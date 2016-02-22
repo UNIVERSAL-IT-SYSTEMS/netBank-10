@@ -1,16 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package facades;
 
-import entities.User;
+import entities.Group;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Daniel Szabo
+ * @author DSzabo
  */
 @Stateless
-public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal {
+public class GroupFacade extends AbstractFacade<Group> implements GroupFacadeLocal {
 
     @PersistenceContext(unitName = "com.mycompany_NetBank-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -20,8 +25,8 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
         return em;
     }
 
-    public UserFacade() {
-        super(User.class);
+    public GroupFacade() {
+        super(Group.class);
     }
     
 }

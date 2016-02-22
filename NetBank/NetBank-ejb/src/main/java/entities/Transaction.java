@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -12,15 +14,19 @@ import javax.persistence.TemporalType;
  *
  * @author Daniel Szabo
  */
-@Entity
+@Entity(name = "TRANSACTION_TABLE")
 public class Transaction implements Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "sender_id")
     private Account sender;
 
+    @ManyToOne
+    @JoinColumn(name = "reciever_id")
     private Account reciever;
 
     private int amount;

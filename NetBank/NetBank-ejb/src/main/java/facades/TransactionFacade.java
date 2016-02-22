@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class TransactionFacade extends AbstractFacade<Transaction> implements TransactionFacadeLocal {
+
     @PersistenceContext(unitName = "com.mycompany_NetBank-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -19,15 +20,20 @@ public class Account implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     private int accountNumber;
 
     private int balance;
 
-    @ManyToOne
-    private List<Transaction> transactionList;
+    @OneToMany(mappedBy = "sender")
+    private List<Transaction> sendTransactionList;
+    
+    @OneToMany(mappedBy = "reciever")
+    private List<Transaction> recievedTransactionList;
+    
 
     public Account() {
     }
@@ -60,12 +66,20 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
-    public List<Transaction> getTransactionList() {
-        return transactionList;
+    public List<Transaction> getSendTransactionList() {
+        return sendTransactionList;
     }
 
-    public void setTransactionList(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+    public void setSendTransactionList(List<Transaction> sendTransactionList) {
+        this.sendTransactionList = sendTransactionList;
+    }
+
+    public List<Transaction> getRecievedTransactionList() {
+        return recievedTransactionList;
+    }
+
+    public void setRecievedTransactionList(List<Transaction> recievedTransactionList) {
+        this.recievedTransactionList = recievedTransactionList;
     }
 
 }

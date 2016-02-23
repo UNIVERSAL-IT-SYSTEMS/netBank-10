@@ -1,4 +1,4 @@
-package com.mycompany;
+package resources;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -18,7 +18,7 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.mycompany.TestResource.class);
+        resources.add(resources.TestResource.class);
        /* resources.add(com.mycompany.LunaParkResource.class);
         resources.add(com.mycompany.MachineResource.class);
         resources.add(com.mycompany.VisitorResource.class);

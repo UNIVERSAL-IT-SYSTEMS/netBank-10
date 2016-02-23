@@ -1,4 +1,4 @@
-package com.mycompany;
+package resources;
 
 import entities.Account;
 import entities.Address;

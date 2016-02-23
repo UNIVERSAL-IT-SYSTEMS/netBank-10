@@ -6,6 +6,7 @@
 package facades;
 
 import entities.Group;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,16 @@ public class GroupFacade extends AbstractFacade<Group> implements GroupFacadeLoc
 
     public GroupFacade() {
         super(Group.class);
+    }
+    
+    public Group findByLoginName(String name) {
+        List<Group> groupList = findAll();
+        for (Group group : groupList) {
+            if (group.getUser().getLoginName().equals(name)) {
+                return group;
+            }
+        }
+        return null;
     }
     
 }

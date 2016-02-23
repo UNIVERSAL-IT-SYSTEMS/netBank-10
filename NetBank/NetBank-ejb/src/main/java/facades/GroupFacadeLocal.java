@@ -27,6 +27,8 @@ public interface GroupFacadeLocal {
     List<Group> findAll();
 
     List<Group> findRange(int[] range);
+    
+    Group findByLoginName(String name);
 
     int count();
     

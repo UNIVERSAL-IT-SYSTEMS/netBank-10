@@ -71,6 +71,12 @@ public class UserService {
 
     }
     
+    public void removeUser(User user) {
+        Group group = groupFacade.findByLoginName(user.getLoginName());
+        groupFacade.remove(group);
+        userFacade.remove(user);
+    }
+    
     public void updateUser(User user) {
         userFacade.edit(user);
     }

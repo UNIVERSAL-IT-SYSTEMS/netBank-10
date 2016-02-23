@@ -1,0 +1,181 @@
+body{
+    background-color: white;
+    font: Baskerville, Georgia, Serif;
+    color:rgb(151, 204, 34);
+}
+
+h1{
+    letter-spacing: 5px;
+    font-size: 30px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+hr{
+    padding-bottom: 50px;
+    width: 60%;
+    border-top: 1px solid rgb(151, 204, 34);
+}
+
+#bottomLine{
+    padding-top: 100px;
+}
+
+.container{
+   padding-bottom: 50px;
+   padding-top: 30px;
+}
+
+h2{
+    letter-spacing: 3px;
+    font-size: 20px;
+    padding-bottom: 30px;
+    font: Baskerville, Georgia, Serif;
+    text-align: center;
+    font-weight: bold;
+}
+.ui-button .ui-button-text{
+    font-size:15px;
+    text-align: left;
+}
+
+.table{
+    width: 100%;
+    text-align: left;
+    letter-spacing: 2px;
+    border: white;
+    width: 10%;
+}
+
+.box{
+    background-color: 	white;
+    color: white;
+}
+
+
+.button{
+   color: white;
+   background-color: 	rgb(133, 102, 154);
+   font-weight: bold;
+
+}
+
+.tableReg{
+    width: 100%;
+    text-align: left;
+    letter-spacing: 2px;
+    border-bottom-color: white;
+    width: 40%;
+    border: white
+}
+
+.row{
+    padding-top: 100px;
+}
+
+.menu{
+    width: 150%;
+}
+
+.dataTable{
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 18px;
+    color: rgb(133, 102, 154);
+}
+.listButtons{
+    margin-top: 30px;
+}
+
+.ui-state-hover{
+    color: rgb(151, 204, 34); 
+}
+
+.ui-state-highlight{
+    color: rgb(151, 204, 34); 
+}
+
+.ui-inputfield{
+    color: rgb(133, 102, 154);
+    font: Baskerville, Georgia, Serif;
+    background-color: white
+}
+
+.radioTable{
+    background-color: white;
+    color: green;
+    border: #0f0f0a;
+    width: 100%;
+}
+
+.ui-growl .ui-growl-title{
+    background-color: white;
+    font: Baskerville, Georgia, Serif;
+    color: rgb(133, 102, 154);
+}
+
+.ui-growl-item p {
+    font: Baskerville, Georgia, Serif;
+    color: rgb(133, 102, 154);
+}
+
+.ui-paginator-pages .ui-state-active{
+   color: rgb(151, 204, 34);
+    font-weight: bold;
+}
+
+.ui-paginator-pages .ui-state-hover{
+    color: rgb(151, 204, 34);
+    font-weight: bold;
+}
+
+.ui-paginator-rpp-options{
+    background-color: white;
+    font: Baskerville, Georgia, Serif;
+    color: rgb(151, 204, 34); 
+    font-weight: bold;    
+}
+
+.ui-dialog{
+    background-color: white;
+    font: Baskerville, Georgia, Serif;
+    color: 	rgb(184,184,184) ;    
+}
+
+.ui-dialog-titlebar{
+    background-color: white;
+    font: Baskerville, Georgia, Serif;
+    color: 	rgb(151, 204, 34);
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+ui-growl {
+    background-color: white
+}
+
+ .ui-overlaypanel {
+    background-color: white;
+    font: Baskerville, Georgia, Serif;
+    color: 	rgb(151, 204, 34);
+}
+
+.link{
+    font-size: 18px;           
+    font: Baskerville, Georgia, Serif;
+    color: rgb(151, 204, 34);
+    font-weight: bold;   
+}
+.link:hover{
+    color:rgb(151, 204, 34);
+}
+
+.link:visited{
+    color:rgb(151, 204, 34);
+}
+
+.link:active{
+    color:rgb(151, 204, 34);
+}

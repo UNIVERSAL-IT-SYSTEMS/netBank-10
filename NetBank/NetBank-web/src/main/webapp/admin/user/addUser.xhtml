@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:head>  
+        <title>Felhasználók Hozzáadása</title>
+    </h:head>  
+
+    <h:body>  
+        <h:form>
+            <div align="center" class="container">       
+                <p:panelGrid columns="2" class="tableReg">
+                    <p:outputLabel value="Név:" for="name" />
+                    <p:inputText id="name" value="#{userController.user.name}" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
+                    <p:outputLabel value="Email cím: " for="email" />
+                    <p:inputText id="email" value="#{userController.user.email}" title="Email" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
+                    <p:outputLabel value="Felhasználónév: " for="loginName" />
+                    <p:inputText id="loginName" value="#{userController.user.loginName}" title="Felhasználónév" class="box"  required="true" requiredMessage="A mező kitöltése kötelező!"/>
+                    <p:outputLabel value="Jelszó"/>
+                    <p:password id="pwd1" value="#{userController.user.password}" match="pwd2"  class="box" required="true"  requiredMessage="A mező kitöltése kötelező!" validatorMessage="A megadott szavak nem egyeznek"/>
+                    <p:outputLabel value="Jelszó megerősítés:"/>
+                    <p:password id="pwd2" value="#{userController.user.password}" class="box"/>
+                    <p:outputLabel value="Születési idő: " />
+                    <p:calendar id="dateOfBirth" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd" class="box myClass"/>  
+                </p:panelGrid> 
+
+                <div class="row">
+                    <div class="col-lg-6 regButtons">
+                        <p:commandButton value="Felhasználó létrehozása" action="#{userController.adminAddUser()}" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <p:button value="Cancel"  href="listUser.xhtml" styleClass="btnPosRight" class="button btn btn-default"/>
+                    </div>
+                </div>
+
+            </div>
+        </h:form>
+
+    </h:body>  
+</html>  

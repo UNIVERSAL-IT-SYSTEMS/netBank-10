@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:head>  
+        <title>Felhasználók Listázása</title>
+    </h:head>  
+
+    <h:body>  
+        <h:form id="form">
+            <p:dataTable var="user" value="#{userController.findAll()}"
+                         selectionMode="single" selection="#{userController.selectedUser}" rowKey="#{user.id}">
+                <p:column headerText="Id" filterBy="#{user.id}">
+                    <h:outputText value="#{user.id}"/>
+                </p:column>
+
+                <p:column headerText="Név" filterBy="#{user.name}">
+                    <h:outputText value="#{user.name}"/>
+                </p:column>
+
+                <p:column headerText="Email" filterBy="#{user.email}">
+                    <h:outputText value="#{user.email}"/>
+                </p:column>
+
+                <p:column headerText="Születési Idő" filterBy="#{user.dateOfBirth}">
+                    <h:outputText value="#{user.dateOfBirth}">
+                            <f:convertDateTime pattern="YYYY-MM-dd" />
+                        </h:outputText>
+                </p:column>
+
+                <p:column headerText="Telefonszám" filterBy="#{user.phoneNumber}">
+                    <h:outputText value="#{user.phoneNumber}"/>
+                </p:column>
+
+                <p:column headerText="Pozció" filterBy="#{user.position}">
+                    <h:outputText value="#{user.position}"/>
+                </p:column>               
+            </p:dataTable>
+            <hr />
+            
+            <div align="center" class="listButtons">
+                <p:button value="Felhasználó hozzáadása" outcome="addUser.xhtml" styleClass="btnPosLeft" class="button btn btn-default"/>
+                <p:commandButton value="Felhasználó Törlése" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
+            </div>
+            
+            <p:dialog header="Biztosan törli a felhasználót?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                 <div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Yes" actionListener="#{userController.deleteUser()}"  ajax="true" update=":form" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p:commandButton value="No" ajax="true"  update="@form" class="button btn btn-default"/>
+                    </div>
+                </div>
+            </p:dialog>
+        </h:form>
+
+    </h:body>  
+</html>  

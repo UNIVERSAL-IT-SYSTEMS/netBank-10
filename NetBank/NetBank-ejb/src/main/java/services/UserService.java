@@ -71,6 +71,25 @@ public class UserService {
 
     }
     
+    public void editUser(User user, Role originalPosition) throws NoSuchAlgorithmException {
+        Group group = groupFacade.findByLoginName(user.getLoginName());
+        if (originalPosition.equals(user.getPosition())) {
+            user.setPassword(encoding(user.getPassword()));
+            userFacade.edit(user);
+        } else if (user.getPosition().equals(Role.ADMIN)) {
+            user.setPassword(encoding(user.getPassword()));
+            userFacade.edit(user);
+            group.setRole(Role.ADMIN);
+            groupFacade.edit(group);
+        } else {
+            user.setPassword(encoding(user.getPassword()));
+            userFacade.edit(user);
+            group.setRole(Role.USER);
+            groupFacade.edit(group);
+        }
+    }
+    
+    
     public void removeUser(User user) {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         groupFacade.remove(group);
@@ -83,6 +102,10 @@ public class UserService {
     
     public List<User> getUserList(){
         return userFacade.findAll();
+    }
+    
+    public User findById(Long id){
+        return userFacade.find(id);
     }
     
     

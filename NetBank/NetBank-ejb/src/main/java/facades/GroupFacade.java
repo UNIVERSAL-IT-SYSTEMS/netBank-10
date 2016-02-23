@@ -30,6 +30,7 @@ public class GroupFacade extends AbstractFacade<Group> implements GroupFacadeLoc
         super(Group.class);
     }
     
+    @Override
     public Group findByLoginName(String name) {
         List<Group> groupList = findAll();
         for (Group group : groupList) {

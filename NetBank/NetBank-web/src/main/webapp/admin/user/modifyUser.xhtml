@@ -11,16 +11,13 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">  
 
     <h:head>  
-        <title>Felhasználó Hozzáadása</title>
-    </h:head>  
-
-    <h:body>  
-        <h:form>
-            <div align="center">
-                <h1>Felhasználó Hozzáadása</h1>
+        <title>Felhasználó Adatainak Módosítása</title>
+    </h:head> 
+    <h:body>
+            <h:form>
+                <div align="center">
+                <h1>Felhasználó Adatainak Módosítása</h1>
                 <hr />
-            </div>
-            <div align="center" class="container">       
                 <p:panelGrid columns="2" class="tableReg">
                     <p:outputLabel value="Név:" for="name" />
                     <p:inputText id="name" value="#{userController.user.name}" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
@@ -33,20 +30,22 @@ and open the template in the editor.
                     <p:outputLabel value="Jelszó megerősítés:"/>
                     <p:password id="pwd2" value="#{userController.user.password}" class="box"/>
                     <p:outputLabel value="Születési idő: " />
-                    <p:calendar id="dateOfBirth" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd" class="box myClass"/>  
-                </p:panelGrid> 
-
-                <div class="row">
+                    <p:calendar id="dateOfBirth" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd" class="box myClass"/> 
+                    <p:outputLabel value="Position: " />
+                        <h:selectOneRadio id="position" value="#{userController.position}" required="true" class="radioButton">
+                            <f:selectItem itemLabel="Admin" itemValue="Admin" />
+                            <f:selectItem itemLabel="User" itemValue="User" />      
+                        </h:selectOneRadio>
+                </p:panelGrid>
+                  <div class="row">
                     <div class="col-lg-6 regButtons">
-                        <p:commandButton value="Felhasználó létrehozása" action="#{userController.adminAddUser()}" class="button btn btn-default"/>
+                        <p:commandButton value="Update User" action="#{userController.updateUser()}" class="button btn btn-default"/>
                     </div>
                     <div class="col-lg-6">
-                        <p:button value="Vissza"  href="listUser.xhtml" styleClass="btnPosRight" class="button btn btn-default"/>
+                         <p:commandButton value="Mégse" action="#{userController.setNull()}"  class="button btn btn-default"/>
                     </div>
                 </div>
-
-            </div>
-        </h:form>
-
-    </h:body>  
-</html>  
+                </div>
+            </h:form>     
+    </h:body> 
+</html>

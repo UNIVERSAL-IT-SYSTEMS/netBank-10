@@ -15,7 +15,8 @@
         <h:form>
             <p:button value="Felhasználók Kezelése" href="/admin/user/listUser.xhtml" />
             <p:button value="Bakszámlák Kezelése" href="/admin/account/listAccount.xhtml" />
-            
+            <p:commandButton value="Kijelentkezés" action="#{logout.logout()}" class="button btn btn-default"/>
+            <h2>#{loggedIn.user.name}</h2>
             <div id="content" class="container body-content">
                     <ui:insert name="content" >
                         <p></p>

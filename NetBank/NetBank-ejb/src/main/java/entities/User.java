@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -19,6 +20,7 @@ import javax.persistence.TemporalType;
  * @author Daniel Szabo
  */
 @Entity(name = "USER_TABLE")
+@NamedQuery(name = "getUserByLoginName", query = "SELECT u FROM USER_TABLE u WHERE u.loginName = :lName")
 public class User implements Serializable {
     
     @Id

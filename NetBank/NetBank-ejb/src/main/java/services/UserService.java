@@ -17,6 +17,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import logging.LoggingInterceptor;
 
 /**
@@ -37,15 +40,18 @@ public class UserService {
     @Inject
     GroupFacadeLocal groupFacade;
 
-    private final String adminString = "admin";
+    private final String ADMINSTRING = "admin";
 
+    @PersistenceContext(unitName = "com.mycompany_NetBank-ejb_ejb_1.0-SNAPSHOTPU")
+    private EntityManager em;
+    
     @PostConstruct
     public void init() {
-        if (isAvailableLoginName(adminString)) {
+        if (isAvailableLoginName(ADMINSTRING)) {
             try {
-                User admin = new User(adminString, adminString);
+                User admin = new User(ADMINSTRING, ADMINSTRING);
                 admin.setPassword(encoding(admin.getPassword()));
-                admin.setName(adminString);
+                admin.setName(ADMINSTRING);
                 admin.setPosition(Role.ADMIN);
                 admin.setEmail("admin@netbank.com");
                 userFacade.create(admin);
@@ -133,5 +139,12 @@ public class UserService {
             newPassword.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
         return newPassword.toString();
+    }
+    
+    public User findByLoginName(String name) {
+        Query q = em.createNamedQuery("getUserByLoginName", User.class);
+        q.setParameter("lName", name);
+        User user = (User) q.getSingleResult();
+        return user;
     }
 }

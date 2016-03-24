@@ -22,6 +22,8 @@ public interface TransactionFacadeLocal {
     List<Transaction> findAll();
 
     List<Transaction> findRange(int[] range);
+    
+    List<Transaction> specifyTransaction(Long id);
 
     int count();
     

@@ -1,5 +1,6 @@
 facades\GroupFacade.class
 enums\Role.class
+enums\Type.class
 entities\Transaction.class
 services\TransactionService.class
 entities\User.class

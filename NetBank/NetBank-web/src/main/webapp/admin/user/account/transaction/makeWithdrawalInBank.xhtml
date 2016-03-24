@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:head>  
+        <title>Befizetés a számlára</title>
+    </h:head>  
+
+    <h:body>  
+        <h:form>
+            <div align="center">
+                <h1>Kifizetés</h1>
+                <hr />
+            </div>
+            <div align="center" class="container">       
+                <p:panelGrid columns="2" class="tableReg">
+                    <p:outputLabel value="Összeg: " />
+                    <p:inputText id="amount" type="number" value="#{transactionController.transaction.amount}" title="Amount" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />  
+                </p:panelGrid> 
+
+                <div class="row">
+                    <div class="col-lg-6 regButtons">
+                        <p:commandButton value="Kifizet" action="#{transactionController.makeWithdrawalInBank()}" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <p:button value="Vissza"  href="listAccountTransaction.xhtml" styleClass="btnPosRight" class="button btn btn-default"/>
+                    </div>
+                </div>
+
+            </div>
+        </h:form>
+
+    </h:body>  
+</html>  

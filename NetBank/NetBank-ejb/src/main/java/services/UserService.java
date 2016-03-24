@@ -1,5 +1,6 @@
 package services;
 
+import entities.Account;
 import entities.Group;
 import entities.User;
 import enums.Role;
@@ -46,6 +47,7 @@ public class UserService {
                 admin.setPassword(encoding(admin.getPassword()));
                 admin.setName(adminString);
                 admin.setPosition(Role.ADMIN);
+                admin.setEmail("admin@netbank.com");
                 userFacade.create(admin);
                 Group group = new Group(Role.ADMIN, admin);
                 groupFacade.create(group);
@@ -108,8 +110,10 @@ public class UserService {
         return userFacade.find(id);
     }
     
+    public List<Account> getAccountList(User user){
+        return userFacade.find(user.getId()).getAccountList();
+    }
     
-   
     public Boolean isAvailableLoginName(String name) {
         List<User> userList = userFacade.findAll();
         for (User user : userList) {

@@ -1,9 +1,11 @@
 package facades;
 
 import entities.Transaction;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,6 +24,12 @@ public class TransactionFacade extends AbstractFacade<Transaction> implements Tr
 
     public TransactionFacade() {
         super(Transaction.class);
+    }
+    
+    public List<Transaction> specifyTransaction(Long id){
+        Query q = em.createNamedQuery("getSpecifyTransaction", Transaction.class); 
+        q.setParameter("rId", id);
+        return q.getResultList();
     }
     
 }

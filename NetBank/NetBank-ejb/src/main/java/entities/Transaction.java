@@ -1,12 +1,15 @@
 package entities;
 
+import enums.Type;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,6 +18,7 @@ import javax.persistence.TemporalType;
  * @author Daniel Szabo
  */
 @Entity(name = "TRANSACTION_TABLE")
+@NamedQuery(name = "getSpecifyTransaction", query = "SELECT t FROM TRANSACTION_TABLE t WHERE t.sender.id = :rId  OR t.reciever.id = :rId ORDER BY t.dateOfTransaction")
 public class Transaction implements Serializable {
 
     @Id
@@ -35,6 +39,8 @@ public class Transaction implements Serializable {
     private Date dateOfTransaction;
 
     private String description;
+
+    private Type transactionType;
 
     public Transaction() {
     }
@@ -82,5 +88,15 @@ public class Transaction implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Type getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(Type transactionType) {
+        this.transactionType = transactionType;
+    }
+    
+    
 
 }

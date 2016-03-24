@@ -1,6 +1,6 @@
-
 package controllers;
 
+import entities.Account;
 import entities.User;
 import enums.Role;
 import java.io.Serializable;
@@ -19,17 +19,19 @@ import services.UserService;
  */
 @Named(value = "userController")
 @SessionScoped
-public class UserController implements Serializable{
-    
+public class UserController implements Serializable {
+
     @Inject
     UserService userService;
-    
+
     private User user = new User();
     private User selectedUser;
-    
+
     private String position = "User";
     private Role originalPosition;
-    
+
+    private List<Account> accountList;
+
     public UserController() {
     }
 
@@ -64,46 +66,55 @@ public class UserController implements Serializable{
     public void setOriginalPosition(Role originalPosition) {
         this.originalPosition = originalPosition;
     }
-    
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
     public List<User> findAll() {
         return this.userService.getUserList();
     }
-    
+
     public String adminAddUser() {
         addUser();
         return "listUser?faces-redirect=true";
     }
-    
+
+    public String toAddUser() {
+        this.user = new User();
+        return "addUser?faces-redirect=true";
+    }
+
     private void addUser() {
         user.setPosition(Role.USER);
         userService.addUser(user);
         this.user = new User();
     }
-    
-    public int getAccountNumber(User user){
-       return userService.findById(user.getId()).getAccountList().size();
-    }
-    
+
     public String deleteUser() {
-    if (selectedUser != null){
-        if (!"admin".equals(selectedUser.getLoginName())) {
-            userService.removeUser(selectedUser);
-            selectedUser = new User();
-            return "userList?faces-redirect=true";
+        if (selectedUser != null) {
+            if (!"admin".equals(selectedUser.getLoginName())) {
+                userService.removeUser(selectedUser);
+                selectedUser = new User();
+                return "listUser?faces-redirect=true";
             } else {
                 FacesContext.getCurrentInstance().
-                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                    "Deleting error", "This user has leaded projects or you tried to delete admin! >> nice try! "));
-                return "userList?faces-redirect=false";
+                        addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                "Deleting error", "This user has leaded projects or you tried to delete admin! >> nice try! "));
+                return "listUser?faces-redirect=false";
             }
+        } else {
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "User has not selected", "You did not select any user!"));
+            return "listUser?faces-redirect=false";
         }
-        FacesContext.getCurrentInstance().
-        addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-            "User has not selected", "You did not select any user!"));
-        return "userList?faces-redirect=false";
     }
-    
-    
+
     public String selectedToUpdate() {
         if (selectedUser != null) {
             this.originalPosition = selectedUser.getPosition();
@@ -111,8 +122,8 @@ public class UserController implements Serializable{
             return "modifyUser?faces-redirect=true";
         }
         FacesContext.getCurrentInstance().
-            addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, 
-            "User has not selected", "You did not select any user!"));
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "User has not selected", "You did not select any user!"));
         return "listUser?faces-redirect=false";
     }
 
@@ -120,10 +131,10 @@ public class UserController implements Serializable{
         modifyPosition(this.position);
         this.position = "User";
         userService.editUser(user, originalPosition);
-        user = new User();
+        this.user = new User();
         return "listUser?faces-redirect=true";
     }
-    
+
     public void modifyPosition(String position) {
         switch (position) {
             case "Admin":
@@ -134,7 +145,35 @@ public class UserController implements Serializable{
                 break;
         }
     }
-    
+
+    public String selectedToAccountList() {
+        if (selectedUser != null) {
+            this.user = selectedUser;
+            selectedUser = new User();
+            accountList = userService.getAccountList(user);
+            return "/admin/user/account/listUserAccount?faces-redirect=true";
+        } else {
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
+
+            return "/admin/user/account/listUser?faces-redirect=false";
+        }
+    }
+
+    public String selectedToAccountList(User parUser) {
+        if (parUser != null) {
+            this.user = parUser;
+            return "/admin/user/account/listUserAccount?faces-redirect=true";
+        } else {
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
+
+            return "listAccount?faces-redirect=false";
+        }
+    }
+
     public String setNull() {
         user = new User();
         return "listUser?faces-redirect=true";

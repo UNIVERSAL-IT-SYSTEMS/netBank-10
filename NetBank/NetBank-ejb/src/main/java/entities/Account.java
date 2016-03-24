@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -14,6 +16,7 @@ import javax.persistence.OneToMany;
  * @author Daniel Szabo
  */
 @Entity
+@NamedQuery(name = "getSpecifyAccount", query = "SELECT a FROM Account a WHERE a.user.id = :rId")
 public class Account implements Serializable {
 
     @Id

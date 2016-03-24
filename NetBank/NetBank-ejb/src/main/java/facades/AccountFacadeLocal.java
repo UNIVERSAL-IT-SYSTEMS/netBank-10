@@ -22,6 +22,8 @@ public interface AccountFacadeLocal {
     List<Account> findAll();
 
     List<Account> findRange(int[] range);
+    
+    List<Account> specifyAccount(Long id);
 
     int count();
     

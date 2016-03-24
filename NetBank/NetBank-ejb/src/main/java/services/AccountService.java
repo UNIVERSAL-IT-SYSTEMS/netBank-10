@@ -1,19 +1,10 @@
 package services;
 
 import entities.Account;
-import entities.Group;
 import entities.User;
-import enums.Role;
 import facades.AccountFacadeLocal;
-import facades.AddressFacadeLocal;
-import facades.GroupFacadeLocal;
 import facades.UserFacadeLocal;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -44,6 +35,14 @@ public class AccountService {
         }
     }
     
+    public void updateAccount(Account account){
+        accountFacade.edit(account);
+    }
+    
+    public void removeAccount(Account account) {
+        accountFacade.remove(account);
+    }
+    
     public List<Account> getAccountList(){
         return accountFacade.findAll();
     }
@@ -57,5 +56,18 @@ public class AccountService {
         }
         return true;
     }
-
+   
+    public List<Account> listByUser(User user){
+        return accountFacade.specifyAccount(user.getId());
+    }
+   
+    public Account findByAccountNumber(int number){
+        List<Account> accountList = accountFacade.findAll();
+        for (Account account : accountList) {
+            if (account.getAccountNumber() == number) {
+                return account;
+            }
+        }
+        return null;
+    }
 }

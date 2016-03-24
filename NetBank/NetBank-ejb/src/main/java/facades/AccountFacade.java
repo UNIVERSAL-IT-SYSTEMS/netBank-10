@@ -1,9 +1,12 @@
 package facades;
 
 import entities.Account;
+import entities.User;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,6 +25,12 @@ public class AccountFacade extends AbstractFacade<Account> implements AccountFac
 
     public AccountFacade() {
         super(Account.class);
+    }
+    
+    public List<Account> specifyAccount(Long id){
+        Query q = em.createNamedQuery("getSpecifyAccount", Account.class); 
+        q.setParameter("rId", id);
+        return q.getResultList();
     }
     
 }

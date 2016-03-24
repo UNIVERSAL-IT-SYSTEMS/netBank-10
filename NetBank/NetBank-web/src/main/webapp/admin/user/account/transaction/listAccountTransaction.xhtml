@@ -1,0 +1,82 @@
+<ui:composition template="/templates/adminLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:growl id="growl" showDetail="true" sticky="false" life="2000"/>
+            <h1>Bankszámla adatai</h1>
+            <hr />
+            <p:button value="Vissza a Felhasználó adataihoz" href="/admin/user/account/listUserAccount.xhtml"/>
+            <p:panelGrid columns="2" class="tableReg">
+                    <p:outputLabel value="Tulajdonos neve: " for="name" />
+                    <p:link id="name" href="/admin/user/account/listUserAccount.xhtml" value="#{accountController.account.user.name}" title="Név"/>
+                    <p:outputLabel value="Bankszámlaszám: " />
+                    <p:outputLabel id="accountnumber" value="#{accountController.account.accountNumber}" title="Számlaszám"/>
+                    <p:outputLabel value="Egyenleg " />
+                    <p:outputLabel id="balance" value="#{accountController.account.balance}" title="Egyenleg"/>
+            </p:panelGrid>
+            <h1>Tranzakciótörténet</h1>
+            <p:dataTable sortBy="#{transaction.dateOfTransaction}" sortOrder="ascending" var="transaction" value="#{transactionController.getListByAccount(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable">
+                <p:column headerText="Dátum" filterBy="#{transaction.dateOfTransaction}" sortBy="#{transaction.dateOfTransaction}" filterMatchMode="contains">
+                    <h:outputText value="#{transaction.dateOfTransaction}">
+                            <f:convertDateTime pattern="YYYY-MM-dd" />
+                        </h:outputText>
+                </p:column>
+                
+                <p:column headerText="Típus" filterBy="#{transaction.transactionType}" filterMatchMode="contains">
+                    <h:outputText value="#{transaction.transactionType}"/>
+                </p:column>
+                
+                <p:column headerText="Összeg" filterBy="#{transaction.amount}" sortBy="#{transaction.amount}" filterMatchMode="contains">
+                    <h:outputText value="#{transaction.amount} Ft"/>
+                </p:column>
+                
+                <p:column headerText="Küldő Neve" filterBy="#{transaction.sender.user.name}" filterMatchMode="contains">
+                    <h:outputText value="#{transaction.sender.user.name}" />
+                </p:column>
+                
+                <p:column headerText="Küldő Számlaszáma" filterBy="#{transaction.sender.accountNumber}" filterMatchMode="contains">
+                    <h:outputText value="#{transaction.sender.accountNumber}" />
+                </p:column>
+                
+                <p:column headerText="Fogadó Neve" filterBy="#{transaction.reciever.user.name}" filterMatchMode="contains">
+                    <h:outputText value="#{transaction.reciever.user.name}" />
+                </p:column>
+                
+                <p:column headerText="Fogadó Számlaszáma" filterBy="#{transaction.reciever.accountNumber}" filterMatchMode="contains">
+                    <h:outputText value="#{transaction.reciever.accountNumber}" />
+                </p:column>
+            </p:dataTable>
+            
+            
+            <div align="center" >
+                 <p:commandButton value="Új tranzakció létehozása" type="button" onclick="PF('addDialog').show();" class="button btn btn-default"/>
+            </div>
+            
+            
+            
+            <p:dialog header="Válasszon tranzakciótípust?" widgetVar="addDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                 <div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Befizetés" action="#{transactionController.toInpayment(accountController.account)}"  ajax="true" update="@all" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Kifizetés" action="#{transactionController.toWitdrawalInBank(accountController.account)}"  ajax="true" update="@all" class="button btn btn-default"/>
+                    </div>
+                </div>
+            </p:dialog>
+       
+            
+            
+            
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

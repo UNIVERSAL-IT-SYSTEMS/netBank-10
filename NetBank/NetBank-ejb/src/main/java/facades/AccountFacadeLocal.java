@@ -23,7 +23,11 @@ public interface AccountFacadeLocal {
 
     List<Account> findRange(int[] range);
     
-    List<Account> specifyAccount(Long id);
+    List<Account> getNotDestroyByUser(Long id);
+    
+    List<Account> getAllNotDestroy();
+    
+    List<Account> getAllByUser(Long id);
 
     int count();
     

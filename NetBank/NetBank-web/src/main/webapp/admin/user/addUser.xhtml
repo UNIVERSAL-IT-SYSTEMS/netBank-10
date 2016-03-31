@@ -5,13 +5,16 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"  
-      xmlns:h="http://java.sun.com/jsf/html"  
-      xmlns:f="http://java.sun.com/jsf/core"  
-      xmlns:p="http://primefaces.org/ui">  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>  
-        <title>Felhasználó Hozzáadása</title>
+        <meta charset="utf-8"></meta>
+        <title>Felhasználó hozzáadása</title>
+        <link rel="icon" href="http://iconogen.com/images/computer.png"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
     </h:head>  
 
     <h:body>  
@@ -20,7 +23,8 @@ and open the template in the editor.
                 <h1>Felhasználó Hozzáadása</h1>
                 <hr />
             </div>
-            <div align="center" class="container">       
+            <div align="center" class="container"> 
+                <p:growl id="growl"  sticky="false" life="8000" showDetail="false"/>
                 <p:panelGrid columns="2" class="tableReg">
                     <p:outputLabel value="Név:" for="name" />
                     <p:inputText id="name" value="#{userController.user.name}" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />

@@ -4,25 +4,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui" 
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta charset="utf-8"></meta>
         <title>NetBank Ügyintéző Felület</title>
         <link rel="icon" href="http://iconogen.com/images/computer.png"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
     </h:head>
     <h:body> 
         <h:form>
-            <p:button value="Felhasználók Kezelése" href="/admin/user/listUser.xhtml" />
-            <p:button value="Bakszámlák Kezelése" href="/admin/account/listAccount.xhtml" />
-            <p:commandButton value="Kijelentkezés" action="#{logout.logout()}" class="button btn btn-default"/>
-            <h2>#{loggedIn.user.name}</h2>
+            <nav class="navbar navbar-default">
+
+                <ul class="nav nav-pills">
+                    
+                    <li><p:link href="/admin/user/listUser.xhtml" value="Felhasználók Kezelése"/></li>
+                    <li><p:link href="/admin/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
+                    <li>
+
+                            <p:commandLink class="navbar-right" id="dialogButt" value="#{loggedIn.user.name}" />
+                            <p:overlayPanel id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
+                                <div class="row" style="padding: 10px;">
+                                    <div >
+                                        #{loggedIn.user.name}
+                                    </div>
+                                </div>
+                                <nav class="navbar navbar-default">
+                                    <ul class="nav nav-pills">
+                                        <li><p:link href="/user/account/listAccount.xhtml" value="Felhasználó Mód"/></li>
+                                        <li><p:commandLink value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
+                                        <li><p:commandLink value="Kijelentkezés"  action="#{logout.logout()}" /></li>
+                                    </ul>
+                                    
+                                </nav>
+                            </p:overlayPanel>
+                    </li>
+
+                </ul>    
+            </nav>
+
+
+
             <div id="content" class="container body-content">
-                    <ui:insert name="content" >
-                        <p></p>
-                    </ui:insert>
+                <ui:insert name="content" >
+                    <p></p>
+                </ui:insert>
             </div>
-            
+
         </h:form>
     </h:body>
+
+
 </html>

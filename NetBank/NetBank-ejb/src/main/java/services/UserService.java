@@ -3,9 +3,10 @@ package services;
 import entities.Account;
 import entities.Group;
 import entities.User;
+import entities.RegistratedUser;
 import enums.Role;
-import facades.AddressFacadeLocal;
 import facades.GroupFacadeLocal;
+import facades.RegistratedUserFacadeLocal;
 import facades.UserFacadeLocal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,9 +34,9 @@ public class UserService {
 
     @Inject
     UserFacadeLocal userFacade;
-
+    
     @Inject
-    AddressFacadeLocal addressFacade;
+    RegistratedUserFacadeLocal registrate;
 
     @Inject
     GroupFacadeLocal groupFacade;
@@ -74,30 +75,47 @@ public class UserService {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            // HibaÜzenet
+           Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
         }
-
+    }  
+    
+    public void register(RegistratedUser user){
+         if (isAvailableLoginName(user.getLoginName())) {
+                registrate.create(user);
+        } else {
+             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
+        }
+    }
+    
+    public void acceptRegister(RegistratedUser regUser){
+        User user = new User();
+        user.setAddress(regUser.getAddress());
+        user.setDateOfBirth(regUser.getDateOfBirth());
+        user.setEmail(regUser.getEmail());
+        user.setLoginName(regUser.getLoginName());
+        user.setPassword(regUser.getPassword());
+        user.setPhoneNumber(regUser.getPhoneNumber());
+        user.setName(regUser.getName());
+        user.setPosition(Role.USER);
+        addUser(user);    
+        registrate.remove(regUser);
     }
     
     public void editUser(User user, Role originalPosition) throws NoSuchAlgorithmException {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         if (originalPosition.equals(user.getPosition())) {
-            user.setPassword(encoding(user.getPassword()));
             userFacade.edit(user);
         } else if (user.getPosition().equals(Role.ADMIN)) {
-            user.setPassword(encoding(user.getPassword()));
             userFacade.edit(user);
             group.setRole(Role.ADMIN);
             groupFacade.edit(group);
         } else {
-            user.setPassword(encoding(user.getPassword()));
             userFacade.edit(user);
             group.setRole(Role.USER);
             groupFacade.edit(group);
         }
     }
-    
-    
+       
     public void removeUser(User user) {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         groupFacade.remove(group);
@@ -110,6 +128,11 @@ public class UserService {
     
     public List<User> getUserList(){
         return userFacade.findAll();
+    }
+    
+    public List<RegistratedUser> getRegUserList(){
+        Query q = em.createNamedQuery("getAll", RegistratedUser.class);
+        return q.getResultList();
     }
     
     public User findById(Long id){

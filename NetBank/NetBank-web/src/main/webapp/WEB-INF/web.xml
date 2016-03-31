@@ -25,7 +25,7 @@
         <session-timeout>12000</session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>admin/index.xhtml</welcome-file>
+        <welcome-file>user/index.xhtml</welcome-file>
     </welcome-file-list>
     <security-constraint>
         <display-name>adminConstraint</display-name>

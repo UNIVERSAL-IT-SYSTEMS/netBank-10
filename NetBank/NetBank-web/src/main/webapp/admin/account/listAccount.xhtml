@@ -7,7 +7,7 @@
 
     <ui:define name="content"> 
         <h:form id="form">
-            <p:dataTable var="account" value="#{accountController.findAll()}"
+            <p:dataTable var="account" value="#{accountController.getAllNotDestroy()}"
                          selectionMode="single" selection="#{accountController.selectedAccount}" rowKey="#{account.id}" emptyMessage="Nincs találat">
                 <p:column headerText="Számlaszám" filterBy="#{account.accountNumber}" filterMatchMode="contains">
                     <h:outputText value="#{account.accountNumber}"/>

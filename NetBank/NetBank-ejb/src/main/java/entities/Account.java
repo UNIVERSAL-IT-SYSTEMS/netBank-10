@@ -16,7 +16,11 @@ import javax.persistence.OneToMany;
  * @author Daniel Szabo
  */
 @Entity
-@NamedQuery(name = "getSpecifyAccount", query = "SELECT a FROM Account a WHERE a.user.id = :rId")
+@NamedQueries({
+    @NamedQuery(name = "getNotDestroyByUser", query = "SELECT a FROM Account a WHERE a.user.id = :rId and a.destroy = false"),
+    @NamedQuery(name = "getAllByUser", query = "SELECT a FROM Account a WHERE a.user.id = :rId"),
+    @NamedQuery(name = "getAllNotDestroy", query = "SELECT a FROM Account a WHERE a.destroy = false"),
+})   
 public class Account implements Serializable {
 
     @Id
@@ -30,12 +34,17 @@ public class Account implements Serializable {
     private int accountNumber;
 
     private int balance;
+    
+    private boolean destroy = false;
 
     @OneToMany(mappedBy = "sender")
     private List<Transaction> sendTransactionList;
     
     @OneToMany(mappedBy = "reciever")
     private List<Transaction> recievedTransactionList;
+    
+    @OneToMany(mappedBy = "account")
+    private List<CreditCard> creditCardList;
     
 
     public Account() {
@@ -69,6 +78,14 @@ public class Account implements Serializable {
         this.balance = balance;
     }
 
+    public boolean isDestroy() {
+        return destroy;
+    }
+
+    public void setDestroy(boolean destroy) {
+        this.destroy = destroy;
+    }
+    
     public List<Transaction> getSendTransactionList() {
         return sendTransactionList;
     }
@@ -85,4 +102,13 @@ public class Account implements Serializable {
         this.recievedTransactionList = recievedTransactionList;
     }
 
+    public List<CreditCard> getCreditCardList() {
+        return creditCardList;
+    }
+
+    public void setCreditCardList(List<CreditCard> creditCardList) {
+        this.creditCardList = creditCardList;
+    }
+
+    
 }

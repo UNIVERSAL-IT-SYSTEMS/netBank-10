@@ -1,8 +1,10 @@
 package services;
 
 import entities.Account;
+import entities.CreditCard;
 import entities.User;
 import facades.AccountFacadeLocal;
+import facades.CreditCardFacadeLocal;
 import facades.UserFacadeLocal;
 import java.util.List;
 import javax.ejb.LocalBean;
@@ -25,7 +27,7 @@ public class AccountService {
     
     @Inject
     AccountFacadeLocal accountFacade;
-
+    
 
     public void addAccount(Account account) {
         if (isAvailableAccountNumber(account.getAccountNumber())) { 
@@ -57,8 +59,16 @@ public class AccountService {
         return true;
     }
    
-    public List<Account> listByUser(User user){
-        return accountFacade.specifyAccount(user.getId());
+    public List<Account> getAllByUser(User user){
+        return accountFacade.getAllByUser(user.getId());
+    }
+    
+    public List<Account> getNotDestroyByUser(User user){
+        return accountFacade.getNotDestroyByUser(user.getId());
+    }
+    
+    public List<Account> getAllNotDestroy(){
+        return accountFacade.getAllNotDestroy();
     }
    
     public Account findByAccountNumber(int number){

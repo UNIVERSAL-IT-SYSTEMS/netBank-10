@@ -33,6 +33,10 @@
                 <p:column headerText="Egyenleg">
                     <h:outputText value="#{account.balance} Ft" />
                 </p:column>
+                <p:column headerText="Zárolva">
+                    <h:outputText value="#{account.destroy}" />
+                </p:column>
+                
             </p:dataTable>
             
             <hr />
@@ -40,7 +44,7 @@
             <div align="center" class="listButtons">
                 <p:commandButton value="Bankszámla megtekintése" action="#{accountController.selectedToTrancasctionList()}" class="button btn btn-default" ajax="true" update="@form"/>
                 <p:commandButton value="Új Bankszámla hozzáadása" onclick="PF('createDialog').show();" styleClass="btnPosLeft" class="button btn btn-default"/>
-                <p:commandButton value="Bankszámla Törlése" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
+                <p:commandButton value="Bankszámla Zárolása / Aktiválása" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
             </div>
             
             
@@ -56,7 +60,7 @@
             </p:dialog>
             
             
-            <p:dialog header="Biztosan törli a Bankszámlát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+            <p:dialog header="Biztosan Zárolja / Aktiválja a Bankszámlát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                  <div>
                     <div class="col-md-6">
                         <p:commandButton value="Igen" actionListener="#{accountController.deleteAccount()}"  ajax="true" update="@all" class="button btn btn-default"/>

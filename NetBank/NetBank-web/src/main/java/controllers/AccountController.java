@@ -72,8 +72,12 @@ public class AccountController implements Serializable {
 
     public String deleteAccount() {
         if (selectedAccount != null) {
-
-            accountService.removeAccount(selectedAccount);
+            if(selectedAccount.isDestroy()){
+                selectedAccount.setDestroy(false);
+            }else{
+                selectedAccount.setDestroy(true);
+            }
+            accountService.updateAccount(selectedAccount);
             selectedAccount = new Account();
             return "listUserAccount?faces-redirect=true";
 
@@ -89,11 +93,20 @@ public class AccountController implements Serializable {
     }
     
     public List<Account> getListByUser(User user) {
-        return accountService.listByUser(user);
+        return accountService.getAllByUser(user);
     }
 
+    public List<Account> getAllNotDestroy() {
+        return accountService.getAllNotDestroy();
+    }
+    
+    public List<Account> getNotDestroyByUser(User user) {
+        return accountService.getNotDestroyByUser(user);
+    }
+    
+    
     public int getAccountNumber(User user) {
-        return accountService.listByUser(user).size();
+        return accountService.getAllByUser(user).size();
     }
 
 
@@ -110,4 +123,19 @@ public class AccountController implements Serializable {
             return "listUserAccount?faces-redirect=false";
         }
     }
+    
+    public String selectedToTrancasctionListUser() {
+        if (selectedAccount != null) {
+            this.account = selectedAccount;
+            selectedAccount = new Account();
+            return "/user/account/transaction/listAccountTransaction?faces-redirect=true";
+        } else {
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Bankszámla nincs kiválasztva", "Bankszámla nincs kiválasztva"));
+
+            return "listAccount?faces-redirect=false";
+        }
+    }
+    
 }

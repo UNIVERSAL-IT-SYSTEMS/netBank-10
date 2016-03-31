@@ -27,10 +27,22 @@ public class AccountFacade extends AbstractFacade<Account> implements AccountFac
         super(Account.class);
     }
     
-    public List<Account> specifyAccount(Long id){
-        Query q = em.createNamedQuery("getSpecifyAccount", Account.class); 
+    public List<Account> getAllByUser(Long id){
+        Query q = em.createNamedQuery("getAllByUser", Account.class); 
         q.setParameter("rId", id);
         return q.getResultList();
     }
+    
+    public List<Account> getNotDestroyByUser(Long id){
+        Query q = em.createNamedQuery("getNotDestroyByUser", Account.class); 
+        q.setParameter("rId", id);
+        return q.getResultList();
+    }
+    
+    public List<Account> getAllNotDestroy(){
+        Query q = em.createNamedQuery("getAllNotDestroy", Account.class); 
+        return q.getResultList();
+    }
+    
     
 }

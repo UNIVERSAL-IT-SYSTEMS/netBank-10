@@ -8,8 +8,11 @@
     <ui:define name="content">
 
         <h:form id="form">
+            <p>A rendszerbe regisztált felhasználók</p>
+            <p:button value="Regisztrációs Kérelmek Feldolgozása" href="/admin/user/registrate.xhtml" class="button btn btn-default"/>
             <p:dataTable var="user" value="#{userController.findAll()}"
                          selectionMode="single" selection="#{userController.selectedUser}" rowKey="#{user.id}" emptyMessage="Nincs találat">
+                
                 <p:column headerText="Név" filterBy="#{user.name}" filterMatchMode="contains">
                     <h:outputText value="#{user.name}"/>
                 </p:column>
@@ -22,6 +25,10 @@
                     <h:outputText value="#{user.dateOfBirth}">
                            <f:convertDateTime pattern="yyyy.MM.dd"/>
                         </h:outputText>
+                </p:column>
+                
+                <p:column headerText="Cím" filterBy="#{user.address}" filterMatchMode="contains">
+                    <h:outputText value="#{user.address}"/>
                 </p:column>
 
                 <p:column headerText="Telefonszám" filterBy="#{user.phoneNumber}" filterMatchMode="contains">

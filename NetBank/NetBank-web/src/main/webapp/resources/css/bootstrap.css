@@ -2389,7 +2389,7 @@ table th[class*="col-"] {
 .table > thead > tr.info > th,
 .table > tbody > tr.info > th,
 .table > tfoot > tr.info > th {
-  background-color: #adadad;
+  background-color: #d9edf7;
 }
 .table-hover > tbody > tr > td.info:hover,
 .table-hover > tbody > tr > th.info:hover,
@@ -3002,13 +3002,7 @@ select[multiple].input-lg {
     font-size: 12px;
   }
 }
-.backroundColorFacetFooter{
-    /*background: rgba(54, 25, 25, .5);*/
-    background: #000\9;
-    /*filter: alpha(opacity=60)*/
-}
 .btn {
- 
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
@@ -3028,8 +3022,6 @@ select[multiple].input-lg {
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
-  width: 150px;
-  height: 50px;
 }
 .btn:focus,
 .btn:active:focus,

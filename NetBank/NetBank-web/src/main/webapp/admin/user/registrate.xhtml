@@ -1,0 +1,47 @@
+<ui:composition template="/templates/adminLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p>Regisztrációs Kérelmek</p>
+           
+            <p:dataTable var="user" value="#{userController.findAllReg()}"
+                         selectionMode="single" selection="#{userController.selectedRegUser}" rowKey="#{user.id}" emptyMessage="Nincs találat">
+                <p:column headerText="Név" filterBy="#{user.name}" filterMatchMode="contains">
+                    <h:outputText value="#{user.name}"/>
+                </p:column>
+
+                <p:column headerText="Email" filterBy="#{user.email}" filterMatchMode="contains">
+                    <h:outputText value="#{user.email}"/>
+                </p:column>
+
+                <p:column headerText="Születési Idő" filterBy="#{user.dateOfBirth}" filterMatchMode="contains">
+                    <h:outputText value="#{user.dateOfBirth}">
+                           <f:convertDateTime pattern="yyyy.MM.dd"/>
+                        </h:outputText>
+                </p:column>
+                
+                <p:column headerText="Lakcím" filterBy="#{user.address}" filterMatchMode="contains">
+                    <h:outputText value="#{user.address}"/>
+                </p:column>
+
+                <p:column headerText="Telefonszám" filterBy="#{user.phoneNumber}" filterMatchMode="contains">
+                    <h:outputText value="#{user.phoneNumber}"/>
+                </p:column>
+                
+            </p:dataTable>
+            <hr />
+            
+            <div align="center" class="listButtons">
+                <p:commandButton value="Regisztráció elfogadása" action="#{userController.acceptRegister()}" class="button btn btn-default" update="@all"/>
+            </div>
+            
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

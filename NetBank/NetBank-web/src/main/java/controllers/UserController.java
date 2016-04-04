@@ -188,8 +188,6 @@ public class UserController implements Serializable {
     }
 
     public String updateProfileUser() throws NoSuchAlgorithmException {
-        modifyPosition(this.position);
-        this.position = "User";
         userService.editUser(user, originalPosition);
         this.user = new User();
         return "/user/index?faces-redirect=true";

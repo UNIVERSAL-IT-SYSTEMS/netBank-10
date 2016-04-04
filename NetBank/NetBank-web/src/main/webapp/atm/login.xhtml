@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <title>NetBank ATM</title>
+        <link rel="icon" href="http://iconogen.com/images/computer.png"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body>
+        <h1>Üdvözlünk a NetBank ATM -nél</h1>
+        <div align="center" class="container">
+           <hr />
+           <h2>Kérem adja meg a Bankkártya adatait</h2>
+           <h:form class="form-signin">
+               <p:panelGrid columns="2">
+                        <p:outputLabel value="Kártyaszám: "/>
+                        <p:inputText type="number" value="#{creditCardController.cardNumber}" class="form-control" />
+                        <p:outputLabel value="PIN kód: "/>
+                        <p:inputText type="password" value="#{creditCardController.password}" class="form-control box"/>
+               </p:panelGrid>
+               
+               
+                <div class="row">
+                     <div class="col-md-6">
+                         <p:commandButton class="button btn btn-default" action="#{creditCardController.login()}" value="Bejelentkezés"/>
+                     </div>
+                     <div class="col-md-6">
+                        <p:button value="Vissza" href="/login.xhtml" class="button btn btn-default"/> 
+                     </div>
+                 </div>
+            </h:form>
+        </div>
+        <hr  id="bottomLine"/>
+    </h:body>
+</html>

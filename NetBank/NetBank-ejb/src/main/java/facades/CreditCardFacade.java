@@ -37,4 +37,10 @@ public class CreditCardFacade extends AbstractFacade<CreditCard> implements Cred
         return q.getResultList();
     }
     
+    @Override
+    public CreditCard findByCardNumber(Integer cardNumber){
+        Query q = em.createNamedQuery("findByCardNumber", CreditCard.class); 
+        q.setParameter("rNumber", cardNumber);
+        return (CreditCard)q.getSingleResult();
+    }
 }

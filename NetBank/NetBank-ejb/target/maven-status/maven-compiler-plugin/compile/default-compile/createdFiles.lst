@@ -1,9 +1,11 @@
+entities\Topic.class
 facades\GroupFacade.class
 enums\Role.class
 enums\Type.class
 facades\CreditCardFacadeLocal.class
 entities\Transaction.class
 services\TransactionService.class
+entities\Message.class
 entities\CreditCard.class
 entities\User.class
 enums\CardType.class

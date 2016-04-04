@@ -58,4 +58,7 @@ public class CreditCardService {
         return creditCardFacade.findAll();
     }
     
+    public CreditCard findByCardNumber(Integer cardNumber){
+        return creditCardFacade.findByCardNumber(cardNumber);
+    }
 }

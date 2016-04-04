@@ -25,7 +25,7 @@
                     <p:outputLabel id="position" value="#{userController.user.position}" title="Pozíció"/>
             </p:panelGrid>
             <h1>Ügyfél Bankszámlái</h1>
-            <p:dataTable var="account" emptyMessage="Nincs találat" value="#{accountController.getListByUser(userController.user)}" class="dataTable"
+            <p:dataTable id="account" var="account" emptyMessage="Nincs találat" value="#{accountController.getListByUser(userController.user)}" class="dataTable"
                          selectionMode="single" selection="#{accountController.selectedAccount}" rowKey="#{account.id}">
                  <p:column headerText="Számlaszám" filterBy="#{account.accountNumber}" filterMatchMode="contains">
                     <h:outputText value="#{account.accountNumber}" />
@@ -51,10 +51,10 @@
             <p:dialog header="Biztosan létre kíván hozni egy új bankszámlát ehez az ügyfélhez?" widgetVar="createDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                  <div>
                     <div class="col-md-6">
-                        <p:commandButton value="Igen" actionListener="#{accountController.adminAddAccount(userController.user)}" ajax="true" update="@all" class="button btn btn-default"/>
+                        <p:commandButton value="Igen" actionListener="#{accountController.adminAddAccount(userController.user)}" ajax="false" update="@account" class="button btn btn-default"/>
                     </div>
                     <div class="col-md-6">
-                        <p:commandButton value="Vissza" ajax="true"  update="@all" class="button btn btn-default"/>
+                        <p:commandButton value="Vissza" ajax="false"  update="@account" class="button btn btn-default"/>
                     </div>
                 </div>
             </p:dialog>
@@ -63,10 +63,10 @@
             <p:dialog header="Biztosan Zárolja / Aktiválja a Bankszámlát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                  <div>
                     <div class="col-md-6">
-                        <p:commandButton value="Igen" actionListener="#{accountController.deleteAccount()}"  ajax="true" update="@all" class="button btn btn-default"/>
+                        <p:commandButton value="Igen" actionListener="#{accountController.deleteAccount()}"  ajax="false" update="@account" class="button btn btn-default"/>
                     </div>
                     <div class="col-md-6">
-                        <p:commandButton value="Vissza" ajax="true"  update="@all" class="button btn btn-default"/>
+                        <p:commandButton value="Vissza" ajax="false"  update="@account" class="button btn btn-default"/>
                     </div>
                 </div>
             </p:dialog>

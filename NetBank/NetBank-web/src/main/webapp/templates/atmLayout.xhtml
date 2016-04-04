@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <title>NetBank ATM</title>
+        <link rel="icon" href="http://iconogen.com/images/computer.png"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+    </h:head>
+    <h:body> 
+        <h:form>
+            <nav class="navbar navbar-default">
+
+                <ul class="nav nav-pills">
+                    <li>
+
+                        <p:commandLink class="navbar-right" id="dialogButt" value="#{creditCardController.card.account.user.name}" />
+                        <p:overlayPanel id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
+                            <div class="row" style="padding: 10px;">
+                                <div >
+                                    #{creditCardController.card.account.user.name}
+                                    Kártyaszám: #{creditCardController.card.number}
+                                    #{creditCardController.card.type}
+                                </div>
+                            </div>
+                            <nav class="navbar navbar-default">
+                                <ul class="nav nav-pills">
+                                    <li><p:commandLink value="Kijelentkezés"  action="#{creditCardController.logout()}" /></li>
+                                </ul>  
+                            </nav>
+                        </p:overlayPanel>
+                    </li>
+
+                </ul>    
+            </nav>
+
+
+
+            <div id="content" class="container body-content">
+                <ui:insert name="content" >
+                    <p></p>
+                </ui:insert>
+            </div>
+
+
+        </h:form>
+    </h:body>
+</html>

@@ -30,6 +30,8 @@ public interface CreditCardFacadeLocal {
     List<CreditCard> findRange(int[] range);
     
     List<CreditCard> listByAccount(Long id);
+    
+    CreditCard findByCardNumber(Integer cardNumber);
 
     int count();
     

@@ -15,8 +15,8 @@ import javax.persistence.TemporalType;
  *
  * @author Daniel Szabo
  */
-@Entity
-@NamedQuery(name = "getAll", query = "SELECT r FROM RegistratedUser r")
+@Entity(name = "REGISTRATED_USER")
+@NamedQuery(name = "getAll", query = "SELECT r FROM REGISTRATED_USER r")
 public class RegistratedUser implements Serializable {
     
     @Id

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -17,7 +18,12 @@ import javax.validation.constraints.Min;
  * @author Daniel Szabo
  */
 @Entity
-@NamedQuery(name = "getListByAccount", query = "SELECT c FROM CreditCard c WHERE c.account.id = :rId")
+
+
+@NamedQueries({
+    @NamedQuery(name = "getListByAccount", query = "SELECT c FROM CreditCard c WHERE c.account.id = :rId"),
+    @NamedQuery(name = "findByCardNumber", query = "SELECT c FROM CreditCard c WHERE c.number = :rNumber")
+}) 
 public class CreditCard implements Serializable {
 
     @Id

@@ -201,26 +201,43 @@ public class TransactionController implements Serializable {
         return "listAccountTransaction?faces-redirect=true";
     }
 
-    public void makeWithdrawalFromAtm(Account account, int amount) {
-        if (account.getBalance() < amount) {
+    
+    public String toWitdrawalFromAtm(Account account) {
+            this.transaction = new Transaction();
+            transaction.setSender(account);
+            return "/atm/makeWitdrawalFromAtm?faces-redirect=true";
+    }
+    
+    public String makeWithdrawalFromAtm() {
+        if (transaction.getSender().getBalance() < transaction.getAmount()) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Nincs elég egyenlege!", "Nincs elég egyenlege!"));
-            // return "listAccountTransaction?faces-redirect=false";
+            return "/atm/index?faces-redirect=false";
         } else {
             Transaction withdrawal = new Transaction();
-            withdrawal.setSender(account);
-            withdrawal.setAmount(amount);
+            withdrawal.setSender(transaction.getSender());
+            withdrawal.setAmount(transaction.getAmount());
             withdrawal.setDateOfTransaction(new Date());
             withdrawal.setTransactionType(Type.WITHDRAWAL_FROM_ATM);
 
             transactionService.addTransaction(withdrawal);
 
-            account.getSendTransactionList().add(withdrawal);
-            account.setBalance(account.getBalance() - amount);
+            transaction.getSender().getSendTransactionList().add(withdrawal);
+            transaction.getSender().setBalance(transaction.getSender().getBalance() - transaction.getAmount());
 
-            accountService.updateAccount(account);
-            //return "listAccountTransaction?faces-redirect=true";
+            accountService.updateAccount(transaction.getSender());
+
+            this.transaction = new Transaction();
+            this.recieverNumber = 0;
+
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                    "Sikeres készpénzfelvétel!", "Sikeres készpénzfelvétel!"));
+            return "/atm/index?faces-redirect=false";
+            
+            /*
+            return "/atm/index?faces-redirect=true";*/
         }
     }
 }

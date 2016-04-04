@@ -30,15 +30,6 @@
                 <p:column headerText="Típus" filterBy="#{card.type}" filterMatchMode="contains">
                     <h:outputText value="#{card.type}"/>
                 </p:column>
-                
-                <p:column headerText="PIN kód">
-                    <h:outputText value="#{card.pinCode}"/>
-                </p:column>
-                
-                <p:column headerText="Zárolva">
-                    <h:outputText value="#{card.destroy}"/>
-                </p:column>
-
             </p:dataTable>
             
             <h1>Tranzakciótörténet</h1>
@@ -84,15 +75,10 @@
             <p:dialog header="Válasszon tranzakciótípust?" widgetVar="addDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                  <div>
                     <div class="col-md-6">
-                         <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" ajax="true" update="@all" class="button btn btn-default"/>
+                         <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" ajax="false" update="@form" class="button btn btn-default"/>
                     </div>
                 </div>
-            </p:dialog>
-       
-            
-            
-            
+            </p:dialog>      
         </h:form>
-        
     </ui:define>
 </ui:composition>

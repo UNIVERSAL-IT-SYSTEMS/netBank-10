@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,7 +16,8 @@ import javax.persistence.TemporalType;
  * @author Daniel Szabo
  */
 
-@Entity(name="MESSAGE")
+@Entity(name="MESSAGES")
+@NamedQuery(name = "getMessagesByTopic", query = "SELECT m FROM MESSAGES m WHERE m.topic.id = :rId ORDER BY m.date DESC")
 public class Message implements Serializable {
     
     @Id

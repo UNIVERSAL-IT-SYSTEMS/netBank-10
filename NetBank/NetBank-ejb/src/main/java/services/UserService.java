@@ -34,18 +34,31 @@ public class UserService {
 
     @Inject
     UserFacadeLocal userFacade;
-    
+
     @Inject
     RegistratedUserFacadeLocal registrate;
 
     @Inject
     GroupFacadeLocal groupFacade;
 
+    @Inject
+    EmailSendingService emailService;
+
     private final String ADMINSTRING = "admin";
+
+    private final String REGISTRATION_MESSAGE = "Sikeresen regisztrált az SZDT Bank rendszerébe, "
+            + "amint ügyintézőnk jóváhagyja a regisztrációt, azonnal beléphet és használhatja bankunk rendszerét!\n"
+            + "\n"
+            + "Üdvözlettel, SZDT Bank!";
+
+    private final String ACTIVATION_MESSAGE = "Regisztrációja jóváhagyásra került, "
+            + "most már beléphet és használhatja bankunk rendszerét!\n"
+            + "\n"
+            + "Üdvözlettel, SZDT Bank!";
 
     @PersistenceContext(unitName = "com.mycompany_NetBank-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
-    
+
     @PostConstruct
     public void init() {
         if (isAvailableLoginName(ADMINSTRING)) {
@@ -75,19 +88,27 @@ public class UserService {
                 Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-           Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
-        }
-    }  
-    
-    public void register(RegistratedUser user){
-         if (isAvailableLoginName(user.getLoginName())) {
-                registrate.create(user);
-        } else {
-             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
         }
     }
-    
-    public void acceptRegister(RegistratedUser regUser){
+
+    public void register(RegistratedUser user) {
+        if (isAvailableLoginName(user.getLoginName())) {
+            registrate.create(user);
+            StringBuilder sb = new StringBuilder();
+            sb.append("Tisztelt ");
+            sb.append(user.getName());
+            sb.append(" ! \n");
+            sb.append("\n");
+            sb.append(REGISTRATION_MESSAGE);
+            String messageBody = sb.toString();
+            emailService.sendEmail(user.getEmail(), "Üdvözli önt az SZDT Bank", messageBody);
+        } else {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
+        }
+    }
+
+    public void acceptRegister(RegistratedUser regUser) {
         User user = new User();
         user.setAddress(regUser.getAddress());
         user.setDateOfBirth(regUser.getDateOfBirth());
@@ -97,10 +118,19 @@ public class UserService {
         user.setPhoneNumber(regUser.getPhoneNumber());
         user.setName(regUser.getName());
         user.setPosition(Role.USER);
-        addUser(user);    
+        addUser(user);
         registrate.remove(regUser);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tisztelt ");
+        sb.append(user.getName());
+        sb.append(" ! \n");
+        sb.append(" \n");
+        sb.append(ACTIVATION_MESSAGE);
+        String messageBody = sb.toString();
+        emailService.sendEmail(user.getEmail(), "Regisztrációja jóváhagyásra került", messageBody);
     }
-    
+
     public void editUser(User user, Role originalPosition) throws NoSuchAlgorithmException {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         if (originalPosition.equals(user.getPosition())) {
@@ -115,34 +145,34 @@ public class UserService {
             groupFacade.edit(group);
         }
     }
-       
+
     public void removeUser(User user) {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         groupFacade.remove(group);
         userFacade.remove(user);
     }
-    
+
     public void updateUser(User user) {
         userFacade.edit(user);
     }
-    
-    public List<User> getUserList(){
+
+    public List<User> getUserList() {
         return userFacade.findAll();
     }
-    
-    public List<RegistratedUser> getRegUserList(){
+
+    public List<RegistratedUser> getRegUserList() {
         Query q = em.createNamedQuery("getAll", RegistratedUser.class);
         return q.getResultList();
     }
-    
-    public User findById(Long id){
+
+    public User findById(Long id) {
         return userFacade.find(id);
     }
-    
-    public List<Account> getAccountList(User user){
+
+    public List<Account> getAccountList(User user) {
         return userFacade.find(user.getId()).getAccountList();
     }
-    
+
     public Boolean isAvailableLoginName(String name) {
         List<User> userList = userFacade.findAll();
         for (User user : userList) {
@@ -163,7 +193,7 @@ public class UserService {
         }
         return newPassword.toString();
     }
-    
+
     public User findByLoginName(String name) {
         Query q = em.createNamedQuery("getUserByLoginName", User.class);
         q.setParameter("lName", name);

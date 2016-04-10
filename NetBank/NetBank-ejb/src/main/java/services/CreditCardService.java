@@ -59,6 +59,7 @@ public class CreditCardService {
     }
     
     public CreditCard findByCardNumber(Integer cardNumber){
-        return creditCardFacade.findByCardNumber(cardNumber);
+        CreditCard creditCard = creditCardFacade.findByCardNumber(cardNumber);
+        return creditCard;
     }
 }

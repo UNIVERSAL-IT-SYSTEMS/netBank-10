@@ -1,8 +1,12 @@
 entities\Topic.class
+services\MessageService.class
 facades\GroupFacade.class
+services\EmailSendingService$1.class
 enums\Role.class
 enums\Type.class
 facades\CreditCardFacadeLocal.class
+services\EmailSendingService.class
+facades\TopicFacade.class
 entities\Transaction.class
 services\TransactionService.class
 entities\Message.class
@@ -10,6 +14,7 @@ entities\CreditCard.class
 entities\User.class
 enums\CardType.class
 facades\CreditCardFacade.class
+facades\TopicFacadeLocal.class
 facades\UserFacade.class
 facades\RegistratedUserFacade.class
 services\CreditCardService.class
@@ -19,10 +24,12 @@ facades\GroupFacadeLocal.class
 exceptions\LoggerExeption.class
 logging\LoggingInterceptor.class
 facades\TransactionFacade.class
+facades\MessageFacadeLocal.class
 facades\RegistratedUserFacadeLocal.class
 facades\AccountFacade.class
 entities\Account.class
 facades\AbstractFacade.class
+facades\MessageFacade.class
 services\AccountService.class
 entities\Group.class
 facades\AccountFacadeLocal.class

@@ -3,7 +3,6 @@ package entities;
 import enums.Type;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +17,7 @@ import javax.persistence.TemporalType;
  * @author Daniel Szabo
  */
 @Entity(name = "TRANSACTION_TABLE")
-@NamedQuery(name = "getSpecifyTransaction", query = "SELECT t FROM TRANSACTION_TABLE t WHERE t.sender.id = :rId  OR t.reciever.id = :rId ORDER BY t.dateOfTransaction")
+@NamedQuery(name = "getSpecifyTransaction", query = "SELECT t FROM TRANSACTION_TABLE t WHERE t.sender.id = :rId  OR t.reciever.id = :rId ORDER BY t.dateOfTransaction DESC")
 public class Transaction implements Serializable {
 
     @Id

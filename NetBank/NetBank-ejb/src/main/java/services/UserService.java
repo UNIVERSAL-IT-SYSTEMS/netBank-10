@@ -55,6 +55,10 @@ public class UserService {
             + "most már beléphet és használhatja bankunk rendszerét!\n"
             + "\n"
             + "Üdvözlettel, SZDT Bank!";
+    
+    private final String DECLINE_MESSAGE = "Regisztrációja visszautasításra került, "
+            + "ennek oka: "
+            + "\n";
 
     @PersistenceContext(unitName = "com.mycompany_NetBank-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -130,7 +134,21 @@ public class UserService {
         String messageBody = sb.toString();
         emailService.sendEmail(user.getEmail(), "Regisztrációja jóváhagyásra került", messageBody);
     }
-
+    
+    public void refuseRegister(RegistratedUser regUser, String message){
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tisztelt ");
+        sb.append(regUser.getName());
+        sb.append(" ! \n");
+        sb.append(" \n");
+        sb.append(ACTIVATION_MESSAGE);
+        sb.append(message);
+        sb.append("\nÜdvözlettel, SZDT Bank!");
+        String messageBody = sb.toString();
+        emailService.sendEmail(regUser.getEmail(), "Regisztrációja visszautasításra került", messageBody);
+        registrate.remove(regUser);
+    }    
     public void editUser(User user, Role originalPosition) throws NoSuchAlgorithmException {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         if (originalPosition.equals(user.getPosition())) {
@@ -177,6 +195,16 @@ public class UserService {
         List<User> userList = userFacade.findAll();
         for (User user : userList) {
             if (user.getLoginName().equals(name)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public Boolean isAvailableEmail(String email) {
+        List<User> userList = userFacade.findAll();
+        for (User user : userList) {
+            if (user.getEmail().equals(email)) {
                 return false;
             }
         }

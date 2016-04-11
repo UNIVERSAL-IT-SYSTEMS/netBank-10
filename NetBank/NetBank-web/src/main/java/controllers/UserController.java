@@ -39,6 +39,8 @@ public class UserController implements Serializable {
     private Role originalPosition;
 
     private List<Account> accountList;
+    
+    private String message = new String();
 
     public UserController() {
     }
@@ -99,6 +101,14 @@ public class UserController implements Serializable {
         this.selectedRegUser = selectedRegUser;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
     public List<User> findAll() {
         return this.userService.getUserList();
     }
@@ -241,6 +251,13 @@ public class UserController implements Serializable {
     public String acceptRegister(){
         userService.acceptRegister(selectedRegUser);
         this.selectedRegUser = new RegistratedUser();
+        return "registrate?faces-redirect=true";
+    }
+    
+    public String refuseRegister(){
+        userService.refuseRegister(selectedRegUser, message);
+        this.selectedRegUser = new RegistratedUser();
+        this.message = new String();
         return "registrate?faces-redirect=true";
     }
 }

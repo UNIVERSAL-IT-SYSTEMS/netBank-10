@@ -20,11 +20,9 @@ and open the template in the editor.
                 <hr />
                 <p:panelGrid columns="2" class="tableReg">
                     <p:outputLabel value="Név:" for="name" />
-                    <p:inputText id="name" value="#{userController.user.name}" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
+                    <p:inputText id="name" value="#{userController.user.name}" disabled="true" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
                     <p:outputLabel value="Email cím: " for="email" />
                     <p:inputText id="email" value="#{userController.user.email}" title="Email" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
-                    <p:outputLabel value="Születési idő: " />
-                    <p:calendar id="dateOfBirth" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd" class="box myClass"/>
                     <p:outputLabel value="Cím: " />
                     <p:inputText id="address" value="#{userController.user.address}" class="box"/> 
                     <p:outputLabel value="Telefonszám: " />

@@ -25,14 +25,24 @@ and open the template in the editor.
                 <p:panelGrid columns="2" class="tableReg">
                     <p:outputLabel value="Név:" for="name" />
                     <p:inputText id="name" value="#{userController.regUser.name}" title="Name" class="box" required="true" requiredMessage="Név megadása kötelező!" />
+                    
                     <p:outputLabel value="Születési idő: " />
-                    <p:calendar id="dateOfBirth" value="#{userController.regUser.dateOfBirth}" pattern="yyyy.MM.dd."  class="box"/>
-                     <p:outputLabel value="Cím" for="address" />
-                     <p:inputText id="address" value="#{userController.regUser.address}" title="Address" class="box"/>        
+                    <p:calendar mindate="1900.01.01." maxdate="1999.12.31."  id="dateOfBirth" value="#{userController.regUser.dateOfBirth}" pattern="yyyy.MM.dd"  class="box"/>
+                    
+                    <p:outputLabel value="Cím" for="address" />
+                    <p:inputText id="address" value="#{userController.regUser.address}" title="Address" class="box"/>  
+                    
                     <p:outputLabel value="Felhasználónév" for="loginName" />
-                    <p:inputText id="loginName" value="#{userController.regUser.loginName}" title="LoginName" class="box" required="true"  requiredMessage="Felhasználónév megadása kötelező!"/>
+                    <p:inputText id="loginName" value="#{userController.regUser.loginName}" title="LoginName" class="box" required="true"  requiredMessage="Felhasználónév megadása kötelező!">
+                        <f:validator validatorId="isAvailableUserName" />
+                    </p:inputText>
+                    
                     <p:outputLabel value="Email cím" for="email" />
-                    <p:inputText id="email" value="#{userController.regUser.email}" title="email" class="box" required="true"/>
+                    <p:inputText id="email" value="#{userController.regUser.email}" title="email" class="box" required="true">
+			<f:validator validatorId="emailValidator" />
+                        <f:validator validatorId="isAvailableEmail"/>
+                    </p:inputText>
+                    
                     <p:outputLabel value="Jelszó:"/>
                     <p:password id="pwd1" value="#{userController.regUser.password}"   match="pwd2" class="box" required="true"  requiredMessage="Jelszó megadása kötelező" validatorMessage="A jelszavak nem egyeznek!" />
                     <p:outputLabel value="Jelszó megerősítés:"/>

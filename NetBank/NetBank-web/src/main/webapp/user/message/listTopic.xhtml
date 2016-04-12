@@ -14,18 +14,21 @@
                     Üzenetek
                 </f:facet>
 
-                <p:commandLink action="#{messageController.navigateToTopic(topic)}">
-                    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Téma:" />
-                            <h:outputText value="#{topic.theme}" style="font-weight: bold"/>
-                            <h:outputText value="#{topic.lastMessage.content}" style="font-weight: bold"/>
+                <p:commandLink action="#{messageController.navigateToTopic(topic)}" >
+                    <div class="panel" >
+                        <h:panelGrid columns="2" style="width:100%">
+                            <p:outputPanel>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Téma:" />
+                                    <h:outputText value="#{topic.theme}" style="font-weight: bold"/>
+                                    <h:outputText value="#{topic.lastMessage.content}" style="font-weight: bold"/>
+                                </h:panelGrid>
+                            </p:outputPanel>
                         </h:panelGrid>
-                    </p:outputPanel>
-                    </h:panelGrid>
+                    </div>
                 </p:commandLink>
-                <hr />
+
+
             </p:dataScroller>
             <p:commandButton value="Új Beszélgetés Létrehozása" onclick="PF('createDialog').show();" />
         </h:form>

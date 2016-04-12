@@ -14,29 +14,31 @@ and open the template in the editor.
         <title>Felhasználó Adatainak Módosítása</title>
     </h:head> 
     <h:body>
-            <h:form>
-                <div align="center">
+        <h:form>
+            <div align="center">
                 <h1>Felhasználó Adatainak Módosítása</h1>
                 <hr />
                 <p:panelGrid columns="2" class="tableReg">
                     <p:outputLabel value="Név:" for="name" />
-                    <p:inputText id="name" value="#{userController.user.name}" disabled="true" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
+                    <p:inputText id="name" value="#{userController.user.name}" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
                     <p:outputLabel value="Email cím: " for="email" />
                     <p:inputText id="email" value="#{userController.user.email}" title="Email" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
+                    <p:outputLabel value="Születési idő: " />
+                    <p:calendar id="dateOfBirth" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd" class="box myClass"/>
                     <p:outputLabel value="Cím: " />
                     <p:inputText id="address" value="#{userController.user.address}" class="box"/> 
                     <p:outputLabel value="Telefonszám: " />
                     <p:inputText id="phone" value="#{userController.user.phoneNumber}" class="box"/> 
                 </p:panelGrid>
-                  <div class="row">
+                <div class="row">
                     <div class="col-lg-6 regButtons">
                         <p:commandButton value="Adatlap módosítása" action="#{userController.updateProfileUser()}" class="button btn btn-default"/>
                     </div>
                     <div class="col-lg-6">
-                        <p:button value="Mégse" href="index.xhtml" class="button btn btn-default"/>
+                        <p:button value="Mégse" href="profilePage.xhtml" class="button btn btn-default"/>
                     </div>
-                  </div>
                 </div>
-            </h:form>     
+            </div>
+        </h:form>
     </h:body> 
 </html>

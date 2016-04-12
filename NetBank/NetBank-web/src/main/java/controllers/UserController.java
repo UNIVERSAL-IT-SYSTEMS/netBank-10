@@ -24,23 +24,23 @@ import services.UserService;
 public class UserController implements Serializable {
 
     @Inject
-    UserService userService; 
-    
+    UserService userService;
+
     @Inject
-    AccountService accountService; 
+    AccountService accountService;
 
     private User user = new User();
     private User selectedUser;
-    
+
     private RegistratedUser regUser = new RegistratedUser();
     private RegistratedUser selectedRegUser;
 
     private String position = "User";
     private Role originalPosition;
 
+    private String newPassword;
+
     private List<Account> accountList;
-    
-    private String message = new String();
 
     public UserController() {
     }
@@ -101,18 +101,18 @@ public class UserController implements Serializable {
         this.selectedRegUser = selectedRegUser;
     }
 
-    public String getMessage() {
-        return message;
+    public String getNewPassword() {
+        return newPassword;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
     }
-    
+
     public List<User> findAll() {
         return this.userService.getUserList();
     }
-    
+
     public List<RegistratedUser> findAllReg() {
         return this.userService.getRegUserList();
     }
@@ -133,7 +133,7 @@ public class UserController implements Serializable {
         regUser = new RegistratedUser();
         return "login?faces-redirect=true";
     }
-    
+
     private void addUser() {
         user.setPosition(Role.USER);
         userService.addUser(user);
@@ -144,7 +144,7 @@ public class UserController implements Serializable {
         if (selectedUser != null) {
             if (!"admin".equals(selectedUser.getLoginName())) {
                 List<Account> accountList = accountService.getAllByUser(selectedUser);
-                for(Account account : accountList){
+                for (Account account : accountList) {
                     account.setDestroy(true);
                     account.setUser(null);
                     accountService.updateAccount(account);
@@ -155,13 +155,13 @@ public class UserController implements Serializable {
             } else {
                 FacesContext.getCurrentInstance().
                         addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                "Deleting error", "This user has leaded projects or you tried to delete admin! >> nice try! "));
+                                        "Deleting error", "This user has leaded projects or you tried to delete admin! >> nice try! "));
                 return "listUser?faces-redirect=false";
             }
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "User has not selected", "You did not select any user!"));
+                                    "User has not selected", "You did not select any user!"));
             return "listUser?faces-redirect=false";
         }
     }
@@ -174,17 +174,17 @@ public class UserController implements Serializable {
         }
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "User has not selected", "You did not select any user!"));
+                                "User has not selected", "You did not select any user!"));
         return "listUser?faces-redirect=false";
     }
-    
-     public String selectedToUpdateProfile(String name) {
+
+    public String selectedToUpdateProfile(String name) {
         this.selectedUser = userService.findByLoginName(name);
         if (selectedUser != null) {
             this.originalPosition = selectedUser.getPosition();
             this.user = selectedUser;
-            return "/user/profile?faces-redirect=true";
-        }else{
+            return "/user/profilePage?faces-redirect=true";
+        } else {
             return "?faces-redirect=false";
         }
     }
@@ -202,8 +202,7 @@ public class UserController implements Serializable {
         this.user = new User();
         return "/user/index?faces-redirect=true";
     }
-    
-    
+
     public void modifyPosition(String position) {
         switch (position) {
             case "Admin":
@@ -224,7 +223,7 @@ public class UserController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
+                                    "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
 
             return "/admin/user/account/listUser?faces-redirect=false";
         }
@@ -237,7 +236,7 @@ public class UserController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
+                                    "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
 
             return "listAccount?faces-redirect=false";
         }
@@ -247,17 +246,18 @@ public class UserController implements Serializable {
         user = new User();
         return "listUser?faces-redirect=true";
     }
-    
-    public String acceptRegister(){
+
+    public String acceptRegister() {
         userService.acceptRegister(selectedRegUser);
         this.selectedRegUser = new RegistratedUser();
         return "registrate?faces-redirect=true";
     }
-    
-    public String refuseRegister(){
-        userService.refuseRegister(selectedRegUser, message);
-        this.selectedRegUser = new RegistratedUser();
-        this.message = new String();
-        return "registrate?faces-redirect=true";
+
+    public String changePassword() {
+        if (newPassword != null) {
+            user.setPassword(newPassword);
+            userService.editUserPassword(user);
+        }
+        return "/user/index?faces-redirect=true";
     }
 }

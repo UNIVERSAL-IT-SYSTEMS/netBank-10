@@ -55,7 +55,7 @@ public class UserService {
             + "most már beléphet és használhatja bankunk rendszerét!\n"
             + "\n"
             + "Üdvözlettel, SZDT Bank!";
-    
+
     private final String DECLINE_MESSAGE = "Regisztrációja visszautasításra került, "
             + "ennek oka: "
             + "\n";
@@ -134,9 +134,9 @@ public class UserService {
         String messageBody = sb.toString();
         emailService.sendEmail(user.getEmail(), "Regisztrációja jóváhagyásra került", messageBody);
     }
-    
-    public void refuseRegister(RegistratedUser regUser, String message){
-        
+
+    public void refuseRegister(RegistratedUser regUser, String message) {
+
         StringBuilder sb = new StringBuilder();
         sb.append("Tisztelt ");
         sb.append(regUser.getName());
@@ -148,7 +148,8 @@ public class UserService {
         String messageBody = sb.toString();
         emailService.sendEmail(regUser.getEmail(), "Regisztrációja visszautasításra került", messageBody);
         registrate.remove(regUser);
-    }    
+    }
+
     public void editUser(User user, Role originalPosition) throws NoSuchAlgorithmException {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         if (originalPosition.equals(user.getPosition())) {
@@ -200,7 +201,7 @@ public class UserService {
         }
         return true;
     }
-    
+
     public Boolean isAvailableEmail(String email) {
         List<User> userList = userFacade.findAll();
         for (User user : userList) {
@@ -222,10 +223,23 @@ public class UserService {
         return newPassword.toString();
     }
 
+    public String encode(String password) throws NoSuchAlgorithmException {
+        return encoding(password);
+    }
+
     public User findByLoginName(String name) {
         Query q = em.createNamedQuery("getUserByLoginName", User.class);
         q.setParameter("lName", name);
         User user = (User) q.getSingleResult();
         return user;
+    }
+
+    public void editUserPassword(User user) {
+        try {
+            user.setPassword(encoding(user.getPassword()));
+            userFacade.edit(user);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Nem sikerült a módosítás!", ex);
+        }
     }
 }

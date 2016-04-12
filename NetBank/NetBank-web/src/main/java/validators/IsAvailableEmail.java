@@ -13,9 +13,9 @@ import services.UserService;
  *
  * @author Daniel Szabo
  */
-
-@FacesValidator("isAvailableUserName")
-public class isAvailableUserName implements Validator{
+@FacesValidator("isAvailableEmail")
+public class IsAvailableEmail implements Validator {
+    
     
     @Inject
     UserService userService; 
@@ -24,10 +24,10 @@ public class isAvailableUserName implements Validator{
     public void validate(FacesContext context, UIComponent component,
             Object value) throws ValidatorException {
 
-        if (!userService.isAvailableLoginName(value.toString())) {
+        if (!userService.isAvailableEmail(value.toString())) {
 
             FacesMessage msg
-                    = new FacesMessage("A felhasználónév foglalt.");
+                    = new FacesMessage("A megadott email cím foglalt");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
 

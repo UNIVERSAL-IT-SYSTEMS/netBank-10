@@ -27,7 +27,7 @@ and open the template in the editor.
                     <p:inputText id="name" value="#{userController.regUser.name}" title="Name" class="box" required="true" requiredMessage="Név megadása kötelező!" />
                     
                     <p:outputLabel value="Születési idő: " />
-                    <p:calendar mindate="1900.01.01." maxdate="1999.12.31."  id="dateOfBirth" value="#{userController.regUser.dateOfBirth}" pattern="yyyy.MM.dd"  class="box"/>
+                    <p:calendar maxdate="1999.12.31" mindate="1900.01.01"  id="dateOfBirth" value="#{userController.regUser.dateOfBirth}" pattern="yyyy.MM.dd"  class="box"/>
                     
                     <p:outputLabel value="Cím" for="address" />
                     <p:inputText id="address" value="#{userController.regUser.address}" title="Address" class="box"/>  
@@ -42,6 +42,9 @@ and open the template in the editor.
 			<f:validator validatorId="emailValidator" />
                         <f:validator validatorId="isAvailableEmail"/>
                     </p:inputText>
+                    
+                    <p:outputLabel value="Telefonszám: " />
+                    <p:inputText id="phone" value="#{userController.regUser.phoneNumber}" class="box"/>
                     
                     <p:outputLabel value="Jelszó:"/>
                     <p:password id="pwd1" value="#{userController.regUser.password}"   match="pwd2" class="box" required="true"  requiredMessage="Jelszó megadása kötelező" validatorMessage="A jelszavak nem egyeznek!" />

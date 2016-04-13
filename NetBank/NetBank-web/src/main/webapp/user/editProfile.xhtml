@@ -11,7 +11,10 @@ and open the template in the editor.
       xmlns:p="http://primefaces.org/ui">  
 
     <h:head>  
-        <title>Felhasználó Adatainak Módosítása</title>
+        <meta charset="utf-8"></meta>
+        <title>Felhasználó adatainak módosítása </title>
+        <link rel="icon" href="http://iconogen.com/images/computer.png"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
     </h:head> 
     <h:body>
         <h:form>
@@ -21,14 +24,23 @@ and open the template in the editor.
                 <p:panelGrid columns="2" class="tableReg">
                     <p:outputLabel value="Név:" for="name" />
                     <p:inputText id="name" value="#{userController.user.name}" title="Név" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
+                    
                     <p:outputLabel value="Email cím: " for="email" />
-                    <p:inputText id="email" value="#{userController.user.email}" title="Email" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />
+                    <p:inputText id="email" value="#{userController.user.email}" title="Email" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" >
+                        <f:validator validatorId="emailValidator" />
+                        <f:validator validatorId="isAvailableEmail"/>
+                    </p:inputText>
+                    
+                    
                     <p:outputLabel value="Születési idő: " />
-                    <p:calendar id="dateOfBirth" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd" class="box myClass"/>
+                    <p:calendar id="dateOfBirth"  maxdate="1999.12.31" mindate="1900.01.01" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd" class="box myClass"/>
+                    
                     <p:outputLabel value="Cím: " />
                     <p:inputText id="address" value="#{userController.user.address}" class="box"/> 
+                    
                     <p:outputLabel value="Telefonszám: " />
                     <p:inputText id="phone" value="#{userController.user.phoneNumber}" class="box"/> 
+                    
                 </p:panelGrid>
                 <div class="row">
                     <div class="col-lg-6 regButtons">

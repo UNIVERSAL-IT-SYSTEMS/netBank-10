@@ -1,5 +1,6 @@
 package services;
 
+import enums.EmailType;
 import java.util.Properties;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -21,11 +22,12 @@ import logging.LoggingInterceptor;
 @LocalBean
 @Interceptors(LoggingInterceptor.class)
 public class EmailSendingService {
+    
 
-    public void sendEmail(String to, String subject, String content) {
-
-
-
+    private static final String FOOTER ="\n\n" + "Üdvözlettel, SZDT Bank!";
+    
+    
+    private void send(String to, String subject, String content) {
         final String username = "szdtbank@gmail.com";
         final String password = "abcde01248";
 
@@ -53,6 +55,36 @@ public class EmailSendingService {
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }
-
     }
+    
+    public void sendEmail(String toName, String toMail, EmailType type){
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tisztelt ");
+        sb.append(toName);
+        sb.append(" ! \n");
+        sb.append("\n");
+        sb.append(type.getMessage());
+        sb.append(FOOTER);
+        String messageBody = sb.toString();
+        
+        send(toMail, type.getSubject(), messageBody);
+    }
+    
+    public void sendRefuseMail(String toName, String toMail, EmailType type, String message){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Tisztelt ");
+        sb.append(toName);
+        sb.append(" ! \n");
+        sb.append("\n");
+        sb.append(type.getMessage());
+        sb.append(message);
+        sb.append(FOOTER);
+        String messageBody = sb.toString();
+        
+        send(toMail, type.getSubject(), messageBody);
+    }
+    
+    
+    
 }

@@ -2,6 +2,7 @@ package controllers;
 
 import entities.Account;
 import entities.RegistratedUser;
+import entities.Topic;
 import entities.User;
 import enums.Role;
 import java.io.Serializable;
@@ -13,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import services.AccountService;
+import services.MessageService;
 import services.UserService;
 
 /**
@@ -28,6 +30,9 @@ public class UserController implements Serializable {
 
     @Inject
     AccountService accountService;
+    
+    @Inject
+    MessageService messageService; 
 
     private User user = new User();
     private User selectedUser;
@@ -41,6 +46,10 @@ public class UserController implements Serializable {
     private String newPassword;
 
     private List<Account> accountList;
+    
+    private String message;
+    
+  
 
     public UserController() {
     }
@@ -109,6 +118,14 @@ public class UserController implements Serializable {
         this.newPassword = newPassword;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public List<User> findAll() {
         return this.userService.getUserList();
     }
@@ -149,19 +166,26 @@ public class UserController implements Serializable {
                     account.setUser(null);
                     accountService.updateAccount(account);
                 }
+                List<Topic> topicList = messageService.findByUser(selectedUser);
+                for(Topic topic : topicList){
+                    messageService.removeTopic(topic);
+                }
+                
+                topicList.clear();
+                
                 userService.removeUser(selectedUser);
                 selectedUser = new User();
                 return "listUser?faces-redirect=true";
             } else {
                 FacesContext.getCurrentInstance().
                         addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                        "Deleting error", "This user has leaded projects or you tried to delete admin! >> nice try! "));
+                                "Deleting error", "This user has leaded projects or you tried to delete admin! >> nice try! "));
                 return "listUser?faces-redirect=false";
             }
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "User has not selected", "You did not select any user!"));
+                            "User has not selected", "You did not select any user!"));
             return "listUser?faces-redirect=false";
         }
     }
@@ -174,7 +198,7 @@ public class UserController implements Serializable {
         }
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                "User has not selected", "You did not select any user!"));
+                        "User has not selected", "You did not select any user!"));
         return "listUser?faces-redirect=false";
     }
 
@@ -189,7 +213,7 @@ public class UserController implements Serializable {
         }
     }
 
-    public String updateUser() throws NoSuchAlgorithmException {
+    public String updateUser() {
         modifyPosition(this.position);
         this.position = "User";
         userService.editUser(user, originalPosition);
@@ -223,7 +247,7 @@ public class UserController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
+                            "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
 
             return "/admin/user/account/listUser?faces-redirect=false";
         }
@@ -236,7 +260,7 @@ public class UserController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
+                            "Felhasználó nincs kiválasztva", "Felhasználó nincs kiválasztva"));
 
             return "listAccount?faces-redirect=false";
         }
@@ -250,6 +274,13 @@ public class UserController implements Serializable {
     public String acceptRegister() {
         userService.acceptRegister(selectedRegUser);
         this.selectedRegUser = new RegistratedUser();
+        return "registrate?faces-redirect=true";
+    }
+    
+    public String refuseRegister(){
+        userService.refuseRegister(selectedRegUser, message);
+        this.selectedRegUser = new RegistratedUser();
+        this.message = new String();
         return "registrate?faces-redirect=true";
     }
 

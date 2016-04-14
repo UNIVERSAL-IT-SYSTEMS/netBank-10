@@ -1,4 +1,3 @@
-
 package services;
 
 import entities.Account;
@@ -19,23 +18,26 @@ import logging.LoggingInterceptor;
 @LocalBean
 @Interceptors(LoggingInterceptor.class)
 public class CreditCardService {
-    
+
     @Inject
     CreditCardFacadeLocal creditCardFacade;
 
-    
     public void addCreditCard(CreditCard card) {
-        if (isAvailableCardNumber(card.getNumber())) { 
-                creditCardFacade.create(card); 
+        if (isAvailableCardNumber(card.getNumber())) {
+            creditCardFacade.create(card);
         } else {
             // HibaÜzenet
         }
     }
-    
-    public List<CreditCard> getCreditCardListByAccount(Account account) {
-        return creditCardFacade.listByAccount(account.getId());
+
+    public List<CreditCard> getCreditCardListByAccountAdmin(Account account) {
+        return creditCardFacade.listByAccountAdmin(account.getId());
     }
     
+    public List<CreditCard> getCreditCardListByAccountUser(Account account) {
+        return creditCardFacade.listByAccountUser(account.getId());
+    }
+
     public Boolean isAvailableCardNumber(int number) {
         List<CreditCard> cardList = creditCardFacade.findAll();
         for (CreditCard card : cardList) {
@@ -45,21 +47,25 @@ public class CreditCardService {
         }
         return true;
     }
-    
-    public void updateCreditCard(CreditCard card){
+
+    public void updateCreditCard(CreditCard card) {
         creditCardFacade.edit(card);
     }
-    
+
     public void removeCreditCard(CreditCard card) {
         creditCardFacade.remove(card);
     }
-    
-    public List<CreditCard> getCreditCardList(){
+
+    public List<CreditCard> getCreditCardList() {
         return creditCardFacade.findAll();
     }
-    
-    public CreditCard findByCardNumber(Integer cardNumber){
+
+    public CreditCard findByCardNumber(Integer cardNumber) {
         CreditCard creditCard = creditCardFacade.findByCardNumber(cardNumber);
         return creditCard;
+    }
+
+    public void updateCard(CreditCard card) {
+        creditCardFacade.edit(card);
     }
 }

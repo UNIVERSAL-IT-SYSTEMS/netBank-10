@@ -29,7 +29,7 @@ and open the template in the editor.
                     <p:outputLabel value="Email cím: " for="email" />
                     <p:inputText id="email" value="#{userController.user.email}" title="Email" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" >
                         <f:validator validatorId="emailValidator" />
-                        <f:validator validatorId="isAvailableEmail"/>
+                        <f:validator binding="#{isAvailableEmail}" />
                     </p:inputText>
 
                     <p:outputLabel value="Születési idő: " />
@@ -38,8 +38,10 @@ and open the template in the editor.
                     <p:outputLabel value="Cím: " />
                     <p:inputText id="address" value="#{userController.user.address}" class="box"/> 
 
-                    <p:outputLabel value="Telefonszám: " />
-                    <p:inputText id="phone" value="#{userController.user.phoneNumber}" class="box"/> 
+                    <p:outputLabel value="Mobil telefonszám: " />
+                    <p:inputText id="phone" value="#{userController.user.phoneNumber}" class="box">
+                        <f:validator validatorId="phoneNumberValidator"/>
+                    </p:inputText>
 
                     <p:outputLabel value="Jogosultság " />
                     <h:selectOneRadio id="position" value="#{userController.position}" required="true" class="radioButton">
@@ -47,6 +49,9 @@ and open the template in the editor.
                         <f:selectItem itemLabel="User" itemValue="User" />      
                     </h:selectOneRadio>
                 </p:panelGrid>
+                <div class="col-md-12">
+                            <p:messages id="messages"  showDetail="false" autoUpdate="true"></p:messages>
+                </div>
                 <div class="row">
                     <div class="col-lg-6 regButtons">
                         <p:commandButton value="Adatlap módosítása User" action="#{userController.updateUser()}" class="button btn btn-default"/>

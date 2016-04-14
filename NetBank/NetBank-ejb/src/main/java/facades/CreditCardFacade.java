@@ -26,12 +26,19 @@ public class CreditCardFacade extends AbstractFacade<CreditCard> implements Cred
     }
 
     @Override
-    public List<CreditCard> listByAccount(Long id) {
-        Query q = em.createNamedQuery("getListByAccount", CreditCard.class); 
+    public List<CreditCard> listByAccountAdmin(Long id) {
+        Query q = em.createNamedQuery("getListByAccountAdmin", CreditCard.class); 
         q.setParameter("rId", id);
         return q.getResultList();
     }
     
+    @Override
+    public List<CreditCard> listByAccountUser(Long id) {
+        Query q = em.createNamedQuery("getListByAccountUser", CreditCard.class); 
+        q.setParameter("rId", id);
+        return q.getResultList();
+    }
+        
     @Override
     public CreditCard findByCardNumber(Integer cardNumber){
         Query q = em.createNamedQuery("findByCardNumber", CreditCard.class); 

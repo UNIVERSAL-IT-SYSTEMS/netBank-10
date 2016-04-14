@@ -7,6 +7,7 @@ enums\Type.class
 facades\CreditCardFacadeLocal.class
 services\EmailSendingService.class
 facades\TopicFacade.class
+enums\EmailType.class
 entities\Transaction.class
 services\TransactionService.class
 entities\Message.class

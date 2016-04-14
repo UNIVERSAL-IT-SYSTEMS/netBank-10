@@ -101,6 +101,9 @@ public class MessageController implements Serializable{
          messageService.editTopic(selectedTopic);
          
          this.message = new Message();
+     }    
+     
+     public void deleteTopic(Topic parTopic){
+         
      }
-    
 }

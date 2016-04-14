@@ -21,7 +21,8 @@
             
             <h1>Számlához tartozó Bankkártyák</h1>
             
-            <p:dataTable  var="card" value="#{creditCardController.getCreditCardListByAccount(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable">
+            <p:dataTable  var="card" value="#{creditCardController.getCreditCardListByAccountUser(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable"
+                          selectionMode="single" selection="#{creditCardController.selectedCard}" rowKey="#{card.id}">
 
                 <p:column headerText="Kártyaszám" filterBy="#{card.number}" filterMatchMode="contains">
                     <h:outputText value="#{card.number}"/>
@@ -31,7 +32,10 @@
                     <h:outputText value="#{card.type}"/>
                 </p:column>
             </p:dataTable>
-            
+            <div>
+                 <p:commandButton value="Bankkártya Zárolása / Aktiválása" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
+            </div>
+
             <h1>Tranzakciótörténet</h1>
             <p:dataTable sortBy="#{transaction.dateOfTransaction}" sortOrder="ascending" var="transaction" value="#{transactionController.getListByAccount(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable">
                 <p:column headerText="Dátum" filterBy="#{transaction.dateOfTransaction}" sortBy="#{transaction.dateOfTransaction}" filterMatchMode="contains">
@@ -78,7 +82,18 @@
                          <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" ajax="false" update="@form" class="button btn btn-default"/>
                     </div>
                 </div>
-            </p:dialog>      
+            </p:dialog>
+            
+            <p:dialog header="Biztosan Zárolja a Bankkártyát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                <div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Igen" actionListener="#{creditCardController.deleteCard()}"  ajax="false" update="@form" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Vissza" ajax="false"  update="@form" class="button btn btn-default"/>
+                    </div>
+                </div>
+            </p:dialog>
         </h:form>
     </ui:define>
 </ui:composition>

@@ -25,7 +25,8 @@
 
             <h1>Számlához tartozó Bankkártyák</h1>
 
-            <p:dataTable id="card" var="card" value="#{creditCardController.getCreditCardListByAccount(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable">
+            <p:dataTable id="card" var="card" value="#{creditCardController.getCreditCardListByAccountAdmin(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable"
+                         selectionMode="single" selection="#{creditCardController.selectedCard}" rowKey="#{card.id}">
 
                 <p:column headerText="Kártyaszám" filterBy="#{card.number}" filterMatchMode="contains">
                     <h:outputText value="#{card.number}"/>
@@ -47,6 +48,7 @@
 
             <c:if test="${accountController.account.destroy eq false}">                   
                 <p:commandButton value="Bankkártya igénylése" onclick="PF('createDialog').show();" styleClass="btnPosLeft" class="button btn btn-default"/>
+                <p:commandButton value="Bankkártya Zárolása / Aktiválása" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
             </c:if>
 
 
@@ -111,19 +113,30 @@
 
             <p:dialog header="Bankkártya Létrehozása" widgetVar="createDialog" modal="true" height="150" width="300" resizable="false" draggable="false">
                 <div>
-                        <h3 style="margin-top:0">Válasszon Típust</h3>
-                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                            <p:selectOneRadio id="console" value="#{creditCardController.type}">
-                                <f:selectItem itemLabel="Master Card" itemValue="MASTER_CARD" />
-                                <f:selectItem itemLabel="Maestro" itemValue="MAESTRO" />
-                                <f:selectItem itemLabel="Visa" itemValue="VISA" />
-                            </p:selectOneRadio>
-                        </h:panelGrid>
+                    <h3 style="margin-top:0">Válasszon Típust</h3>
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                        <p:selectOneRadio id="console" value="#{creditCardController.type}">
+                            <f:selectItem itemLabel="Master Card" itemValue="MASTER_CARD" />
+                            <f:selectItem itemLabel="Maestro" itemValue="MAESTRO" />
+                            <f:selectItem itemLabel="Visa" itemValue="VISA" />
+                        </p:selectOneRadio>
+                    </h:panelGrid>
                     <div class="col-md-6">
                         <p:commandButton value="Létrehoz" actionListener="#{creditCardController.addCreditCard(accountController.account)}" ajax="false" update="@card" class="button btn btn-default"/>
                     </div>
                     <div class="col-md-6">
                         <p:commandButton value="Vissza" ajax="false" update="@card" class="button btn btn-default"/>
+                    </div>
+                </div>
+            </p:dialog>
+
+            <p:dialog header="Biztosan Zárolja / Aktiválja a Bankkártyát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                <div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Igen" actionListener="#{creditCardController.deleteCard()}"  ajax="false" update="@form" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Vissza" ajax="false"  update="@form" class="button btn btn-default"/>
                     </div>
                 </div>
             </p:dialog>

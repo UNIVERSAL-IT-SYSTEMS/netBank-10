@@ -28,6 +28,7 @@ C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\facades\Ac
 C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\facades\CreditCardFacadeLocal.java
 C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\entities\RegistratedUser.java
 C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\facades\TopicFacade.java
+C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\enums\EmailType.java
 C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\enums\Type.java
 C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\facades\CreditCardFacade.java
 C:\Users\szdan\Szakdolgozat\NetBank\NetBank\NetBank-ejb\src\main\java\enums\CardType.java

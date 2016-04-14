@@ -31,7 +31,7 @@
                         <p:button value="Adatok módosítása" href="editProfile.xhtml" class="button btn btn-default"/>
                     </div>
                     <div class="col-lg-6 regButtons">
-                        <p:commandButton value="Jelszó megváltoztatása" onclick="PF('passchange').show()" class="button btn btn-default"/>
+                        <p:button value="Jelszó megváltoztatása" href="editPassword.xhtml" class="button btn btn-default"/>
                     </div>
                     <div class="col-lg-6">
                         <p:button value="Mégse" href="index.xhtml" class="button btn btn-default"/>
@@ -39,48 +39,6 @@
                 </div>
             </div>
 
-
-            <p:dialog header="Jelszó megváltoztatása" widgetVar="passchange" modal="true" height="250" width="750" >
-                <div class="form-group">
-                    <label class ="col-md-5 control-label">Jelenlegi jelszó</label>
-                    <div class="col-md-5">
-                        <h:inputSecret id="oldpass" required="true" requiredMessage="Adja meg a jelenlegi jelszavát" autocomplete="off" class="form-control">
-                            <f:validator binding="#{currentPasswordValidator}" />
-                        </h:inputSecret>
-                        <h:message id="m_oldpass" for="oldpass" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <h:outputLabel class ="col-md-5 control-label" for="password" value="Új jelszó"/>
-                    <div class="col-md-5">
-                        <h:inputSecret class="form-control" id="password" autocomplete="off" required="true" requiredMessage="Nem adott meg jelszót!" value="#{userController.newPassword}">
-                            <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
-                        </h:inputSecret>
-                        <h:message id="m_password" for="password"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel class ="col-md-5 control-label" for="confirm" value="Új jelszó megerősítése"/>
-                    <div class="col-md-5">
-                        <h:inputSecret  class="form-control" id="confirm" binding="#{confirmPassword}" autocomplete="off" required="true" requiredMessage="Nem erősítette meg a jelszót!" value="#{userController.newPassword}" >
-                        </h:inputSecret>
-                        <h:message id="m_confirm" for="confirm" />
-                    </div>
-                </div>
-
-
-
-                <p:messages id="messages" showDetail="false" autoUpdate="true"></p:messages>
-
-                <div class="form-group">
-                    <div class="col-md-5"/>    
-                    <div class="col-md-5">
-                        <p:commandButton id="save" class="btn" value="Módosítás" type="submit" action="#{userController.changePassword}" /> 
-                        <p:commandButton id="cancel" value="Mégse" class="btn" onclick="PF('passchange').close()" immediate="true" action="editUser?faces-redirect=true"/>
-                    </div>
-                </div>
-            </p:dialog>
         </h:form>     
     </ui:define>
 </ui:composition>

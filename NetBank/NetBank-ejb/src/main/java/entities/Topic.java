@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Topic implements Serializable {
     
     private String theme;
     
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic", cascade = CascadeType.REMOVE)
     private List<Message> messageList;
     
     @ManyToOne

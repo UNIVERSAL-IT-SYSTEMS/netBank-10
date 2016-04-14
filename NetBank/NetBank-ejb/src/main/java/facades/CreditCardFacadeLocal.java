@@ -29,7 +29,9 @@ public interface CreditCardFacadeLocal {
 
     List<CreditCard> findRange(int[] range);
     
-    List<CreditCard> listByAccount(Long id);
+    List<CreditCard> listByAccountAdmin(Long id);
+    
+    List<CreditCard> listByAccountUser(Long id);
     
     CreditCard findByCardNumber(Integer cardNumber);
 

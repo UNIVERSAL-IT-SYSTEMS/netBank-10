@@ -22,6 +22,9 @@
                                     <h:outputText value="Téma:" />
                                     <h:outputText value="#{topic.theme}" style="font-weight: bold"/>
                                     <h:outputText value="#{topic.lastMessage.content}" style="font-weight: bold"/>
+                                    <h:outputText value="#{topic.lastMessage.date}"  style="font-weight: bold">
+                                        <f:convertDateTime pattern="YYYY.MM.dd" />
+                                    </h:outputText>
                                 </h:panelGrid>
                             </p:outputPanel>
                         </h:panelGrid>

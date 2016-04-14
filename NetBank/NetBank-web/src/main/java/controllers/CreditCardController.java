@@ -5,9 +5,10 @@ import entities.CreditCard;
 import enums.CardType;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import services.AccountService;
@@ -20,21 +21,23 @@ import services.CreditCardService;
 @Named(value = "creditCardController")
 @SessionScoped
 public class CreditCardController implements Serializable {
-    
+
     @Inject
     CreditCardService cardService;
-    
+
     @Inject
     AccountService accountService;
-    
+
     private Integer cardNumber;
     private Integer password;
-    
+
     private CreditCard card = new CreditCard();
     private CreditCard selectedCard;
-    
+
     private String type = "MASTER_CARD";
-    
+
+    private Integer newPassword;
+
     public CreditCardController() {
     }
 
@@ -78,10 +81,18 @@ public class CreditCardController implements Serializable {
         this.password = password;
     }
 
-     public String addCreditCard(Account account) {
+    public Integer getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(Integer newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String addCreditCard(Account account) {
         card = new CreditCard();
         modifyType();
-        Random rand = new Random(); 
+        Random rand = new Random();
         card.setNumber(rand.nextInt(9000000) + 1000000);
         card.setAccount(account);
         card.setPinCode(rand.nextInt(9000) + 1000);
@@ -94,12 +105,17 @@ public class CreditCardController implements Serializable {
 
         return "listAccountTransaction?faces-redirect=true";
     }
-    
-    public List<CreditCard> getCreditCardListByAccount(Account account){
-        return cardService.getCreditCardListByAccount(account);
+
+    public List<CreditCard> getCreditCardListByAccountAdmin(Account account) {
+        return cardService.getCreditCardListByAccountAdmin(account);
     }
     
-    private void modifyType(){
+    public List<CreditCard> getCreditCardListByAccountUser(Account account) {
+        return cardService.getCreditCardListByAccountUser(account);
+    }
+
+
+    private void modifyType() {
         switch (type) {
             case "MASTER_CARD":
                 this.card.setType(CardType.MASTER_CARD);
@@ -113,32 +129,58 @@ public class CreditCardController implements Serializable {
         }
         this.type = "MASTER_CARD";;
     }
-    
-    public String login(){
+
+    public String login() {
         CreditCard creditCard = cardService.findByCardNumber(cardNumber);
-        if(null!=creditCard && !creditCard.isDestroy()){
-            if(creditCard.getPinCode().equals(password)){
+        if (null != creditCard && !creditCard.isDestroy()) {
+            if (creditCard.getPinCode().equals(password)) {
                 this.card = creditCard;
                 this.cardNumber = null;
                 this.password = null;
                 return "/atm/index?faces-redirect=true";
-            }else {
+            } else {
                 this.cardNumber = null;
                 this.password = null;
                 return "/atm/loginerror?faces-redirect=true";
             }
-        }else{
+        } else {
             this.cardNumber = null;
             this.password = null;
             return "/atm/loginerror?faces-redirect=true";
         }
     }
-    
-    public String logout(){
+
+    public String changePinCode() {
+        if (newPassword != null) {
+            card.setPinCode(newPassword);
+            cardService.updateCard(card);
+        }
+        return "/atm/index?faces-redirect=true";
+    }
+
+    public String logout() {
         this.card = new CreditCard();
         this.cardNumber = null;
         this.password = null;
         return "/atm/login?faces-redirect=true";
     }
 
+   
+    public String deleteCard() {
+        if (selectedCard!= null) {
+            if(selectedCard.isDestroy()){
+                selectedCard.setDestroy(false);
+            }else{
+                selectedCard.setDestroy(true);
+            }
+            cardService.updateCard(selectedCard);
+            selectedCard = new CreditCard();
+            return "listAccountTransaction?faces-redirect=true";
+
+        }
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Hiba!", "Kérem válassza ki a zárolni / aktiválni kívánt bankkártyát"));
+        return "listAccountTransaction?faces-redirect=false";
+    }
 }

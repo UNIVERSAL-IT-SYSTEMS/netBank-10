@@ -4,6 +4,7 @@ import entities.Account;
 import entities.Group;
 import entities.User;
 import entities.RegistratedUser;
+import enums.EmailType;
 import enums.Role;
 import facades.GroupFacadeLocal;
 import facades.RegistratedUserFacadeLocal;
@@ -46,19 +47,7 @@ public class UserService {
 
     private final String ADMINSTRING = "admin";
 
-    private final String REGISTRATION_MESSAGE = "Sikeresen regisztrált az SZDT Bank rendszerébe, "
-            + "amint ügyintézőnk jóváhagyja a regisztrációt, azonnal beléphet és használhatja bankunk rendszerét!\n"
-            + "\n"
-            + "Üdvözlettel, SZDT Bank!";
-
-    private final String ACTIVATION_MESSAGE = "Regisztrációja jóváhagyásra került, "
-            + "most már beléphet és használhatja bankunk rendszerét!\n"
-            + "\n"
-            + "Üdvözlettel, SZDT Bank!";
-
-    private final String DECLINE_MESSAGE = "Regisztrációja visszautasításra került, "
-            + "ennek oka: "
-            + "\n";
+    
 
     @PersistenceContext(unitName = "com.mycompany_NetBank-ejb_ejb_1.0-SNAPSHOTPU")
     private EntityManager em;
@@ -98,15 +87,8 @@ public class UserService {
 
     public void register(RegistratedUser user) {
         if (isAvailableLoginName(user.getLoginName())) {
-            registrate.create(user);
-            StringBuilder sb = new StringBuilder();
-            sb.append("Tisztelt ");
-            sb.append(user.getName());
-            sb.append(" ! \n");
-            sb.append("\n");
-            sb.append(REGISTRATION_MESSAGE);
-            String messageBody = sb.toString();
-            emailService.sendEmail(user.getEmail(), "Üdvözli önt az SZDT Bank", messageBody);
+            registrate.create(user); 
+            emailService.sendEmail(user.getName(),user.getEmail(),EmailType.REGISTRATION);
         } else {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
         }
@@ -125,32 +107,16 @@ public class UserService {
         addUser(user);
         registrate.remove(regUser);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Tisztelt ");
-        sb.append(user.getName());
-        sb.append(" ! \n");
-        sb.append(" \n");
-        sb.append(ACTIVATION_MESSAGE);
-        String messageBody = sb.toString();
-        emailService.sendEmail(user.getEmail(), "Regisztrációja jóváhagyásra került", messageBody);
+        emailService.sendEmail(user.getName(),user.getEmail(),EmailType.ACTIVATION);
     }
 
     public void refuseRegister(RegistratedUser regUser, String message) {
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("Tisztelt ");
-        sb.append(regUser.getName());
-        sb.append(" ! \n");
-        sb.append(" \n");
-        sb.append(ACTIVATION_MESSAGE);
-        sb.append(message);
-        sb.append("\nÜdvözlettel, SZDT Bank!");
-        String messageBody = sb.toString();
-        emailService.sendEmail(regUser.getEmail(), "Regisztrációja visszautasításra került", messageBody);
+        emailService.sendRefuseMail(regUser.getName(),regUser.getEmail(),EmailType.REFUSE,message);
         registrate.remove(regUser);
     }
 
-    public void editUser(User user, Role originalPosition) throws NoSuchAlgorithmException {
+    public void editUser(User user, Role originalPosition) {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         if (originalPosition.equals(user.getPosition())) {
             userFacade.edit(user);

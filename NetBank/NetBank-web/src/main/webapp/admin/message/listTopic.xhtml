@@ -14,20 +14,27 @@
                     Üzenetek
                 </f:facet>
 
-                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Ügyfél:" />
-                            <h:outputText value="#{topic.user.name}" style="font-weight: bold"/>
-                            <h:outputText value="Téma:" />
-                            <h:outputText value="#{topic.theme}" style="font-weight: bold"/>
-                            <h:outputText value="#{topic.lastMessage.content}" style="font-weight: bold"/>
-                        </h:panelGrid>
-                    </p:outputPanel>
-                </h:panelGrid>
 
-                <p:commandButton value="Kiválaszt" action="#{messageController.navigateToTopic(topic)}" />
-                <hr />
+                <div class="panel" >
+                    <h:panelGrid columns="2" style="width:100%">
+                        <p:commandLink action="#{messageController.navigateToTopic(topic)}" >
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:outputText value="Téma:" />
+                                        <h:outputText value="#{topic.theme}" style="font-weight: bold"/>
+                                        <h:outputText value="#{topic.lastMessage.content}" style="font-weight: bold"/>
+                                        <h:outputText value="#{topic.lastMessage.date}"  style="font-weight: bold">
+                                            <f:convertDateTime pattern="YYYY.MM.dd" />
+                                        </h:outputText>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                        </p:commandLink>
+                            <p:commandButton class="btn-warning" value="Törlés" action="#{messageController.navigateToTopic(topic)}" />
+
+                    </h:panelGrid>
+                </div>
+
+
             </p:dataScroller>
         </h:form>
     </ui:define>

@@ -21,7 +21,8 @@ import javax.validation.constraints.Min;
 
 
 @NamedQueries({
-    @NamedQuery(name = "getListByAccount", query = "SELECT c FROM CreditCard c WHERE c.account.id = :rId"),
+    @NamedQuery(name = "getListByAccountAdmin", query = "SELECT c FROM CreditCard c WHERE c.account.id = :rId"),
+    @NamedQuery(name = "getListByAccountUser", query = "SELECT c FROM CreditCard c WHERE c.account.id = :rId AND c.destroy = false"),
     @NamedQuery(name = "findByCardNumber", query = "SELECT c FROM CreditCard c WHERE c.number = :rNumber")
 }) 
 public class CreditCard implements Serializable {

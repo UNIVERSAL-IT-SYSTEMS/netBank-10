@@ -51,4 +51,8 @@ public class MessageService {
     public List<Message> findByTopic(Topic topic){
         return messageFacade.findByTopic(topic.getId());
     }
+    
+    public void removeTopic(Topic topic){
+        topicFacade.remove(topic);
+    }
 }

@@ -1,6 +1,7 @@
 package controllers;
 
 import entities.Account;
+import entities.Message;
 import entities.RegistratedUser;
 import entities.Topic;
 import entities.User;
@@ -168,6 +169,15 @@ public class UserController implements Serializable {
                 }
                 List<Topic> topicList = messageService.findByUser(selectedUser);
                 for(Topic topic : topicList){
+                    List<Message> messageList = messageService.findByTopic(topic);
+                    topic.setLastMessage(null);
+                    messageService.editTopic(topic);
+                    for(Message message : messageList){
+                        message.setSender(null);
+                        message.setTopic(null);
+                        messageService.removeMessage(message);
+                    }
+                    messageList.clear();
                     messageService.removeTopic(topic);
                 }
                 

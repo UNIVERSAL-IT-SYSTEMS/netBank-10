@@ -1,0 +1,65 @@
+body {
+    background-color: #627AAD;
+}
+
+.loginbody{
+    background-color: #627AAD;
+}
+
+.navbar {
+    position: relative;
+    border: 0px solid transparent
+}
+
+.navbar-default {
+    background-color: #3b5998;
+    border-color: #3b5998;
+    -webkit-box-shadow: 0px 5px 9px 0px rgba(10,19,38,9);
+    -moz-box-shadow: 0px 5px 9px 0px rgba(10,19,38,9);
+    box-shadow: 0px 5px 9px 0px rgba(10,19,38,9);
+}
+
+.navbar-popup{
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+    border-radius: 0px 0px 0px 0px;
+}
+
+.navbar-fnt {
+    font-family: "Verdana";
+    font-size: 18px; 
+    color: #f2f2f2;
+}
+
+.navbar-name {
+    font-family: "Verdana";
+    font-size: 18px;
+    font-weight: bold;
+    color: #f2f2f2;
+}
+
+.navbar-popup-fnt {
+    font-family: "Verdana";
+    font-size: 18px; 
+    color: #3b5998;
+}
+
+.navbar-popup-name {
+    font-family: "Verdana";
+    font-size: 18px;
+    font-weight: bold;
+    color: #3b5998;
+}
+
+.loginpanel {
+    background-color: #E2E2E2;
+    border: 0px solid #000000;
+    -webkit-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    -moz-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+}
+
+.darktext{
+    font-family: "Verdana";
+    color: #333333;
+}

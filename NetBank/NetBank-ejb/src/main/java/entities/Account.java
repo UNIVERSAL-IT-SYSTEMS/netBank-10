@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Account implements Serializable {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotNull
     private int accountNumber;
 
     private int balance;

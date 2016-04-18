@@ -12,6 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -26,12 +27,15 @@ public class User implements Serializable {
     @Column(name = "user_id")
     private Long id;
     
+    @NotNull
     private String loginName;
     
+    @NotNull
     private String password;
     
     private String name;
     
+    @NotNull
     private String email;
     
     private Role position;

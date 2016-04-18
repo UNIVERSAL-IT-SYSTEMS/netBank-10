@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -32,6 +33,7 @@ public class CreditCard implements Serializable {
     @Column(name = "card_id")
     private Long id;
 
+    @NotNull
     private Integer number;
 
     private CardType type;

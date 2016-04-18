@@ -12,34 +12,35 @@
         <title>NetBank Ügyintéző Felület</title>
         <link rel="icon" href="http://iconogen.com/images/computer.png"/>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
     </h:head>
+
     <h:body> 
         <h:form>
             <nav class="navbar navbar-default">
-
                 <ul class="nav nav-pills">
-                    
-                    <li><p:link href="/admin/user/listUser.xhtml" value="Felhasználók Kezelése"/></li>
-                    <li><p:link href="/admin/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
-                    <li><p:link href="/admin/message/listTopic.xhtml" value="Helpdesk"/></li>
-                    <li>
 
-                            <p:commandLink class="navbar-right" id="dialogButt" value="#{loggedIn.user.name}" />
-                            <p:overlayPanel id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
-                                <div class="row" style="padding: 10px;">
-                                    <div >
-                                        #{loggedIn.user.name}
-                                    </div>
+                    <li><p:link class="navbar-fnt" href="/admin/user/listUser.xhtml" value="Felhasználók Kezelése"/></li>
+                    <li><p:link class="navbar-fnt" href="/admin/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
+                    <li><p:link class="navbar-fnt" href="/admin/message/listTopic.xhtml" value="Helpdesk"/></li>
+                    <li class="navbar-right">
+
+                        <p:commandLink class="navbar-name" id="dialogButt" value="#{loggedIn.user.name}" />
+                        <p:overlayPanel class="panel" id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
+                            <div class="row" style="padding: 10px;">
+                                <div >
+                                    #{loggedIn.user.name}
                                 </div>
-                                <nav class="navbar navbar-default">
-                                    <ul class="nav nav-pills">
-                                        <li><p:link href="/user/account/listAccount.xhtml" value="Felhasználó Mód"/></li>
-                                        <li><p:commandLink value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
-                                        <li><p:commandLink value="Kijelentkezés"  action="#{logout.logout()}" /></li>
-                                    </ul>
-                                    
-                                </nav>
-                            </p:overlayPanel>
+                            </div>
+                            <nav class="navbar navbar-popup col-md-12">
+                                <ul class="nav nav-pills">
+                                    <li><p:link class="navbar-popup-fnt" href="/user/account/listAccount.xhtml" value="Felhasználó Mód"/></li>
+                                    <li><p:commandLink class="navbar-popup-fnt" value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
+                                    <li><p:commandLink class="navbar-popup-fnt" value="Kijelentkezés"  action="#{logout.logout()}" /></li>
+                                </ul>
+
+                            </nav>
+                        </p:overlayPanel>
                     </li>
 
                 </ul>    

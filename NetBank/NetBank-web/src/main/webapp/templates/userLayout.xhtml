@@ -12,39 +12,38 @@
         <title>NetBank</title>
         <link rel="icon" href="http://iconogen.com/images/computer.png"/>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
     </h:head>
+    
     <h:body> 
         <h:form>
             <nav class="navbar navbar-default">
-
                 <ul class="nav nav-pills">
-                    <li><p:link href="/user/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
-                    <li><p:link href="/user/message/listTopic.xhtml" value="Helpdesk"/></li>
-                    <li>
+                    <li><p:link class="navbar-fnt" href="/user/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
+                    <li><p:link class="navbar-fnt" href="/user/message/listTopic.xhtml" value="Helpdesk"/></li>
 
-                        <p:commandLink class="navbar-right" id="dialogButt" value="#{loggedIn.user.name}" />
-                        <p:overlayPanel id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
+                    <li class="navbar-right">
+                        <p:commandLink class="navbar-name" id="dialogButt" value="#{loggedIn.user.name}" />
+                        <p:overlayPanel class="panel" id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:400px">
                             <div class="row" style="padding: 10px;">
-                                <div >
+                                <div class="navbar-popup-name">
                                     #{loggedIn.user.name}
                                 </div>
                             </div>
-                            <nav class="navbar navbar-default">
+                            <nav class="navbar navbar-popup col-md-12">
                                 <ul class="nav nav-pills">
-
                                     <li> 
                                         <c:if test="${loggedIn.user.position eq loggedIn.adminPos}">                   
-                                            <p:link href="/admin/index.xhtml" value="Ügyitéző Mód"/>
+                                            <p:link class="navbar-popup-fnt" href="/admin/index.xhtml" value="Ügyitéző Mód"/>
                                         </c:if>
                                     </li>
-                                    <li><p:commandLink value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
-                                    <li><p:commandLink value="Kijelentkezés"  action="#{logout.logout()}" /></li>
+                                    <li><p:commandLink class="navbar-popup-fnt" value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
+                                    <li><p:commandLink class="navbar-popup-fnt" value="Kijelentkezés"  action="#{logout.logout()}" /></li>
                                 </ul>  
                             </nav>
                         </p:overlayPanel>
-                    </li>
-
-                </ul>    
+                    </li>  
+                </ul>
             </nav>
 
 

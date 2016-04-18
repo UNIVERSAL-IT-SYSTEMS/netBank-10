@@ -55,4 +55,8 @@ public class MessageService {
     public void removeTopic(Topic topic){
         topicFacade.remove(topic);
     }
+    
+    public void removeMessage(Message message){
+        messageFacade.remove(message);
+    }
 }

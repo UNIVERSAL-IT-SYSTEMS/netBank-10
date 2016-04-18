@@ -17,34 +17,36 @@
             <h1 class="navbar-fnt" align="left">SZDT Bank Netbank Alkalmazás</h1>
         </nav>
 
-        <div align="center" class=" container">
-            <img src="resources/logo.png" alt="logo" /> 
-        </div>
-
-        <div align="center" class="container">
-            <hr />
+        <div align="center" class="col-md-8 col-md-offset-2">
             <form method="POST" action="j_security_check" class="form-horizontal">
+
+                <div align="center" class="logo">
+                    <img src="resources/logo2.png" alt="logo" /> 
+                </div>
+
 
                 <div class="col-md-6 col-md-offset-3 loginpanel">
                     <div class="panel-heading">
-                        <h3 class="darktext">Bejelentkezés</h3>
+                        <h3 >Bejelentkezés</h3>
                     </div>
 
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="username" class="col-sm-3 col-md-offset-1 control-label">Felhasználónév:</label>
+                            <label for="username" class="col-sm-4 col-sm-offset-1 control-label">Felhasználónév:</label>
                             <div class="col-sm-6">
                                 <input id="username" type="text" name="j_username" class="form-control"/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="col-sm-3 col-md-offset-1 control-label">Jelszó:</label>
+                            <label for="password" class="col-sm-4 col-sm-offset-1 control-label">Jelszó:</label>
                             <div class="col-sm-6">
                                 <input id="password" type="password" name="j_password" class="form-control box"/>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="panel-heading">
                         <div class="row" >
                             <div class="col-md-6">
                                 <h:commandButton class="button btn btn-default" type="submit" value="Bejelentkezés"/>
@@ -55,22 +57,15 @@
                         </div>
 
                         <div class="row" >
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="padding-top: 10px">
                                 <p:button class="button btn btn-primary" value="ATM Használata" href="/atm/login.xhtml"/>                 
                             </div>
                         </div>
-
                     </div>
+
                 </div>   
             </form>
-
         </div>
-
-
-
-
-
-
     </h:body>
 </html>
 

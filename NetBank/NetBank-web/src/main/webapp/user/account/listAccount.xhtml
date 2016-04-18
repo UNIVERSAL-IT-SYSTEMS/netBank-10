@@ -7,23 +7,38 @@
 
     <ui:define name="content">
         <h:form id="form">
-            <h1>Bankszámláid :</h1>
-            <p:dataTable var="account" emptyMessage="Nincs találat" value="#{accountController.getNotDestroyByUser(loggedIn.user)}" class="dataTable"
-                         selectionMode="single" selection="#{accountController.selectedAccount}" rowKey="#{account.id}">
-                 <p:column headerText="Számlaszám" filterBy="#{account.accountNumber}" filterMatchMode="contains">
-                    <h:outputText value="#{account.accountNumber}" />
-                </p:column>
-                <p:column headerText="Egyenleg">
-                    <h:outputText value="#{account.balance} Ft" />
-                </p:column>
-            </p:dataTable>
-            
-            <hr />
-            
-            <div align="center" class="listButtons">
-                <p:commandButton value="Bankszámla megtekintése" action="#{accountController.selectedToTrancasctionListUser()}" class="button btn btn-default" ajax="true" update="@form"/>
-            </div> 
+
+            <div class="col-md-10 col-md-offset-1 tablepanel">
+
+
+
+                <div class="panel-heading">
+                    <h3>Bankszámláid :</h3>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="resultTable col-md-10 col-md-offset-1" >
+                        <p:dataTable var="account" widgetVar="accountTable" emptyMessage="Nincs találat" value="#{accountController.getNotDestroyByUser(loggedIn.user)}" 
+                                     selectionMode="single" selection="#{accountController.selectedAccount}" rowKey="#{account.id}">
+                            <p:column headerText="Számlaszám" >
+                                <h:outputText value="#{account.accountNumber}" />
+                            </p:column>
+                            <p:column headerText="Egyenleg">
+                                <h:outputText value="#{account.balance} Ft" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+
+                </div>
+                <div class="panel-heading" style="text-align: center">
+                    <p:commandButton value="Bankszámla megtekintése" action="#{accountController.selectedToTrancasctionListUser()}" class="button btn btn-default" ajax="true" update="@form"/>
+                </div>
+
+                
+            </div>
+
         </h:form>
-        
+
     </ui:define>
 </ui:composition>

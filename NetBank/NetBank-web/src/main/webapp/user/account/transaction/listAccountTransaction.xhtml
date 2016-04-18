@@ -7,83 +7,101 @@
 
     <ui:define name="content">
         <h:form id="form">
-            <p:growl id="growl" showDetail="true" sticky="false" life="2000"/>
-            <h1>Bankszámla adatai</h1>
-            <hr />
-            <p:panelGrid columns="2" class="tableReg">
-                    <p:outputLabel value="Tulajdonos neve: " for="name" />
-                    <p:link id="name" href="/admin/user/account/listUserAccount.xhtml" value="#{accountController.account.user.name}" title="Név"/>
-                    <p:outputLabel value="Bankszámlaszám: " />
-                    <p:outputLabel id="accountnumber" value="#{accountController.account.accountNumber}" title="Számlaszám"/>
-                    <p:outputLabel value="Egyenleg " />
-                    <p:outputLabel id="balance" value="#{accountController.account.balance}" title="Egyenleg"/>
-            </p:panelGrid>
-            
-            <h1>Számlához tartozó Bankkártyák</h1>
-            
-            <p:dataTable  var="card" value="#{creditCardController.getCreditCardListByAccountUser(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable"
-                          selectionMode="single" selection="#{creditCardController.selectedCard}" rowKey="#{card.id}">
 
-                <p:column headerText="Kártyaszám" filterBy="#{card.number}" filterMatchMode="contains">
-                    <h:outputText value="#{card.number}"/>
-                </p:column>
-                
-                <p:column headerText="Típus" filterBy="#{card.type}" filterMatchMode="contains">
-                    <h:outputText value="#{card.type}"/>
-                </p:column>
-            </p:dataTable>
-            <div>
-                 <p:commandButton value="Bankkártya Zárolása / Aktiválása" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
-            </div>
+            <div class="col-md-10 col-md-offset-1 tablepanel">
 
-            <h1>Tranzakciótörténet</h1>
-            <p:dataTable sortBy="#{transaction.dateOfTransaction}" sortOrder="ascending" var="transaction" value="#{transactionController.getListByAccount(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable">
-                <p:column headerText="Dátum" filterBy="#{transaction.dateOfTransaction}" sortBy="#{transaction.dateOfTransaction}" filterMatchMode="contains">
-                    <h:outputText value="#{transaction.dateOfTransaction}">
+                <div class="row">
+
+
+                    <div class="col-md-3">
+
+                        <h3>Bankszámla adatai</h3>
+                        <p:panelGrid columns="2" class="tableReg">
+                            <p:outputLabel value="Tulajdonos neve: " for="name" />
+                            <p:link id="name" href="/admin/user/account/listUserAccount.xhtml" value="#{accountController.account.user.name}" title="Név"/>
+                            <p:outputLabel value="Bankszámlaszám: " />
+                            <p:outputLabel id="accountnumber" value="#{accountController.account.accountNumber}" title="Számlaszám"/>
+                            <p:outputLabel value="Egyenleg " />
+                            <p:outputLabel id="balance" value="#{accountController.account.balance}" title="Egyenleg"/>
+                        </p:panelGrid>
+                    </div>
+
+                    <div class="col-md-9">
+                        <h3>Számlához tartozó Bankkártyák</h3>
+                        <div class="resultTable" >
+                            <p:dataTable  var="card" value="#{creditCardController.getCreditCardListByAccountUser(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable"
+                                          selectionMode="single" selection="#{creditCardController.selectedCard}" rowKey="#{card.id}">
+
+                                <p:column headerText="Kártyaszám"  filterMatchMode="contains">
+                                    <h:outputText value="#{card.number}"/>
+                                </p:column>
+
+                                <p:column headerText="Típus" filterMatchMode="contains">
+                                    <h:outputText value="#{card.type}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+
+                        <div>
+                            <p:commandButton value="Bankkártya Zárolása / Aktiválása" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+                <h3>Tranzakciótörténet</h3>
+                <p:dataTable sortBy="#{transaction.dateOfTransaction}" sortOrder="ascending" var="transaction" value="#{transactionController.getListByAccount(accountController.account)}" emptyMessage="Nincs találat"  class="dataTable">
+                    <p:column headerText="Dátum" filterBy="#{transaction.dateOfTransaction}" sortBy="#{transaction.dateOfTransaction}" filterMatchMode="contains">
+                        <h:outputText value="#{transaction.dateOfTransaction}">
                             <f:convertDateTime pattern="YYYY-MM-dd" />
                         </h:outputText>
-                </p:column>
-                
-                <p:column headerText="Típus" filterBy="#{transaction.transactionType}" filterMatchMode="contains">
-                    <h:outputText value="#{transaction.transactionType}"/>
-                </p:column>
-                
-                <p:column headerText="Összeg" filterBy="#{transaction.amount}" sortBy="#{transaction.amount}" filterMatchMode="contains">
-                    <h:outputText value="#{transaction.amount} Ft"/>
-                </p:column>
-                
-                <p:column headerText="Küldő Neve" filterBy="#{transaction.sender.user.name}" filterMatchMode="contains">
-                    <h:outputText value="#{transaction.sender.user.name}" />
-                </p:column>
-                
-                <p:column headerText="Küldő Számlaszáma" filterBy="#{transaction.sender.accountNumber}" filterMatchMode="contains">
-                    <h:outputText value="#{transaction.sender.accountNumber}" />
-                </p:column>
-                
-                <p:column headerText="Fogadó Neve" filterBy="#{transaction.reciever.user.name}" filterMatchMode="contains">
-                    <h:outputText value="#{transaction.reciever.user.name}" />
-                </p:column>
-                
-                <p:column headerText="Fogadó Számlaszáma" filterBy="#{transaction.reciever.accountNumber}" filterMatchMode="contains">
-                    <h:outputText value="#{transaction.reciever.accountNumber}" />
-                </p:column>
-            </p:dataTable>
-            
-            
-            <div align="center" >
-                 <p:commandButton value="Új tranzakció létehozása" type="button" onclick="PF('addDialog').show();" class="button btn btn-default"/>
+                    </p:column>
+
+                    <p:column headerText="Típus" filterBy="#{transaction.transactionType}" filterMatchMode="contains">
+                        <h:outputText value="#{transaction.transactionType}"/>
+                    </p:column>
+
+                    <p:column headerText="Összeg" filterBy="#{transaction.amount}" sortBy="#{transaction.amount}" filterMatchMode="contains">
+                        <h:outputText value="#{transaction.amount} Ft"/>
+                    </p:column>
+
+                    <p:column headerText="Küldő Neve" filterBy="#{transaction.sender.user.name}" filterMatchMode="contains">
+                        <h:outputText value="#{transaction.sender.user.name}" />
+                    </p:column>
+
+                    <p:column headerText="Küldő Számlaszáma" filterBy="#{transaction.sender.accountNumber}" filterMatchMode="contains">
+                        <h:outputText value="#{transaction.sender.accountNumber}" />
+                    </p:column>
+
+                    <p:column headerText="Fogadó Neve" filterBy="#{transaction.reciever.user.name}" filterMatchMode="contains">
+                        <h:outputText value="#{transaction.reciever.user.name}" />
+                    </p:column>
+
+                    <p:column headerText="Fogadó Számlaszáma" filterBy="#{transaction.reciever.accountNumber}" filterMatchMode="contains">
+                        <h:outputText value="#{transaction.reciever.accountNumber}" />
+                    </p:column>
+                </p:dataTable>
+
+
+                <div align="center" >
+                    <p:commandButton value="Új tranzakció létehozása" type="button" onclick="PF('addDialog').show();" class="button btn btn-default"/>
+                </div>
             </div>
-            
-            
-            
+
+
+
+
             <p:dialog header="Válasszon tranzakciótípust?" widgetVar="addDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
-                 <div>
+                <div>
                     <div class="col-md-6">
-                         <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" ajax="false" update="@form" class="button btn btn-default"/>
+                        <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" ajax="false" update="@form" class="button btn btn-default"/>
                     </div>
                 </div>
             </p:dialog>
-            
+
             <p:dialog header="Biztosan Zárolja a Bankkártyát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                 <div>
                     <div class="col-md-6">

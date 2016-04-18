@@ -14,17 +14,34 @@
         <h:outputStylesheet library="css" name="bootstrap.css"/>
         <h:outputStylesheet library="css" name="main.css"/>
     </h:head>
-    
+
     <h:body> 
+        <script src="resources/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.js"></script>
         <h:form>
-            <nav class="navbar navbar-default">
-                <ul class="nav nav-pills">
+
+
+
+            <nav class="navbar navbar-default col-md-12">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                 
+                <div class="collapse navbar-collapse" id="js-navbar-collapse">
+                    <ul id="menu" class="nav nav-pills">
                     <li><p:link class="navbar-fnt" href="/user/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
                     <li><p:link class="navbar-fnt" href="/user/message/listTopic.xhtml" value="Helpdesk"/></li>
 
                     <li class="navbar-right">
                         <p:commandLink class="navbar-name" id="dialogButt" value="#{loggedIn.user.name}" />
-                        <p:overlayPanel class="panel" id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:400px">
+                        <p:overlayPanel class="col-md-3 profile-popup-panel" id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true">
                             <div class="row" style="padding: 10px;">
                                 <div class="navbar-popup-name">
                                     #{loggedIn.user.name}
@@ -39,16 +56,20 @@
                                     </li>
                                     <li><p:commandLink class="navbar-popup-fnt" value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
                                     <li><p:commandLink class="navbar-popup-fnt" value="Kijelentkezés"  action="#{logout.logout()}" /></li>
-                                </ul>  
+                                </ul>
                             </nav>
                         </p:overlayPanel>
                     </li>  
                 </ul>
+                </div>
+                    
+                
+                
             </nav>
 
 
 
-            <div id="content" class="container body-content">
+            <div id="content" class="col-md-12 container body-content">
                 <ui:insert name="content" >
                     <p></p>
                 </ui:insert>
@@ -58,3 +79,4 @@
         </h:form>
     </h:body>
 </html>
+

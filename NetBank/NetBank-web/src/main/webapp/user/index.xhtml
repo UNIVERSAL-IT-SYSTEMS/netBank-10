@@ -6,11 +6,18 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h1>Üdvözöljük a NetBank rendszerben!</h1>
-            <h2>#{loggedIn.user.name}</h2>
-           <hr />
-           <h2>Kérem válasszon a fenti menüpontok közül</h2>
-           <h3>A mai látogatottság: #{loggedIn.visitorNumber}</h3>
-           <hr/>
+        
+        <div class="col-md-8 col-md-offset-2" style="margin-top: 80px; text-align: center">
+           <h1>Üdvözöljük a NetBank rendszerben #{loggedIn.user.name}!</h1>
+
+           
+           <h2 style="padding-top: 20px">Kérem válasszon a fenti menüpontok közül</h2>
+           <h3 style="padding-top: 10px">A mai látogatottság: #{loggedIn.visitorNumber}</h3>
+           
+        </div>
+        
+        
+        
+
     </ui:define>
 </ui:composition>

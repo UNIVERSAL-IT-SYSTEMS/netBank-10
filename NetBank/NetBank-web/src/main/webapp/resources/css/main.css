@@ -1,9 +1,9 @@
 body {
-    background-color: #627AAD;
+    background-image: url('http://www.wallpaperfort.com/img/2015/6/texture-gray-background-8042-8193-hd-wallpapers.jpg');
 }
 
 .loginbody{
-    background-color: #627AAD;
+    background-color: #E2E2E2;
 }
 
 .navbar {
@@ -17,6 +17,7 @@ body {
     -webkit-box-shadow: 0px 5px 9px 0px rgba(10,19,38,9);
     -moz-box-shadow: 0px 5px 9px 0px rgba(10,19,38,9);
     box-shadow: 0px 5px 9px 0px rgba(10,19,38,9);
+
 }
 
 .navbar-popup{
@@ -27,39 +28,100 @@ body {
 
 .navbar-fnt {
     font-family: "Verdana";
-    font-size: 18px; 
+    font-size: 14px; 
     color: #f2f2f2;
 }
 
 .navbar-name {
     font-family: "Verdana";
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     color: #f2f2f2;
 }
 
 .navbar-popup-fnt {
     font-family: "Verdana";
-    font-size: 18px; 
+    font-size: 14px; 
     color: #3b5998;
 }
 
 .navbar-popup-name {
     font-family: "Verdana";
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     color: #3b5998;
 }
 
 .loginpanel {
-    background-color: #E2E2E2;
+    background-color: #627AAD;
+    border: 0px solid #000000;
+    -webkit-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    -moz-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    color: #fff;
+    margin-top: 40px;
+}
+
+.login-body-panel {
+    background-color: #627AAD;
+    height: 600px;
+    padding: 150px;
     border: 0px solid #000000;
     -webkit-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
     -moz-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
     box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
 }
 
-.darktext{
+.profile-popup-panel {
+    width: 400px;
+}
+
+.resultTable .ui-datatable.ui-widget, .resultTable .ui-datatable-header.ui-widget-header.ui-corner-top
+, .resultTable .ui-state-default.ui-filter-column, .resultTable .ui-datatable-tablewrapper th.ui-state-default,
+.resultTable .ui-paginator.ui-paginator-top.ui-widget-header, .resultTable .ui-paginator.ui-paginator-bottom.ui-widget-header.ui-corner-bottom,
+.resultTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left{
+    background:#b5231b;
+    color: #fff;
     font-family: "Verdana";
-    color: #333333;
+    font-weight: normal;
+    
+}
+.resultTable .ui-outputpanel.ui-widget .ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
+    width:400px;
+    margin-right: 286px; 
+}
+
+.ui-datatable{
+    font-family:MyriadPro;
+}
+.resultTable .ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
+    border:1px solid #0059B2;
+    box-shadow:none;
+}
+.resultTable .ui-button-text.ui-c{
+    display:block;
+    background:#0059B2;
+    border:none;
+    color:white;
+    text-shadow:none;
+}
+.resultTable .searchtext{
+    float:left;
+    padding-top:6px;
+    font-family:MyriadPro;
+}
+
+.tablepanel {
+    background-color: #627AAD;
+    border: 0px solid #000000;
+    -webkit-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    -moz-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    color: #fff;
+    margin-top: 40px;
+    padding-left: 25px;
+}
+
+.logo{
+    margin-top: 20px;
 }

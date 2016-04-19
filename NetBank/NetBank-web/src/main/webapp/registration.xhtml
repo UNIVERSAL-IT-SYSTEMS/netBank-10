@@ -1,72 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/templates/publicLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head>
-        <meta charset="utf-8"></meta>
-        <title>NetBank Regisztáció</title>
-        <link rel="icon" href="http://iconogen.com/images/computer.png"/>
-        <h:outputStylesheet library="css" name="bootstrap.css"/>
-    </h:head>
-    <h:body>
+    <ui:define name="content">
         <div align="center" >
-            <h1>Regisztráció</h1>
-            <hr />
+
             <h:form>
-                <p:growl id="growl"  sticky="false" life="8000" showDetail="false"/>
-                <p:panelGrid columns="2" class="tableReg">
-                    <p:outputLabel value="Név:" for="name" />
-                    <p:inputText id="name" value="#{userController.regUser.name}" title="Name" class="box" required="true" requiredMessage="Név megadása kötelező!" />
 
-                    <p:outputLabel value="Születési idő: " />
-                    <p:calendar maxdate="1999.12.31" mindate="1900.01.01"  id="dateOfBirth" value="#{userController.regUser.dateOfBirth}" pattern="yyyy.MM.dd"  class="box"/>
+                <div class="col-md-8 col-md-offset-2 tablepanel">
 
-                    <p:outputLabel value="Cím" for="address" />
-                    <p:inputText id="address" value="#{userController.regUser.address}" title="Address" class="box"/>  
-
-                    <p:outputLabel value="Felhasználónév" for="loginName" />
-                    <p:inputText id="loginName" value="#{userController.regUser.loginName}" title="LoginName" class="box" required="true"  requiredMessage="Felhasználónév megadása kötelező!">
-                        <f:validator validatorId="isAvailableUserName" />
-                    </p:inputText>
-
-                    <p:outputLabel value="Email cím" for="email" />
-                    <p:inputText id="email" value="#{userController.regUser.email}" title="email" class="box" required="true">
-                        <f:validator validatorId="emailValidator" />
-                        <f:validator binding="#{isAvailableEmail}" />
-                    </p:inputText>
-
-                    <p:outputLabel value="Mobil telefonszám: " />
-                    <p:inputText id="phone" value="#{userController.regUser.phoneNumber}" class="box">
-                        <f:validator validatorId="phoneNumberValidator"/>
-                    </p:inputText>
-
-                    <p:outputLabel value="Jelszó:"/>
-                    <p:password id="pwd1" value="#{userController.regUser.password}" match="confirm" class="box" required="true"  requiredMessage="Jelszó megadása kötelező" validatorMessage="A megadott jelszavak nem egyeznek!" >          
-                    </p:password>
-
-                    <p:outputLabel value="Jelszó megerősítés:"/>
-                    <p:password id="confirm" value="#{userController.regUser.password}" class="box" >
-                        <f:validator validatorId="passwordValidator"/>
-                    </p:password>        
-                </p:panelGrid>
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <p:commandButton value="Regisztálok" action="#{userController.registerUser()}"  update="growl" class="button btn btn-default"/>
+                    <div class="panel-heading">
+                        <h2>Regisztráció</h2>
                     </div>
-                    <div class="col-md-6 ">
-                        <p:button value="Mégsem" outcome="login" class="button btn btn-default"/>
+                    <div class="panelGrid">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="Név:" for="name" />
+                            <p:inputText id="name" value="#{userController.regUser.name}" title="Name" class="box" required="true" requiredMessage="Név megadása kötelező!" />
+
+                            <p:outputLabel value="Születési idő: " />
+                            <p:calendar maxdate="1999.12.31" mindate="1900.01.01"  id="dateOfBirth" value="#{userController.regUser.dateOfBirth}" pattern="yyyy.MM.dd"  class="box"/>
+
+                            <p:outputLabel value="Cím" for="address" />
+                            <p:inputText id="address" value="#{userController.regUser.address}" title="Address" class="box"/>  
+
+                            <p:outputLabel value="Felhasználónév" for="loginName" />
+                            <p:inputText id="loginName" value="#{userController.regUser.loginName}" title="LoginName" class="box" required="true"  requiredMessage="Felhasználónév megadása kötelező!">
+                                <f:validator validatorId="isAvailableUserName" />
+                            </p:inputText>
+
+                            <p:outputLabel value="Email cím" for="email" />
+                            <p:inputText id="email" value="#{userController.regUser.email}" title="email" class="box" required="true">
+                                <f:validator validatorId="emailValidator" />
+                                <f:validator binding="#{isAvailableEmail}" />
+                            </p:inputText>
+
+                            <p:outputLabel value="Mobil telefonszám: " />
+                            <p:inputText id="phone" value="#{userController.regUser.phoneNumber}" class="box">
+                                <f:validator validatorId="phoneNumberValidator"/>
+                            </p:inputText>
+
+                            <p:outputLabel value="Jelszó:"/>
+                            <p:password id="pwd1" value="#{userController.regUser.password}" match="confirm" class="box" required="true"  requiredMessage="Jelszó megadása kötelező" validatorMessage="A megadott jelszavak nem egyeznek!" >          
+                            </p:password>
+
+                            <p:outputLabel value="Jelszó megerősítés:"/>
+                            <p:password id="confirm" value="#{userController.regUser.password}" class="box" >
+                                <f:validator validatorId="passwordValidator"/>
+                            </p:password>        
+                        </p:panelGrid>
+                    </div>  
+
+                    <div class="panel-heading" style="text-align: center; padding-top: 20px ;padding-bottom: 30px">
+                        <div class="row" >
+                            <div class="col-md-6 ">
+                                <p:commandButton value="Regisztálok" action="#{userController.registerUser()}" class="button btn btn-default"/>
+                            </div>
+                            <div class="col-md-6 ">
+                                <p:button value="Mégsem" outcome="login" class="button btn btn-default"/>
+                            </div>
+                        </div>
                     </div>
+
+
                 </div>
+
             </h:form>
 
         </div>
-    </h:body> 
-</html>
+
+    </ui:define>
+
+</ui:composition>
+

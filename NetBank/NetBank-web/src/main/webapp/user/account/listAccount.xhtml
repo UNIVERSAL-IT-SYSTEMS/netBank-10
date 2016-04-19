@@ -1,3 +1,4 @@
+
 <ui:composition template="/templates/userLayout.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -10,34 +11,32 @@
 
             <div class="col-md-10 col-md-offset-1 tablepanel">
 
-
-
                 <div class="panel-heading">
                     <h3>Bankszámláid :</h3>
                 </div>
 
                 <div class="panel-body">
-
                     <div class="resultTable col-md-10 col-md-offset-1" >
                         <p:dataTable var="account" widgetVar="accountTable" emptyMessage="Nincs találat" value="#{accountController.getNotDestroyByUser(loggedIn.user)}" 
                                      selectionMode="single" selection="#{accountController.selectedAccount}" rowKey="#{account.id}">
-                            <p:column headerText="Számlaszám" >
+                                <f:facet name="header">
+                                    <p:outputPanel style="text-align: right">
+                                        <p:inputText id="globalFilter" onkeyup="PF('accountTable').filter()" style="height:30px; width:120px" placeholder="Keresés"/>
+                                    </p:outputPanel>
+                                </f:facet>
+                            <p:column headerText="Számlaszám" filterBy="#{account.accountNumber}" filterMatchMode="contains" >
                                 <h:outputText value="#{account.accountNumber}" />
                             </p:column>
-                            <p:column headerText="Egyenleg">
+                            <p:column headerText="Egyenleg"  filterBy="#{account.balance}" filterMatchMode="contains">
                                 <h:outputText value="#{account.balance} Ft" />
                             </p:column>
                         </p:dataTable>
                     </div>
-
                 </div>
                 <div class="panel-heading" style="text-align: center">
                     <p:commandButton value="Bankszámla megtekintése" action="#{accountController.selectedToTrancasctionListUser()}" class="button btn btn-default" ajax="true" update="@form"/>
                 </div>
-
-                
             </div>
-
         </h:form>
 
     </ui:define>

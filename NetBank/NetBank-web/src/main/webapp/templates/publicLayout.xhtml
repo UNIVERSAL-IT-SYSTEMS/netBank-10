@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <h:head>
+        <meta charset="utf-8"></meta>
+        <title>NetBank Ügyintéző Felület</title>
+        <link rel="icon" href="http://iconogen.com/images/computer.png"/>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
+    </h:head>
+
+    <h:body> 
+        <h:form>
+            <nav class="navbar navbar-default">
+                <h1 class="navbar-fnt" align="left">SZDT Bank Netbank Alkalmazás</h1>
+            </nav>
+            
+            <div id="content">
+                <ui:insert name="content" >
+                    <p></p>
+                </ui:insert>
+            </div>
+
+        </h:form>
+    </h:body>
+
+
+</html>

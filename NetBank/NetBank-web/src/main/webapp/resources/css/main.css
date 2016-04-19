@@ -6,6 +6,8 @@ body {
     background-color: #E2E2E2;
 }
 
+/* NAVBAR */
+
 .navbar {
     position: relative;
     border: 0px solid transparent
@@ -52,6 +54,88 @@ body {
     color: #3b5998;
 }
 
+/* TÁBLÁZAT */
+
+.resultTable .ui-datatable.ui-widget, .resultTable .ui-state-default.ui-filter-column, .resultTable .ui-datatable-tablewrapper th.ui-state-default,
+.resultTable .ui-paginator.ui-paginator-top.ui-widget-header, .resultTable .ui-paginator.ui-paginator-bottom.ui-widget-header.ui-corner-bottom,
+.resultTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left{
+    background:#b5231b;
+    color: #fff;
+    font-family: "Verdana";
+    font-weight: normal;
+
+}
+.resultTable .ui-outputpanel.ui-widget .ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
+    width:400px;
+    margin-right: 0px; 
+}
+
+.ui-datatable{
+    font-family:MyriadPro;
+}
+
+.ui-column-filter{
+    display: none !important;
+}
+
+.ui-datatable-header {
+    background: #627AAD !important;
+}
+
+
+.resultTable .ui-widget-header.ui-corner-top{
+    background: #627AAD !important;
+    border: 0px;
+}
+
+.resultTable .ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
+    border:1px solid #0059B2;
+    box-shadow:none;
+}
+
+.resultTable .ui-button-text.ui-c{
+    display:block;
+    background:#0059B2;
+    border:none;
+    color:white;
+    text-shadow:none;
+}
+.resultTable .searchtext{
+    float:left;
+    padding-top:6px;
+    font-family:MyriadPro;
+}
+
+.resultTable .ui-paginator.ui-paginator-bottom.ui-widget-header.ui-corner-bottom{
+    background: #627AAD !important;
+    border: 0px;
+}
+
+.resultTable .ui-paginator-top { 
+    display: none; 
+}
+
+.resultTable .ui-icon.ui-icon-seek-prev{
+    background-image: none;
+}
+
+.resultTable .ui-icon.ui-icon-seek-next{
+    background-image: none;
+}
+
+/* PANELEK */
+.tablepanel {
+    background-color: #627AAD;
+    border: 0px solid #000000;
+    -webkit-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    -moz-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
+    color: #fff;
+    margin-top: 40px;
+    padding-left: 25px;
+    opacity: 0.9;
+}
+
 .loginpanel {
     background-color: #627AAD;
     border: 0px solid #000000;
@@ -60,6 +144,7 @@ body {
     box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
     color: #fff;
     margin-top: 40px;
+    opacity: 0.9;
 }
 
 .login-body-panel {
@@ -76,51 +161,15 @@ body {
     width: 400px;
 }
 
-.resultTable .ui-datatable.ui-widget, .resultTable .ui-datatable-header.ui-widget-header.ui-corner-top
-, .resultTable .ui-state-default.ui-filter-column, .resultTable .ui-datatable-tablewrapper th.ui-state-default,
-.resultTable .ui-paginator.ui-paginator-top.ui-widget-header, .resultTable .ui-paginator.ui-paginator-bottom.ui-widget-header.ui-corner-bottom,
-.resultTable .ui-paginator-rpp-options.ui-widget.ui-state-default.ui-corner-left{
-    background:#b5231b;
-    color: #fff;
-    font-family: "Verdana";
-    font-weight: normal;
-    
-}
-.resultTable .ui-outputpanel.ui-widget .ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
-    width:400px;
-    margin-right: 286px; 
-}
+/* PANELGRID */
 
-.ui-datatable{
-    font-family:MyriadPro;
-}
-.resultTable .ui-inputfield.ui-inputtext.ui-widget.ui-state-default.ui-corner-all{
-    border:1px solid #0059B2;
-    box-shadow:none;
-}
-.resultTable .ui-button-text.ui-c{
-    display:block;
-    background:#0059B2;
-    border:none;
-    color:white;
-    text-shadow:none;
-}
-.resultTable .searchtext{
-    float:left;
-    padding-top:6px;
-    font-family:MyriadPro;
-}
-
-.tablepanel {
+.panelGrid.ui-panelgrid.ui-widget, .ui-panelgrid-cell{
     background-color: #627AAD;
-    border: 0px solid #000000;
-    -webkit-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
-    -moz-box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
-    box-shadow: 0px 5px 9px 0px rgba(11,42,110,1);
     color: #fff;
-    margin-top: 40px;
-    padding-left: 25px;
+    border: 0px;
+    text-align: center;
 }
+
 
 .logo{
     margin-top: 20px;

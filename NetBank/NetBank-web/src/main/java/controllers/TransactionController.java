@@ -70,18 +70,18 @@ public class TransactionController implements Serializable {
         if (accountService.isAvailableAccountNumber(transaction.getSender().getAccountNumber()) || accountService.isAvailableAccountNumber(recieverNumber)) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Sikertelen tranzakció!", "A kedvezményezett számlaszám nem létezik"));
-            return "listAccountTransaction?faces-redirect=false";
+                                    "Sikertelen tranzakció! A kedvezményezett számlaszám nem létezik",""));
+            return "makeTransfer?faces-redirect=false";
         } else if (transaction.getSender().getBalance() < transaction.getAmount()) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Sikertelen tranzakció!", "Nincs elég egyenlege az átutalás létrehozásához"));
-            return "listAccountTransaction?faces-redirect=false";
+                                    "Sikertelen tranzakció! Nincs elég egyenlege az átutalás létrehozásához",""));
+            return "makeTransfer?faces-redirect=false";
         } else if (transaction.getAmount() < 1000) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Sikertelen tranzakció!", "Legalább 1000 Ft-t kell átutalni"));
-            return "listAccountTransaction?faces-redirect=false";
+                                    "Sikertelen tranzakció! Legalább 1000 Ft-t kell átutalni",""));
+            return "makeTransfer?faces-redirect=false";
         } else {
             Transaction transfer = new Transaction();
             Account reciever = accountService.findByAccountNumber(recieverNumber);
@@ -113,8 +113,8 @@ public class TransactionController implements Serializable {
             } else {
                 FacesContext.getCurrentInstance().
                         addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                        "Sikertelen tranzakció!", "Zárolt bankszámlára nem lehet utalni"));
-                return "listAccountTransaction?faces-redirect=false";
+                                        "Sikertelen tranzakció! Zárolt bankszámlára nem lehet utalni",""));
+                return "makeTransfer?faces-redirect=false";
             }
         }
     }
@@ -136,9 +136,15 @@ public class TransactionController implements Serializable {
         if (transaction.getSender().getBalance() < transaction.getAmount()) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Nincs elég egyenlege!", "Nincs elég egyenlege!"));
+                                    "Sikertelen kifizetés! Nincs elég egyenlege!",""));
             return "listAccountTransaction?faces-redirect=false";
-        } else {
+        }else if(transaction.getAmount()<1000){
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                    "Sikertelen kifizetés! Legalább 1000 forintot kell felvenni!",""));
+            return "listAccountTransaction?faces-redirect=false";
+        }
+        else {
             Transaction withdrawal = new Transaction();
             withdrawal.setSender(transaction.getSender());
             withdrawal.setAmount(transaction.getAmount());
@@ -167,7 +173,7 @@ public class TransactionController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Sikertelen tranzakció!", "Zárolt számlán nem alkalmazható tranzakció!"));
+                                    "Sikertelen tranzakció! Zárolt számlán nem alkalmazható tranzakció!",""));
             return "listAccountTransaction?faces-redirect=false";
         }
     }
@@ -177,8 +183,8 @@ public class TransactionController implements Serializable {
         if (transaction.getAmount() < 0) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Sikertelen tranzakció!", "Legalább 1000 Ft-t kell befizetni"));
-            return "listAccountTransaction?faces-redirect=false";
+                                    "Sikertelen tranzakció! Legalább 1000 Ft-t kell befizetni",""));
+            return "makeInpay?faces-redirect=false";
         }
         Transaction inpayment = new Transaction();
         inpayment.setReciever(transaction.getReciever());

@@ -1,42 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"  
-      xmlns:h="http://java.sun.com/jsf/html"  
-      xmlns:f="http://java.sun.com/jsf/core"  
-      xmlns:p="http://primefaces.org/ui">  
+<ui:composition template="/templates/publicLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head>  
-        <title>Befizetés a számlára</title>
-    </h:head>  
-
-    <h:body>  
+    <ui:define name="content">
         <h:form>
-            <div align="center">
-                <h1>Befizetés a számlára</h1>
-                <hr />
-            </div>
-            <div align="center" class="container">       
-                <p:panelGrid columns="2" class="tableReg">
-                    <p:outputLabel value="Összeg: " />
-                    <p:inputText id="amount" type="number" value="#{transactionController.transaction.amount}" title="Amount" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />  
-                </p:panelGrid> 
-
-                <div class="row">
-                    <div class="col-lg-6 regButtons">
-                        <p:commandButton value="Befizet" action="#{transactionController.makeInpayment()}" class="button btn btn-default"/>
-                    </div>
-                    <div class="col-lg-6">
-                        <p:button value="Vissza"  href="listAccountTransaction.xhtml" styleClass="btnPosRight" class="button btn btn-default"/>
+            <div class="col-md-8 col-md-offset-2 tablepanel">
+                <div class="panel-heading ">
+                    <h1>Befizetés a számlára</h1>
+                </div>
+                <div class="panel-body" align="center">
+                    <p:panelGrid columns="2" class="tableReg">
+                        <p:outputLabel value="Összeg: " />
+                        <p:inputText id="amount" type="number" value="#{transactionController.transaction.amount}" title="Amount" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />  
+                    </p:panelGrid> 
+                </div>
+                <div class="panel-heading" style="text-align: center; padding-top: 20px ;padding-bottom: 30px">
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-3">
+                            <p:commandButton value="Befizet" action="#{transactionController.makeInpayment()}" class="button btn btn-default"/>
+                        </div>
+                        <div class="col-md-2 col-md-offset-2" >
+                            <p:button value="Vissza"  href="listAccountTransaction.xhtml" styleClass="btnPosRight" class="button btn btn-default"/>
+                        </div>
                     </div>
                 </div>
-
+                <div class="col-md-12">
+                    <p:messages id="messages" closable="true" showDetail="false" autoUpdate="true"></p:messages>
+                </div>
             </div>
         </h:form>
-
-    </h:body>  
-</html>  
+    </ui:define>
+</ui:composition>

@@ -12,7 +12,7 @@
 
                 <div class="row" style="padding-top: 30px">
 
-                    
+
                     <div class="panelGrid col-md-4">
                         <h3>Bankszámla adatai</h3>
                         <p:panelGrid columns="2" class="col-md-offset-1" style="padding-top: 30px">
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="col-md-12" style="padding-top: 50px">
                     <h3>Tranzakciótörténet</h3>
                     <div class="resultTable" >
@@ -55,14 +55,15 @@
                                      emptyMessage="Nincs találat"  class="dataTable col-md-12"
                                      widgetVar="transactionTable"
                                      rows="10"  paginator="true"
-                                     paginatorTemplate=" {PreviousPageLink} {PageLinks} {NextPageLink}" >
-                            
+                                     paginatorTemplate=" {PreviousPageLink} {PageLinks} {NextPageLink}"
+                                     paginatorAlwaysVisible="false">
+
                             <f:facet name="header">
-                                    <p:outputPanel style="text-align: right">
-                                        <p:inputText id="globalFilter" onkeyup="PF('transactionTable').filter()" style="height:30px; width:120px" placeholder="Keresés"/>
-                                    </p:outputPanel>
+                                <p:outputPanel style="text-align: right">
+                                    <p:inputText id="globalFilter" onkeyup="PF('transactionTable').filter()" style="height:30px; width:120px" placeholder="Keresés"/>
+                                </p:outputPanel>
                             </f:facet>
-                            
+
                             <p:column headerText="Dátum" filterBy="#{transaction.dateOfTransaction}" sortBy="#{transaction.dateOfTransaction}" filterMatchMode="contains">
                                 <h:outputText value="#{transaction.dateOfTransaction}">
                                     <f:convertDateTime pattern="YYYY-MM-dd" />

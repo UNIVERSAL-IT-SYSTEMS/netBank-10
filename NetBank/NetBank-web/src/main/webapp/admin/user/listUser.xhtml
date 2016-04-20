@@ -8,53 +8,81 @@
     <ui:define name="content">
 
         <h:form id="form">
-            <p>A rendszerbe regisztált felhasználók</p>
-            <p:button value="Regisztrációs Kérelmek Feldolgozása" href="/admin/user/registrate.xhtml" class="button btn btn-default"/>
-            <p:dataTable id="user" var="user" value="#{userController.findAll()}"
-                         selectionMode="single" selection="#{userController.selectedUser}" rowKey="#{user.id}" emptyMessage="Nincs találat">
-                
-                <p:column headerText="Név" filterBy="#{user.name}" filterMatchMode="contains">
-                    <h:outputText value="#{user.name}"/>
-                </p:column>
+            <div class="col-md-10 col-md-offset-1 tablepanel">
+                <div class="panel-heading ">
+                    <h3>A rendszerbe regisztált felhasználók</h3>
+                </div>
 
-                <p:column headerText="Email" filterBy="#{user.email}" filterMatchMode="contains">
-                    <h:outputText value="#{user.email}"/>
-                </p:column>
+                <div class="panel-body">
+                    <p:button value="Regisztrációs Kérelmek Feldolgozása" href="/admin/user/registrate.xhtml" class="button btn btn-default"/>
+                    <div class="resultTable col-md-12" >
+                        <p:dataTable id="user" var="user" value="#{userController.findAll()}"
+                                     selectionMode="single" selection="#{userController.selectedUser}" 
+                                     rowKey="#{user.id}" emptyMessage="Nincs találat"
+                                     widgetVar="userTable"
+                                     rows="10"  paginator="true"
+                                     paginatorTemplate=" {PreviousPageLink} {PageLinks} {NextPageLink}" 
+                                     paginatorAlwaysVisible="false">
 
-                <p:column headerText="Születési Idő" filterBy="#{user.dateOfBirth}" filterMatchMode="contains">
-                    <h:outputText value="#{user.dateOfBirth}">
-                           <f:convertDateTime pattern="yyyy.MM.dd"/>
-                        </h:outputText>
-                </p:column>
-                
-                <p:column headerText="Cím" filterBy="#{user.address}" filterMatchMode="contains">
-                    <h:outputText value="#{user.address}"/>
-                </p:column>
+                            <f:facet name="header">
+                                <p:outputPanel style="text-align: right">
+                                    <p:inputText id="globalFilter" onkeyup="PF('userTable').filter()" style="height:30px; width:120px" placeholder="Keresés"/>
+                                </p:outputPanel>
+                            </f:facet>
 
-                <p:column headerText="Telefonszám" filterBy="#{user.phoneNumber}" filterMatchMode="contains">
-                    <h:outputText value="#{user.phoneNumber}"/>
-                </p:column>
+                            <p:column headerText="Név" filterBy="#{user.name}" filterMatchMode="contains">
+                                <h:outputText value="#{user.name}"/>
+                            </p:column>
 
-                <p:column headerText="Pozció" filterBy="#{user.position}" filterMatchMode="contains">
-                    <h:outputText value="#{user.position}"/>
-                </p:column>
-                
-                <p:column headerText="Bankszámlák száma">
-                    <h:outputText value="#{accountController.getAccountNumber(user)}"/>
-                </p:column>
-                
-            </p:dataTable>
-            <hr />
-            
-            <div align="center" class="listButtons">
-                <p:commandButton value="Adatlap megtekintése" action="#{userController.selectedToAccountList()}" class="button btn btn-default" ajax="true" update="@form"/>
-                <p:commandButton value="Felhasználó hozzáadása" action="#{userController.toAddUser()}" styleClass="btnPosLeft" class="button btn btn-default"/>
-                <p:commandButton value="Felhasználó Módosítása" action="#{userController.selectedToUpdate()}" class="button btn btn-default" ajax="true" update="@form"/>
-                <p:commandButton value="Felhasználó Törlése" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default" ajax="true" update="@form"/>
+                            <p:column headerText="Email" filterBy="#{user.email}" filterMatchMode="contains">
+                                <h:outputText value="#{user.email}" style="font-size: 13px"/>
+                            </p:column>
+
+                            <p:column headerText="Születési Idő" filterBy="#{user.dateOfBirth}" filterMatchMode="contains">
+                                <h:outputText value="#{user.dateOfBirth}">
+                                    <f:convertDateTime pattern="yyyy.MM.dd"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Telefonszám" filterBy="#{user.phoneNumber}" filterMatchMode="contains">
+                                <h:outputText value="#{user.phoneNumber}"/>
+                            </p:column>
+
+                            <p:column headerText="Pozció" filterBy="#{user.position}" filterMatchMode="contains">
+                                <h:outputText value="#{user.position}"/>
+                            </p:column>
+
+                            <p:column headerText="Bankszámlák száma">
+                                <h:outputText value="#{accountController.getAccountNumber(user)}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </div>                              
+                </div>
+
+                <div class="panel-heading col-md-12" style="text-align: center">
+                    <div class="row col-md-12">
+                        <div class="col-md-3">
+                            <p:commandButton value="Adatlap megtekintése" action="#{userController.selectedToAccountList()}" class="button btn btn-default" />
+                        </div>
+                        <div class="col-md-3" >
+                            <p:commandButton value="Felhasználó hozzáadása" action="#{userController.toAddUser()}"  class="button btn btn-default"/>
+                        </div>
+                        <div class="col-md-3" >
+                            <p:commandButton value="Felhasználó Módosítása" action="#{userController.selectedToUpdate()}" class="button btn btn-default" />
+                        </div>
+                        <div class="col-md-3" >
+                            <p:commandButton value="Felhasználó Törlése" type="button" onclick="PF('deleteDialog').show();"  class="button btn btn-default"/>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
             <h:form>
                 <p:dialog header="Biztosan törli a felhasználót?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
-                     <div>
+                    <div>
                         <div class="col-md-6">
                             <p:commandButton value="Igen" actionListener="#{userController.deleteUser()}"  ajax="false" update="@user" class="button btn btn-default"/>
                         </div>
@@ -65,6 +93,6 @@
                 </p:dialog>
             </h:form>
         </h:form>
-        
+
     </ui:define>
 </ui:composition>

@@ -33,39 +33,37 @@
                     </button>
                 </div>
 
-                 
+
                 <div class="collapse navbar-collapse" id="js-navbar-collapse">
                     <ul id="menu" class="nav nav-pills">
-                    <li><p:link class="navbar-fnt" href="/user/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
-                    <li><p:link class="navbar-fnt" href="/user/message/listTopic.xhtml" value="Helpdesk"/></li>
+                        <li><p:link class="navbar-fnt" href="/user/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
+                        <li><p:link class="navbar-fnt" href="/user/message/listTopic.xhtml" value="Helpdesk"/></li>
 
-                    <li class="navbar-right">
-                        <p:commandLink class="navbar-name" id="dialogButt" value="#{loggedIn.user.name}" />
-                        <p:overlayPanel class="col-md-3 profile-popup-panel" id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true">
-                            <div class="row" style="padding: 10px;">
-                                <div class="navbar-popup-name">
-                                    #{loggedIn.user.name}
-                                </div>
-                            </div>
-                            <nav class="navbar navbar-popup col-md-12">
-                                <ul class="nav nav-pills">
-                                    <li> 
-                                        <c:if test="${loggedIn.user.position eq loggedIn.adminPos}">                   
-                                            <p:link class="navbar-popup-fnt" href="/admin/index.xhtml" value="Ügyitéző Mód"/>
-                                        </c:if>
-                                    </li>
-                                    <li><p:commandLink class="navbar-popup-fnt" value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
-                                    <li><p:commandLink class="navbar-popup-fnt" value="Kijelentkezés"  action="#{logout.logout()}" /></li>
-                                </ul>
-                            </nav>
-                        </p:overlayPanel>
-                    </li>  
-                </ul>
+                        <li class="navbar-right">
+                            <p:commandLink class="navbar-name" id="dialogButt" value="#{loggedIn.user.name}" />
+                        </li>  
+                    </ul>
                 </div>
-                    
-                
-                
             </nav>
+
+            <p:overlayPanel class="col-md-3 profile-popup-panel" id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true">
+                <div class="row" style="padding: 10px;">
+                    <div class="navbar-popup-name">
+                        #{loggedIn.user.name}
+                    </div>
+                </div>
+                <nav class="navbar navbar-default col-md-12">
+                    <ul class="nav nav-pills">
+                        <li> 
+                            <c:if test="${loggedIn.user.position eq loggedIn.adminPos}">                   
+                                <p:link class="navbar-fnt" href="/admin/index.xhtml" value="Ügyitéző Mód"/>
+                            </c:if>
+                        </li>
+                        <li><p:commandLink class="navbar-fnt" value="Profil" action="#{userController.selectedToUpdateProfile(loggedIn.user.loginName)}"/></li>
+                        <li><p:commandLink class="navbar-fnt" value="Kijelentkezés"  action="#{logout.logout()}" /></li>
+                    </ul>
+                </nav>
+            </p:overlayPanel>
 
 
 

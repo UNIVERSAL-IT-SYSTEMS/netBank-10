@@ -6,39 +6,43 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            <div align="center">
-                <h1>Felhasználó Adatainak Módosítása</h1>
-                <hr />
-                <p:panelGrid columns="2" class="tableReg">
-                    <p:outputLabel value="Név:" for="name" />
-                    <p:outputLabel id="name" value="#{userController.user.name}" title="Név"/>
-                    <p:outputLabel value="Születési idő: " />
-                    <p:outputLabel id="dateOfBirth" value="#{userController.user.dateOfBirth}" title="Születési idő">
-                        <f:convertDateTime pattern="YYYY.MM.dd" />
-                    </p:outputLabel>
-                    <p:outputLabel value="Cím: " for="address" />
-                    <p:outputLabel id="address" value="#{userController.user.address}" title="Cím"/>
-                    <p:outputLabel value="Email cím: " for="email" />
-                    <p:outputLabel id="email" value="#{userController.user.email}" title="Email"/>
-                    <p:outputLabel value="Telefonszám: " for="phone" />
-                    <p:outputLabel id="phone" value="#{userController.user.phoneNumber}" title="Telefonszám"/>
-                    <p:outputLabel value="Felhasználónév: " for="loginName" />
-                    <p:outputLabel id="loginName" value="#{userController.user.loginName}" title="Felhasználónév"/>
-                </p:panelGrid>
-                <div class="row">
-                    <div class="col-lg-6 regButtons">
-                        <p:button value="Adatok módosítása" href="editProfile.xhtml" class="button btn btn-default"/>
+        <div align="center" >
+            <h:form>
+                <div class="col-md-8 col-md-offset-2 tablepanel">
+                    <div class="panel-heading">
+                        <h2>Adataim</h2>
                     </div>
-                    <div class="col-lg-6 regButtons">
-                        <p:button value="Jelszó megváltoztatása" href="editPassword.xhtml" class="button btn btn-default"/>
-                    </div>
-                    <div class="col-lg-6">
-                        <p:button value="Mégse" href="index.xhtml" class="button btn btn-default"/>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Név:" for="name" />
+                        <p:outputLabel id="name" value="#{userController.user.name}" title="Név"/>
+                        <p:outputLabel value="Születési idő: " />
+                        <p:outputLabel id="dateOfBirth" value="#{userController.user.dateOfBirth}" title="Születési idő">
+                            <f:convertDateTime pattern="YYYY.MM.dd" />
+                        </p:outputLabel>
+                        <p:outputLabel value="Cím: " for="address" />
+                        <p:outputLabel id="address" value="#{userController.user.address}" title="Cím"/>
+                        <p:outputLabel value="Email cím: " for="email" />
+                        <p:outputLabel id="email" value="#{userController.user.email}" title="Email"/>
+                        <p:outputLabel value="Telefonszám: " for="phone" />
+                        <p:outputLabel id="phone" value="#{userController.user.phoneNumber}" title="Telefonszám"/>
+                        <p:outputLabel value="Felhasználónév: " for="loginName" />
+                        <p:outputLabel id="loginName" value="#{userController.user.loginName}" title="Felhasználónév"/>
+                    </p:panelGrid>
+                    <div class="panel-heading" style="text-align: center; padding-top: 20px ;padding-bottom: 30px">
+                        <div class="row" >
+                            <div class="col-md-2 col-md-offset-3 regButtons">
+                                <p:button value="Adatok módosítása" href="editProfile.xhtml" class="button btn btn-default"/>
+                            </div>
+                            <div class="col-md-2 regButtons">
+                                <p:button value="Jelszó megváltoztatása" href="editPassword.xhtml" class="button btn btn-default"/>
+                            </div>
+                            <div class="col-md-2">
+                                <p:button value="Mégse" href="index.xhtml" class="button btn btn-default"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-        </h:form>     
+            </h:form>     
+        </div>
     </ui:define>
 </ui:composition>

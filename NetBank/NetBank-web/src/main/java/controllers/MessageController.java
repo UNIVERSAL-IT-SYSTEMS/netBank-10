@@ -69,14 +69,13 @@ public class MessageController implements Serializable{
             
      public String navigateToTopic(Topic parTopic){
         this.selectedTopic = parTopic;
-        return "listMessages?faces-redirect=true";
+        return "listTopic?faces-redirect=true";
     }
     
     
      public void createTopic(User user){
          topic.setUser(user);
          messageService.createTopic(topic);
-         
          
          message.setDate(new Date());
          message.setSender(user);

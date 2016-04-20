@@ -8,34 +8,96 @@
 
     <ui:define name="content">
 
-        <h:form id="form">          
-            <p:dataScroller value="#{messageController.findAllTopic()}" var="topic" chunkSize="10" mode="inline" scrollHeight="500">
-                <f:facet name="header">
-                    Üzenetek
-                </f:facet>
+        <h:form id="form">        
 
+            <div class="col-md-10 col-md-offset-1 tablepanel">
+                <div class="row">
 
-                <div class="panel" >
-                    <h:panelGrid columns="2" style="width:100%">
-                        <p:commandLink action="#{messageController.navigateToTopic(topic)}" >
-                                <p:outputPanel>
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <h:outputText value="Téma:" />
-                                        <h:outputText value="#{topic.theme}" style="font-weight: bold"/>
-                                        <h:outputText value="#{topic.lastMessage.content}" style="font-weight: bold"/>
-                                        <h:outputText value="#{topic.lastMessage.date}"  style="font-weight: bold">
-                                            <f:convertDateTime pattern="YYYY.MM.dd" />
-                                        </h:outputText>
+                    <div class="col-md-3 topicpanel">
+                        <div class="panel-heading">
+                            <h3>Beszélgetések:</h3>
+                        </div>
+                        <p:dataScroller value="#{messageController.findAllTopic()}" var="topic" chunkSize="10" mode="inline" scrollHeight="500">
+                            <p:commandLink action="#{messageController.navigateToTopic(topic)}">
+
+                                <div class="topicElement col-md-10 col-md-offset-1" >
+                                    <h:panelGrid columns="2" style="width:100%">
+                                        <p:outputPanel>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h:outputText value="Téma: #{topic.theme}" style="font-size: 13px;font-weight: normal"/>
+                                                </div>
+                                                <div class="col-md-6" style="text-align: right">
+                                                    <h:outputText value="#{topic.lastMessage.date}"  style="font-size: 13px;font-weight: normal">
+                                                        <f:convertDateTime pattern="YYYY.MM.dd HH:mm" />
+                                                    </h:outputText>   
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-md-offset-1">
+                                                <h:outputText value="#{topic.lastMessage.sender.name}: #{topic.lastMessage.content}" style="font-size: 15px;font-weight: bold"/>
+                                            </div>
+
+                                        </p:outputPanel>
                                     </h:panelGrid>
-                                </p:outputPanel>
-                        </p:commandLink>
-                            <p:commandButton class="btn-warning" value="Törlés" action="#{messageController.navigateToTopic(topic)}" />
+                                </div>
 
-                    </h:panelGrid>
+                            </p:commandLink>
+
+
+                        </p:dataScroller>
+                    </div>
+
+                    <div class="col-md-9 topicpanel">
+                        <div class="panel-heading">
+                            <h3>#{messageController.selectedTopic.user.name} :</h3>
+                        </div>
+
+                        <p:dataScroller value="#{messageController.findMessageByTopic()}" var="message" chunkSize="10" mode="inline" scrollHeight="500">
+
+                            <div class="messageElement col-md-10 col-md-offset-1" >
+                                <h:panelGrid columns="2" style="width:100%">
+                                    <p:outputPanel>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h:outputText value="#{message.sender.name}" style="font-size: 15px;font-weight: bold"/>
+                                            </div>
+                                            <div class="col-md-6" style="text-align: right">
+                                                <h:outputText value="#{message.date}" style="font-size: 15px;font-weight: bold">
+                                                    <f:convertDateTime pattern="YYYY.MM.dd HH:mm" />
+                                                </h:outputText>   
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 col-md-offset-1">
+                                            <h:outputText value="#{message.content}" style="font-size: 13px;font-weight: normal"/>
+                                        </div>
+
+                                    </p:outputPanel>
+                                </h:panelGrid>
+                            </div>
+                        </p:dataScroller>
+
+                        <div class="panel-heading" style="text-align: center">
+                            <p:commandButton value="Új Üzenet" onclick="PF('createMessage').show();" class="button btn btn-default" />
+                        </div>
+                    </div>    
                 </div>
-
-
-            </p:dataScroller>
+            </div>
         </h:form>
+
+
+        <p:dialog header="Adja meg a témát?" widgetVar="createDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+
+            <p:inputText value="#{messageController.topic.theme}"> Téma </p:inputText>
+            <p:inputTextarea value="#{messageController.message.content}">Üzenet</p:inputTextarea>
+            <p:commandButton value="Létrehoz" actionListener="#{messageController.createTopic(loggedIn.user)}" ajax="false" update="@form" class="button btn btn-default"/>
+
+        </p:dialog>
+
+        <p:dialog header="Üzenet küldése" widgetVar="createMessage" modal="true" height="100" width="400" resizable="false" draggable="false">
+
+            <p:inputTextarea value="#{messageController.message.content}">Üzenet</p:inputTextarea>
+            <p:commandButton value="Létrehoz" actionListener="#{messageController.createMessage(loggedIn.user)}" ajax="false" update="@form" class="button btn btn-default"/>
+
+        </p:dialog>
     </ui:define>
 </ui:composition>

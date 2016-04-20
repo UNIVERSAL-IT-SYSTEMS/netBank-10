@@ -11,14 +11,14 @@
 
             <div class="col-md-10 col-md-offset-1 tablepanel">
 
-                <div class="panel-heading">
+                <div class="panel-heading ">
                     <h3>Bankszámláid :</h3>
                 </div>
 
                 <div class="panel-body">
                     <div class="resultTable col-md-10 col-md-offset-1" >
                         <p:dataTable var="account" widgetVar="accountTable" emptyMessage="Nincs találat" value="#{accountController.getNotDestroyByUser(loggedIn.user)}" 
-                                     selectionMode="single" selection="#{accountController.selectedAccount}" rowKey="#{account.id}">
+                                     selectionMode="single" selection="#{accountController.selectedAccount}" rowKey="#{account.id}" class="col-md-12">
                                 <f:facet name="header">
                                     <p:outputPanel style="text-align: right">
                                         <p:inputText id="globalFilter" onkeyup="PF('accountTable').filter()" style="height:30px; width:120px" placeholder="Keresés"/>

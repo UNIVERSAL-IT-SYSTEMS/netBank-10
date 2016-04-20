@@ -20,24 +20,26 @@
                     <li>
 
                         <p:commandLink class="navbar-right" id="dialogButt" value="#{creditCardController.card.account.user.name}" />
-                        <p:overlayPanel id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
-                            <div class="row" style="padding: 10px;">
-                                <div >
-                                    #{creditCardController.card.account.user.name}
-                                    Kártyaszám: #{creditCardController.card.number}
-                                    #{creditCardController.card.type}
-                                </div>
-                            </div>
-                            <nav class="navbar navbar-default">
-                                <ul class="nav nav-pills">
-                                    <li><p:commandLink value="Kijelentkezés" action="#{creditCardController.logout()}" /></li>
-                                </ul>  
-                            </nav>
-                        </p:overlayPanel>
+
                     </li>
 
                 </ul>    
             </nav>
+
+            <p:overlayPanel id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
+                <div class="row" style="padding: 10px;">
+                    <div >
+                        #{creditCardController.card.account.user.name}
+                        Kártyaszám: #{creditCardController.card.number}
+                        #{creditCardController.card.type}
+                    </div>
+                </div>
+                <nav class="navbar navbar-default">
+                    <ul class="nav nav-pills">
+                        <li><p:commandLink value="Kijelentkezés" action="#{creditCardController.logout()}" /></li>
+                    </ul>  
+                </nav>
+            </p:overlayPanel>
 
 
 

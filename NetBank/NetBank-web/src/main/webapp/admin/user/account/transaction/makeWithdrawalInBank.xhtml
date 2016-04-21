@@ -17,16 +17,18 @@
                         <p:inputText id="amount" type="number" value="#{transactionController.transaction.amount}" title="Amount" class="box" required="true" requiredMessage="A mező kitöltése kötelező!" />  
                     </p:panelGrid> 
                 </div>    
+                 
                 <div class="panel-heading" style="text-align: center; padding-top: 20px ;padding-bottom: 30px">
                     <div class="row">
                         <div class="col-md-2 col-md-offset-3">
-                             <p:commandButton value="Kifizet" action="#{transactionController.makeWithdrawalInBank()}" class="button btn btn-default"/>
+                           <p:commandButton value="Kifizet" action="#{transactionController.makeWithdrawalInBank()}" class="button btn btn-default"/>
                         </div>
-                        <div class="col-md-2">
-                             <p:button value="Vissza"  href="listAccountTransaction.xhtml" styleClass="btnPosRight" class="button btn btn-default"/>
-                        </div>         
-                    </div>                
+                        <div class="col-md-2 col-md-offset-2" >
+                            <p:button value="Vissza"  href="listAccountTransaction.xhtml" styleClass="btnPosRight" class="button btn btn-default"/>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-md-12">
                     <p:messages id="messages" closable="true" showDetail="false" autoUpdate="true"></p:messages>
                 </div>

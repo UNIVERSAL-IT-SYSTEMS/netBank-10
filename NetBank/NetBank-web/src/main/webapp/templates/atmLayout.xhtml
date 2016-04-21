@@ -11,22 +11,30 @@
         <title>NetBank ATM</title>
         <link rel="icon" href="http://iconogen.com/images/computer.png"/>
         <h:outputStylesheet library="css" name="bootstrap.css"/>
+        <h:outputStylesheet library="css" name="main.css"/>
     </h:head>
     <h:body> 
         <h:form>
-            <nav class="navbar navbar-default">
+            <nav class="navbar navbar-default col-md-12">
 
-                <ul class="nav nav-pills">
-                    <li>
 
-                        <p:commandLink class="navbar-right" id="dialogButt" value="#{creditCardController.card.account.user.name}" />
+                <div>
+                    <ul id="menu" class="nav nav-pills">
+                        <li class="navbar-left">
+                            <h1 class="navbar-fnt" align="left">SZDT Bank Netbank Alkalmazás</h1>
+                        </li>
 
-                    </li>
+                        <li class="navbar-right">
+                            <p:commandLink class="navbar-right" id="dialogButt" value="#{creditCardController.card.account.user.name}" />
+                        </li>  
+                    </ul>
+                </div>
 
-                </ul>    
+
+
             </nav>
 
-            <p:overlayPanel id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true" style="width:500px">
+            <p:overlayPanel id="profilePanel" class="col-md-3 profile-popup-panel" for="dialogButt" hideEffect="fade" dynamic="true">
                 <div class="row" style="padding: 10px;">
                     <div >
                         #{creditCardController.card.account.user.name}

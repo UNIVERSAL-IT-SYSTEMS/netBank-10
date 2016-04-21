@@ -82,7 +82,7 @@
                                 <h:outputText value="#{transaction.sender.user.name}" />
                             </p:column>
 
-                            <p:column headerText="Küldő Számla" filterBy="#{transaction.sender.accountNumber}" filterMatchMode="contains">
+                            <p:column headerText="Küldő Számlaszáma" filterBy="#{transaction.sender.accountNumber}" filterMatchMode="contains">
                                 <h:outputText value="#{transaction.sender.accountNumber}" />
                             </p:column>
 
@@ -90,7 +90,7 @@
                                 <h:outputText value="#{transaction.reciever.user.name}" />
                             </p:column>
 
-                            <p:column headerText="Fogadó Számla" filterBy="#{transaction.reciever.accountNumber}" filterMatchMode="contains">
+                            <p:column headerText="Fogadó Számlaszáma" filterBy="#{transaction.reciever.accountNumber}" filterMatchMode="contains">
                                 <h:outputText value="#{transaction.reciever.accountNumber}" />
                             </p:column>
                         </p:dataTable>

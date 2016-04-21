@@ -1,15 +1,26 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Login Error </title>
-    </h:head>
-    <h:body>
-        <h1 style="color:red;font-weight: bold;">Hibás kártyaszám vagy PIN!</h1>
-         <hr />
-         <div align="center">
-            <h:link outcome="/atm/login" value="To Login page"  class="link"/>
-         </div>
-    </h:body>
-</html>
+<ui:composition template="/templates/publicLayout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div align="center" >
+
+            <h:form>
+                <div class="col-md-8 col-md-offset-2 tablepanel">
+                    <div style="padding-top: 40px; padding-bottom: 40px">
+                        <h1 style="color:red;font-weight: bold;">Hibás kártyaszám, vagy PIN kód!</h1>
+                        <div align="center" style="padding-top: 20px">
+                            <h:link outcome="/atm/login"  style="color: #fff ; font-size: 25px ; font-weight: bold" class="link">Vissza az ATM bejelentkezési felületre</h:link>
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+
+        </div>
+
+    </ui:define>
+
+</ui:composition>

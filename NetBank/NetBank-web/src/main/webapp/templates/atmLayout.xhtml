@@ -14,18 +14,28 @@
         <h:outputStylesheet library="css" name="main.css"/>
     </h:head>
     <h:body> 
+        <script src="resources/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.js"></script>
         <h:form>
             <nav class="navbar navbar-default col-md-12">
+                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
 
-
-                <div>
+                <div class="collapse navbar-collapse" id="js-navbar-collapse">
                     <ul id="menu" class="nav nav-pills">
                         <li class="navbar-left">
                             <h1 class="navbar-fnt" align="left">SZDT Bank Netbank Alkalmazás</h1>
                         </li>
 
                         <li class="navbar-right">
-                            <p:commandLink class="navbar-right" id="dialogButt" value="#{creditCardController.card.account.user.name}" />
+                            <p:commandLink class="navbar-name" id="dialogButt" value="#{creditCardController.card.account.user.name}" />
                         </li>  
                     </ul>
                 </div>
@@ -36,15 +46,17 @@
 
             <p:overlayPanel id="profilePanel" class="col-md-3 profile-popup-panel" for="dialogButt" hideEffect="fade" dynamic="true">
                 <div class="row" style="padding: 10px;">
-                    <div >
+                    <div>
                         #{creditCardController.card.account.user.name}
+                    </div>
+                    <div>
                         Kártyaszám: #{creditCardController.card.number}
                         #{creditCardController.card.type}
                     </div>
                 </div>
-                <nav class="navbar navbar-default">
-                    <ul class="nav nav-pills">
-                        <li><p:commandLink value="Kijelentkezés" action="#{creditCardController.logout()}" /></li>
+                <nav class="navbar navbar-default navbar-right" style="width: 130px ; margin-right: 10px">
+                    <ul class="nav nav-pills " >
+                            <li><p:commandLink class="navbar-fnt" value="Kijelentkezés" action="#{creditCardController.logout()}" /></li>
                     </ul>  
                 </nav>
             </p:overlayPanel>

@@ -6,52 +6,67 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="content">
-        <h:form>
-            
-          
-            
-            <div class="form-group">
-                <label class ="col-md-5 control-label">Jelenlegi PIN kód</label>
-                <div class="col-md-5">
-                    <p:password id="oldpass" required="true" requiredMessage="Adja meg a jelenlegi jelszavát" autocomplete="false" class="form-control">
-                        <f:validator binding="#{currentPinCodeValidator}" />
-                    </p:password>
-                    <h:message id="m_oldpass" for="oldpass" />
-                </div>
-            </div>
+        <div align="center">
+            <h:form>
+                <div class="col-md-8 col-md-offset-2 tablepanel">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="panel-heading">
+                            <h3>PIN kód megváltoztatása</h3>
+                        </div>
+ 
+                        <div class="form-group" style="padding-top: 30px">
+                            <label for="oldpass" class="col-md-6 control-label">Jelenlegi PIN kód:</label>
+                            <div class="col-md-6">
+                                <p:password id="oldpass" required="true" requiredMessage="Adja meg a jelenlegi PIN kódját" autocomplete="off" class="form-control">
+                                    <f:validator binding="#{currentPinCodeValidator}"/>
+                                </p:password>
+                                <h:message id="m_oldpass" for="oldpass" />
+                            </div>
+                        </div>
+                        
 
-            <div class="form-group">
-                <h:outputLabel class ="col-md-5 control-label" for="password" value="Új PIN kód"/>
-                <div class="col-md-5">
-                    <p:password class="form-control" id="password" match="confirm" required="false" autocomplete="true" validatorMessage="A jelszavak nem egyeznek!" requiredMessage="Nem adott meg jelszót!" value="#{creditCardController.newPassword}">
-                        <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
-                    </p:password>
-                    <h:message id="m_password" for="password"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <h:outputLabel class ="col-md-5 control-label" for="confirm" value="Új PIN kód megerősítése"/>
-                <div class="col-md-5">
-                    <p:password  class="form-control" id="confirm" binding="#{confirmPassword}" autocomplete="false" required="true" requiredMessage="Nem erősítette meg a jelszót!" value="#{creditCardController.newPassword}" >
-                    </p:password>
-                    <h:message id="m_confirm" for="confirm" />
-                </div>
-            </div>
+                        <div class="form-group" style="padding-top: 30px">
+                            <label for="oldpass" class="col-md-6 control-label">Új PIN kód:</label>
+                            <div class="col-md-6">
+                                <p:password class="form-control" id="password" match="confirm" required="true" autocomplete="true" validatorMessage="A jelszavak nem egyeznek!" requiredMessage="Nem adott meg jelszót!" value="#{creditCardController.newPassword}">
+                                    <f:attribute name="confirm" value="#{confirmPassword.submittedValue}" />
+                                </p:password>
+                                <h:message id="m_password" for="password"/>
+                            </div>
+                        </div>
 
-            
-            <div class="col-md-12">
-                  <p:messages id="messages"  showDetail="false" autoUpdate="true"></p:messages>
-            </div>
-                
-               
-            
+                        <div class="form-group" style="padding-top: 30px">
+                            <label for="oldpass" class="col-md-6 control-label">Új PIN kód megerősítése:</label>
+                            <div class="col-md-6">
+                                <p:password  class="form-control" id="confirm" binding="#{confirmPassword}" autocomplete="false" required="true" requiredMessage="Nem erősítette meg a jelszót!" value="#{creditCardController.newPassword}" />
+                                <h:message id="m_confirm" for="confirm" />
+                            </div>
+                        </div>
 
-            <div class="form-group">   
-                <div class="col-md-5">
-                    <p:commandButton id="save" class="button btn btn-default" value="Módosítás" action="#{creditCardController.changePinCode()}" /> 
-                    <p:button value="Mégse"  href="index.xhtml" class="button btn btn-default"/>
-                </div>
-            </div>
-        </h:form>
+                        <div class="panel-heading" style="text-align: center; padding-top: 30px ;padding-bottom: 30px">
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <p:commandButton id="save" class="button btn btn-default" value="Módosítás" action="#{creditCardController.changePinCode()}" /> 
+                                </div>
+                                <div class="col-md-6">
+                                    <p:button value="Mégse"  href="index.xhtml" class="button btn btn-default"/>               
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12" style="padding-top: 20px">
+                            <p:messages id="messages"  closable="true" showDetail="false" autoUpdate="true"></p:messages>
+                        </div>
+
+                    </div>
+                </div>    
+
+
+
+
+
+
+            </h:form>
+        </div>
     </ui:define>
 </ui:composition>

@@ -34,7 +34,9 @@
                                 <p:dataTable id="card" var="card" value="#{creditCardController.getCreditCardListByAccountAdmin(accountController.account)}" 
                                              emptyMessage="Nincs találat"  class="dataTable"
                                              selectionMode="single" selection="#{creditCardController.selectedCard}" 
-                                             rowKey="#{card.id}">
+                                             rowKey="#{card.id}" rows="4"  paginator="true"
+                                             paginatorTemplate=" {PreviousPageLink} {PageLinks} {NextPageLink}"
+                                             paginatorAlwaysVisible="false">
                                     <p:column headerText="Kártyaszám" filterBy="#{card.number}" filterMatchMode="contains">
                                         <h:outputText value="#{card.number}"/>
                                     </p:column>
@@ -130,49 +132,49 @@
                 </div>
             </div>    
 
-                <p:dialog header="Válasszon tranzakciótípust?" widgetVar="addDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
-                    <div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" ajax="true" update="@all" class="button btn btn-default"/>
-                        </div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Befizetés" action="#{transactionController.toInpayment(accountController.account)}"  ajax="true" update="@all" class="button btn btn-default"/>
-                        </div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Kifizetés" action="#{transactionController.toWitdrawalInBank(accountController.account)}"  ajax="true" update="@all" class="button btn btn-default"/>
-                        </div>
+            <p:dialog header="Válasszon tranzakciótípust?" widgetVar="addDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                <div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Átutalás" action="#{transactionController.toAddTransfer(accountController.account)}" ajax="true" update="@all" class="button btn btn-default"/>
                     </div>
-                </p:dialog>
+                    <div class="col-md-6">
+                        <p:commandButton value="Befizetés" action="#{transactionController.toInpayment(accountController.account)}"  ajax="true" update="@all" class="button btn btn-default"/>
+                    </div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Kifizetés" action="#{transactionController.toWitdrawalInBank(accountController.account)}"  ajax="true" update="@all" class="button btn btn-default"/>
+                    </div>
+                </div>
+            </p:dialog>
 
-                <p:dialog header="Bankkártya Létrehozása" widgetVar="createDialog" modal="true" height="150" width="300" resizable="false" draggable="false">
-                    <div>
-                        <h3 style="margin-top:0">Válasszon Típust</h3>
-                        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-                            <p:selectOneRadio id="console" value="#{creditCardController.type}">
-                                <f:selectItem itemLabel="Master Card" itemValue="MASTER_CARD" />
-                                <f:selectItem itemLabel="Maestro" itemValue="MAESTRO" />
-                                <f:selectItem itemLabel="Visa" itemValue="VISA" />
-                            </p:selectOneRadio>
-                        </h:panelGrid>
-                        <div class="col-md-6">
-                            <p:commandButton value="Létrehoz" actionListener="#{creditCardController.addCreditCard(accountController.account)}" ajax="false" update="@card" class="button btn btn-default"/>
-                        </div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Vissza" ajax="false" update="@card" class="button btn btn-default"/>
-                        </div>
+            <p:dialog header="Bankkártya Létrehozása" widgetVar="createDialog" modal="true" height="150" width="300" resizable="false" draggable="false">
+                <div>
+                    <h3 style="margin-top:0">Válasszon Típust</h3>
+                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                        <p:selectOneRadio id="console" value="#{creditCardController.type}">
+                            <f:selectItem itemLabel="Master Card" itemValue="MASTER_CARD" />
+                            <f:selectItem itemLabel="Maestro" itemValue="MAESTRO" />
+                            <f:selectItem itemLabel="Visa" itemValue="VISA" />
+                        </p:selectOneRadio>
+                    </h:panelGrid>
+                    <div class="col-md-6">
+                        <p:commandButton value="Létrehoz" action="#{creditCardController.addCreditCard(accountController.account)}" class="button btn btn-default"/>
                     </div>
-                </p:dialog>
+                    <div class="col-md-6">
+                        <p:commandButton value="Vissza" action="#{navigationController.toListTransaction()}" class="button btn btn-default"/>
+                    </div>
+                </div>
+            </p:dialog>
 
-                <p:dialog header="Biztosan Zárolja / Aktiválja a Bankkártyát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
-                    <div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Igen" actionListener="#{creditCardController.deleteCard()}"  ajax="false" update="@form" class="button btn btn-default"/>
-                        </div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Vissza" ajax="false"  update="@form" class="button btn btn-default"/>
-                        </div>
+            <p:dialog header="Biztosan Zárolja / Aktiválja a Bankkártyát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                <div>
+                    <div class="col-md-6">
+                        <p:commandButton value="Igen" action="#{creditCardController.deleteCard()}" class="button btn btn-default"/>
                     </div>
-                </p:dialog>
+                    <div class="col-md-6">
+                        <p:commandButton value="Vissza" action="#{navigationController.toListTransaction()}" class="button btn btn-default"/>
+                    </div>
+                </div>
+            </p:dialog>
 
         </h:form>
     </ui:define>

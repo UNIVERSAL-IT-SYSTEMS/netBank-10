@@ -84,10 +84,10 @@
                 <p:dialog header="Biztosan törli a felhasználót?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                     <div>
                         <div class="col-md-6">
-                            <p:commandButton value="Igen" actionListener="#{userController.deleteUser()}"  ajax="false" update="@user" class="button btn btn-default"/>
+                            <p:commandButton value="Igen" action="#{userController.deleteUser()}"  class="button btn btn-default"/>
                         </div>
                         <div class="col-md-6">
-                            <p:commandButton value="Vissza" ajax="false"  update="@user" class="button btn btn-default"/>
+                            <p:commandButton value="Vissza" action="#{navigationController.toListUser()}" class="button btn btn-default"/>
                         </div>
                     </div>
                 </p:dialog>

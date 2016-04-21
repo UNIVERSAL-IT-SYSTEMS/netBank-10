@@ -109,11 +109,10 @@ public class CreditCardController implements Serializable {
     public List<CreditCard> getCreditCardListByAccountAdmin(Account account) {
         return cardService.getCreditCardListByAccountAdmin(account);
     }
-    
+
     public List<CreditCard> getCreditCardListByAccountUser(Account account) {
         return cardService.getCreditCardListByAccountUser(account);
     }
-
 
     private void modifyType() {
         switch (type) {
@@ -165,12 +164,11 @@ public class CreditCardController implements Serializable {
         return "/atm/login?faces-redirect=true";
     }
 
-   
     public String deleteCard() {
-        if (selectedCard!= null) {
-            if(selectedCard.isDestroy()){
+        if (selectedCard != null) {
+            if (selectedCard.isDestroy()) {
                 selectedCard.setDestroy(false);
-            }else{
+            } else {
                 selectedCard.setDestroy(true);
             }
             cardService.updateCard(selectedCard);
@@ -180,7 +178,7 @@ public class CreditCardController implements Serializable {
         }
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Hiba!", "Kérem válassza ki a zárolni / aktiválni kívánt bankkártyát"));
+                                "Hiba!", "Kérem válassza ki a zárolni / aktiválni kívánt bankkártyát"));
         return "listAccountTransaction?faces-redirect=false";
     }
 }

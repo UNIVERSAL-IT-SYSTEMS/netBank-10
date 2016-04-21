@@ -44,7 +44,7 @@
                 <div class="panel-heading" style="text-align: center; padding-top: 20px ;padding-bottom: 30px">
                         <div class="row" >
                             <div class="col-md-6 ">
-                                <p:commandButton value="Regisztráció elfogadása" action="#{userController.acceptRegister()}" class="button btn btn-default" update="@all"/>
+                                <p:commandButton value="Regisztráció elfogadása" action="#{userController.acceptRegister()}" class="button btn btn-default"/>
                             </div>
                             <div class="col-md-6 ">
                                 <p:commandButton value="Regisztráció visszautasítása" onclick="PF('refuseDialog').show();" class="button btn btn-default"/>
@@ -60,10 +60,10 @@
                     <h3 style="margin-top:0">Visszautasítás indoka:</h3>
                     <p:inputTextarea value="#{userController.message}" />
                     <div class="col-md-6">
-                        <p:commandButton value="Visszautasít" actionListener="#{userController.refuseRegister()}" ajax="false" update="@form" class="button btn btn-default"/>
+                        <p:commandButton value="Visszautasít" action="#{userController.refuseRegister()}"  class="button btn btn-default"/>
                     </div>
                     <div class="col-md-6">
-                        <p:commandButton value="Mégse" ajax="false" update="@form" class="button btn btn-default"/>
+                        <p:commandButton value="Mégse" action="#{navigationController.toRegistrate()}" class="button btn btn-default"/>
                     </div>
                 </div>
             </p:dialog>

@@ -74,10 +74,10 @@
             <p:dialog header="Biztosan létre kíván hozni egy új bankszámlát ehez az ügyfélhez?" widgetVar="createDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                 <div>
                     <div class="col-md-6">
-                        <p:commandButton value="Igen" actionListener="#{accountController.adminAddAccount(userController.user)}" ajax="false" update="@account" class="button btn btn-default"/>
+                        <p:commandButton value="Igen" action="#{accountController.adminAddAccount(userController.user)}"  class="button btn btn-default"/>
                     </div>
                     <div class="col-md-6">
-                        <p:commandButton value="Vissza" ajax="false"  update="@account" class="button btn btn-default"/>
+                        <p:commandButton value="Vissza" action="#{navigationController.toListUserAccount()}" class="button btn btn-default"/>
                     </div>
                 </div>
             </p:dialog>
@@ -86,10 +86,10 @@
             <p:dialog header="Biztosan Zárolja / Aktiválja a Bankszámlát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
                 <div>
                     <div class="col-md-6">
-                        <p:commandButton value="Igen" actionListener="#{accountController.deleteAccount()}"  ajax="false" update="@account" class="button btn btn-default"/>
+                        <p:commandButton value="Igen" actionListener="#{accountController.deleteAccount()}"  class="button btn btn-default"/>
                     </div>
                     <div class="col-md-6">
-                        <p:commandButton value="Vissza" ajax="false"  update="@account" class="button btn btn-default"/>
+                        <p:commandButton value="Vissza" action="#{navigationController.toListUserAccount()}" class="button btn btn-default"/>
                     </div>
                 </div>
             </p:dialog>

@@ -17,36 +17,36 @@
                     </div>
                     <p:panelGrid columns="2">
                         <p:outputLabel value="Név:" for="name" />
-                        <p:inputText id="name" value="#{userController.regUser.name}" title="Name" class="form-control" required="true" requiredMessage="Név megadása kötelező!" />
+                        <p:inputText id="name" value="#{userController.user.name}" title="Name" class="form-control" required="true" requiredMessage="Név megadása kötelező!" />
 
                         <p:outputLabel value="Születési idő: " />
-                        <p:calendar maxdate="1999.12.31" mindate="1900.01.01"  id="dateOfBirth" value="#{userController.regUser.dateOfBirth}" pattern="yyyy.MM.dd"  class="box" style="height: 10px"/>
+                        <p:calendar maxdate="1999.12.31" mindate="1900.01.01"  id="dateOfBirth" value="#{userController.user.dateOfBirth}" pattern="yyyy.MM.dd"  class="box" style="height: 10px"/>
 
                         <p:outputLabel value="Cím" for="address" />
-                        <p:inputText id="address" value="#{userController.regUser.address}" title="Address" class="form-control"/>  
+                        <p:inputText id="address" value="#{userController.user.address}" title="Address" class="form-control"/>  
 
                         <p:outputLabel value="Felhasználónév" for="loginName" />
-                        <p:inputText id="loginName" value="#{userController.regUser.loginName}" title="LoginName" class="form-control" required="true"  requiredMessage="Felhasználónév megadása kötelező!">
+                        <p:inputText id="loginName" value="#{userController.user.loginName}" title="LoginName" class="form-control" required="true"  requiredMessage="Felhasználónév megadása kötelező!">
                             <f:validator validatorId="isAvailableUserName" />
                         </p:inputText>
 
                         <p:outputLabel value="Email cím" for="email" />
-                        <p:inputText id="email" value="#{userController.regUser.email}" title="email" class="form-control" required="true" requiredMessage="Email cím megadása kötelező!">
+                        <p:inputText id="email" value="#{userController.user.email}" title="email" class="form-control" required="true" requiredMessage="Email cím megadása kötelező!">
                             <f:validator validatorId="emailValidator" />
                             <f:validator binding="#{isAvailableEmail}" />
                         </p:inputText>
 
                         <p:outputLabel value="Mobil telefonszám: " />
-                        <p:inputText id="phone" value="#{userController.regUser.phoneNumber}" class="form-control">
+                        <p:inputText id="phone" value="#{userController.user.phoneNumber}" class="form-control">
                             <f:validator validatorId="phoneNumberValidator"/>
                         </p:inputText>
 
                         <p:outputLabel value="Jelszó:"/>
-                        <p:password id="pwd1" value="#{userController.regUser.password}" match="confirm" class="form-control" required="true"  requiredMessage="Jelszó megadása kötelező" validatorMessage="A megadott jelszavak nem egyeznek!" >          
+                        <p:password id="pwd1" value="#{userController.user.password}" match="confirm" class="form-control" required="true"  requiredMessage="Jelszó megadása kötelező" validatorMessage="A megadott jelszavak nem egyeznek!" >          
                         </p:password>
 
                         <p:outputLabel value="Jelszó megerősítés:"/>
-                        <p:password id="confirm" value="#{userController.regUser.password}" class="form-control" >
+                        <p:password id="confirm" value="#{userController.user.password}" class="form-control" >
                             <f:validator validatorId="passwordValidator"/>
                         </p:password>        
                     </p:panelGrid> 

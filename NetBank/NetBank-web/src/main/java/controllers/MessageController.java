@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import services.MessageService;
@@ -27,8 +26,7 @@ public class MessageController implements Serializable{
     private Topic selectedTopic = new Topic();
     
     private Message message = new Message();
-    
-   
+    private Message newMessage = new Message();
     
     public Topic getTopic() {
         return topic;
@@ -53,6 +51,15 @@ public class MessageController implements Serializable{
     public void setMessage(Message message) {
         this.message = message;
     }
+
+    public Message getNewMessage() {
+        return newMessage;
+    }
+
+    public void setNewMessage(Message newMessage) {
+        this.newMessage = newMessage;
+    }
+    
     
    public List<Topic> findAllTopic(){
         return messageService.findAllTopic();
@@ -66,6 +73,7 @@ public class MessageController implements Serializable{
         return messageService.findByTopic(selectedTopic);
     }
             
+    
             
      public String navigateToTopic(Topic parTopic){
         this.selectedTopic = parTopic;
@@ -73,24 +81,26 @@ public class MessageController implements Serializable{
     }
     
     
-     public void createTopic(User user){
+     public String createTopic(User user){
          topic.setUser(user);
          messageService.createTopic(topic);
          
-         message.setDate(new Date());
-         message.setSender(user);
-         message.setTopic(topic);
+         newMessage.setDate(new Date());
+         newMessage.setSender(user);
+         newMessage.setTopic(topic);
+
          
-         messageService.createMessage(message);
+         messageService.createMessage(newMessage);
          
-         topic.setLastMessage(message);
+         topic.setLastMessage(newMessage);
          messageService.editTopic(topic);
          
-         this.message = new Message();
-         this.topic= new Topic();
+         this.newMessage = new Message();
+         this.topic = new Topic();
+         return "listTopic?faces-redirect=true";
      }
      
-     public void createMessage(User user){
+     public String createMessage(User user){
          message.setSender(user);
          message.setDate(new Date());
          message.setTopic(selectedTopic);
@@ -100,6 +110,7 @@ public class MessageController implements Serializable{
          messageService.editTopic(selectedTopic);
          
          this.message = new Message();
+         return "listTopic?faces-redirect=true";
      }    
      
      public void deleteTopic(Topic parTopic){

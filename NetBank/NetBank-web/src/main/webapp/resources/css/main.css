@@ -241,3 +241,16 @@ panelGrid.ui-panelgrid-cell{
     margin-top: 20px;
 }
 
+
+/* DIALOG */
+
+.dialogPopup{
+    height: 100px;
+    width: 400px;
+    background-color: #627AAD ! important;
+    color: #fff ! important;
+}
+
+.ui-dialog-titlebar, .ui-widget-header{
+    background-color: #627AAD ! important;
+}

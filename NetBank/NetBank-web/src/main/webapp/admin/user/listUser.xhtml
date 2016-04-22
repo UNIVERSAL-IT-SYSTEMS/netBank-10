@@ -81,13 +81,17 @@
             </div>
 
             <h:form>
-                <p:dialog header="Biztosan törli a felhasználót?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
-                    <div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Igen" action="#{userController.deleteUser()}"  class="button btn btn-default"/>
-                        </div>
-                        <div class="col-md-6">
-                            <p:commandButton value="Vissza" action="#{navigationController.toListUser()}" class="button btn btn-default"/>
+                <p:dialog class="dialogPopup"  widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                    <div align="center">
+                        <p style="color:#fff; font-size: 20px">Biztosan törli a felhasználót?</p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                 <p:commandButton value="Igen" action="#{userController.deleteUser()}"  class="button btn btn-default"/>
+                            </div>
+                            <div class="col-md-6">
+                                <p:commandButton value="Vissza" action="#{navigationController.toListUser()}" class="button btn btn-default"/>
+                            </div>
                         </div>
                     </div>
                 </p:dialog>

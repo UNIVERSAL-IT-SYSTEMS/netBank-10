@@ -4,7 +4,9 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
 
     <ui:define name="content">
 
@@ -13,7 +15,7 @@
             <div class="col-md-10 col-md-offset-1 tablepanel">
                 <div class="row">
 
-                    <div class="col-md-3 topicpanel">
+                    <div class="col-md-4 topicpanel">
                         <div class="panel-heading">
                             <h3>Beszélgetések:</h3>
                         </div>
@@ -50,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-9 topicpanel">
+                    <div class="col-md-8 topicpanel">
                         <div class="panel-heading">
                             <h3>Üzenetek:</h3>
                         </div>
@@ -79,28 +81,52 @@
                             </div>
                         </p:dataScroller>
 
-                        <div class="panel-heading" style="text-align: center">
-                            <p:commandButton value="Új Üzenet" onclick="PF('createMessage').show();" class="button btn btn-default" />
-                        </div>
+                        <c:if test="${messageController.selectedTopic.id != null}">                   
+                            <div class="panel-heading" style="text-align: center">
+                                <p:commandButton value="Új Üzenet" onclick="PF('createMessage').show();" class="button btn btn-default" />
+                            </div>
+                        </c:if>            
                     </div>    
                 </div>
             </div>
         </h:form>
 
 
-        <p:dialog header="Adja meg a témát?" widgetVar="createDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
-
-            <p:inputText value="#{messageController.topic.theme}"> Téma </p:inputText>
-            <p:inputTextarea value="#{messageController.message.content}">Üzenet</p:inputTextarea>
-            <p:commandButton value="Létrehoz" actionListener="#{messageController.createTopic(loggedIn.user)}" ajax="false" update="@form" class="button btn btn-default"/>
-
+        <p:dialog class="dialogPopup" widgetVar="createDialog" modal="true" height="300" width="550" resizable="false" draggable="false">
+            <div align="center" class="col-md-12">
+                <p style="color:#fff; font-size: 20px">Új beszélgetés létrehozása</p>
+                <div class="form-group col-md-12">
+                    <label for="theme" style="color: #fff" class="col-sm-4">Téma: </label>
+                    <div class="col-sm-7">
+                        <p:inputText id="theme" type="text" value="#{messageController.topic.theme}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="message1" style="color: #fff" class="col-md-4 ">Üzenet: </label>
+                    <div class="col-md-8">
+                        <p:inputTextarea id="message1" value="#{messageController.newMessage.content}" style="height: 100px; width: 300px" />
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    <p:commandButton value="Létrehoz" action="#{messageController.createTopic(loggedIn.user)}" class="button btn btn-default"/>
+                </div>           
+            </div>
         </p:dialog>
 
-        <p:dialog header="Üzenet küldése" widgetVar="createMessage" modal="true" height="100" width="400" resizable="false" draggable="false">
+        <p:dialog class="dialogPopup" widgetVar="createMessage" modal="true" height="300" width="550" resizable="false" draggable="false">
 
-            <p:inputTextarea value="#{messageController.message.content}">Üzenet</p:inputTextarea>
-            <p:commandButton value="Létrehoz" actionListener="#{messageController.createMessage(loggedIn.user)}" ajax="false" update="@form" class="button btn btn-default"/>
-
+            <div align="center" class="col-md-12">
+                <p style="color:#fff; font-size: 20px">Üzenet küldése</p>
+                <div class="form-group col-md-12">
+                    <label for="message2" style="color: #fff" class="col-md-4 ">Üzenet: </label>
+                    <div class="col-md-8">
+                        <p:inputTextarea id="message2" value="#{messageController.message.content}" style="height: 100px; width: 300px" />
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    <p:commandButton value="Küldés" action="#{messageController.createMessage(loggedIn.user)}" class="button btn btn-default"/>
+                </div>  
+            </div>
         </p:dialog>
 
 

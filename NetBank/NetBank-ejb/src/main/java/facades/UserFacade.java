@@ -4,6 +4,7 @@ import entities.User;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -23,5 +24,13 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     public UserFacade() {
         super(User.class);
     }
-    
+
+    @Override
+    public User findByLoginName(String name) {
+        Query q = em.createNamedQuery("getUserByLoginName", User.class);
+        q.setParameter("lName", name);
+        User user = (User) q.getSingleResult();
+        return user;
+    }
+
 }

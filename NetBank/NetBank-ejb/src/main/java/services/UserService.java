@@ -19,9 +19,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.interceptor.Interceptors;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import logging.LoggingInterceptor;
 
 /**
@@ -47,13 +44,8 @@ public class UserService {
 
     private final String ADMINSTRING = "admin";
 
-    
-
-    @PersistenceContext(unitName = "com.mycompany_NetBank-ejb_ejb_1.0-SNAPSHOTPU")
-    private EntityManager em;
-
     @PostConstruct
-    public void init() {
+    private void init() {
         if (isAvailableLoginName(ADMINSTRING)) {
             try {
                 User admin = new User(ADMINSTRING, ADMINSTRING);
@@ -86,11 +78,11 @@ public class UserService {
     }
 
     public void register(RegistratedUser user) {
-        if (isAvailableLoginName(user.getLoginName())) {
-            registrate.create(user); 
-            emailService.sendEmail(user.getName(),user.getEmail(),EmailType.REGISTRATION);
+        if (isAvailableLoginName(user.getLoginName()) && isAvailableEmail(user.getEmail())) {
+            registrate.create(user);
+            emailService.sendEmail(user.getName(), user.getEmail(), EmailType.REGISTRATION);
         } else {
-            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév már foglalt");
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a felhasználónév vagy email cím már foglalt");
         }
     }
 
@@ -107,12 +99,12 @@ public class UserService {
         addUser(user);
         registrate.remove(regUser);
 
-        emailService.sendEmail(user.getName(),user.getEmail(),EmailType.ACTIVATION);
+        emailService.sendEmail(user.getName(), user.getEmail(), EmailType.ACTIVATION);
     }
 
     public void refuseRegister(RegistratedUser regUser, String message) {
 
-        emailService.sendRefuseMail(regUser.getName(),regUser.getEmail(),EmailType.REFUSE,message);
+        emailService.sendRefuseMail(regUser.getName(), regUser.getEmail(), EmailType.REFUSE, message);
         registrate.remove(regUser);
     }
 
@@ -135,27 +127,6 @@ public class UserService {
         Group group = groupFacade.findByLoginName(user.getLoginName());
         groupFacade.remove(group);
         userFacade.remove(user);
-    }
-
-    public void updateUser(User user) {
-        userFacade.edit(user);
-    }
-
-    public List<User> getUserList() {
-        return userFacade.findAll();
-    }
-
-    public List<RegistratedUser> getRegUserList() {
-        Query q = em.createNamedQuery("getAll", RegistratedUser.class);
-        return q.getResultList();
-    }
-
-    public User findById(Long id) {
-        return userFacade.find(id);
-    }
-
-    public List<Account> getAccountList(User user) {
-        return userFacade.find(user.getId()).getAccountList();
     }
 
     public Boolean isAvailableLoginName(String name) {
@@ -194,10 +165,7 @@ public class UserService {
     }
 
     public User findByLoginName(String name) {
-        Query q = em.createNamedQuery("getUserByLoginName", User.class);
-        q.setParameter("lName", name);
-        User user = (User) q.getSingleResult();
-        return user;
+        return userFacade.findByLoginName(name);
     }
 
     public void editUserPassword(User user) {
@@ -207,5 +175,25 @@ public class UserService {
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Nem sikerült a módosítás!", ex);
         }
+    }
+
+    public void updateUser(User user) {
+        userFacade.edit(user);
+    }
+
+    public List<User> getUserList() {
+        return userFacade.findAll();
+    }
+
+    public List<RegistratedUser> getRegUserList() {
+        return registrate.getAll();
+    }
+
+    public User findById(Long id) {
+        return userFacade.find(id);
+    }
+
+    public List<Account> getAccountList(User user) {
+        return userFacade.find(user.getId()).getAccountList();
     }
 }

@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Dani
+ * @author Daniel Szabo
  */
 @Local
 public interface RegistratedUserFacadeLocal {
@@ -27,7 +27,9 @@ public interface RegistratedUserFacadeLocal {
     List<RegistratedUser> findAll();
 
     List<RegistratedUser> findRange(int[] range);
-
+    
+    List<RegistratedUser> getAll();
+    
     int count();
     
 }

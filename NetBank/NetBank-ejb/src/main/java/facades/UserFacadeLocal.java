@@ -23,6 +23,8 @@ public interface UserFacadeLocal {
 
     List<User> findRange(int[] range);
 
+    User findByLoginName(String name);
+
     int count();
-    
+
 }

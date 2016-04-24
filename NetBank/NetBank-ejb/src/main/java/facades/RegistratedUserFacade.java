@@ -6,13 +6,15 @@
 package facades;
 
 import entities.RegistratedUser;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
- * @author Dani
+ * @author Daniel Szabo
  */
 @Stateless
 public class RegistratedUserFacade extends AbstractFacade<RegistratedUser> implements RegistratedUserFacadeLocal {
@@ -26,6 +28,12 @@ public class RegistratedUserFacade extends AbstractFacade<RegistratedUser> imple
 
     public RegistratedUserFacade() {
         super(RegistratedUser.class);
+    }
+    
+    @Override
+    public List<RegistratedUser> getAll(){
+        Query q = em.createNamedQuery("getAll", RegistratedUser.class);
+        return q.getResultList();
     }
     
 }

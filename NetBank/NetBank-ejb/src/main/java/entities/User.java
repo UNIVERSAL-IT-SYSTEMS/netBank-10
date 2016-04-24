@@ -19,34 +19,35 @@ import javax.validation.constraints.NotNull;
  * @author Daniel Szabo
  */
 @Entity(name = "USER_TABLE")
-@NamedQuery(name = "getUserByLoginName", query = "SELECT u FROM USER_TABLE u WHERE u.loginName = :lName")
+@NamedQuery(name = "getUserByLoginName", 
+        query = "SELECT u FROM USER_TABLE u WHERE u.loginName = :lName")
 public class User implements Serializable {
-    
+
     @Id
     @GeneratedValue
     @Column(name = "user_id")
     private Long id;
-    
+
     @NotNull
     private String loginName;
-    
+
     @NotNull
     private String password;
-    
+
     private String name;
-    
+
     @NotNull
     private String email;
-    
+
     private Role position;
-    
+
     private String address;
-    
+
     private String phoneNumber;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfBirth;
-    
+
     @OneToMany(mappedBy = "user")
     private List<Account> accountList;
 
@@ -61,7 +62,7 @@ public class User implements Serializable {
     public Long getId() {
         return id;
     }
-    
+
     public String getLoginName() {
         return loginName;
     }

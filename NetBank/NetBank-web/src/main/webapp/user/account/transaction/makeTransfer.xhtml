@@ -22,6 +22,8 @@
                         <p:inputText id="reciever" type="number" value="#{transactionController.recieverNumber}" title="Account" class="box" required="true" requiredMessage="Kérem adja meg a kedvezményezett számlaszámát" />
                         <p:outputLabel value="Összeg: " />
                         <p:inputText id="amount" type="number" value="#{transactionController.transaction.amount}" title="Amount" class="box" required="true" requiredMessage="Kérem adja meg az átutalni kívánt összeget" />
+                        <p:outputLabel value="Közlemény: " />
+                        <p:inputTextarea id="description" value="#{transactionController.transaction.description}" title="Description" class="box"  />
                     </p:panelGrid> 
 
                 </div>

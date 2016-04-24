@@ -1,10 +1,8 @@
 package services;
 
 import entities.Account;
-import entities.CreditCard;
 import entities.User;
 import facades.AccountFacadeLocal;
-import facades.CreditCardFacadeLocal;
 import facades.UserFacadeLocal;
 import java.util.List;
 import javax.ejb.LocalBean;

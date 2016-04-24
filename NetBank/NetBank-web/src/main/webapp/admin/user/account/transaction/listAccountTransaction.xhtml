@@ -18,24 +18,23 @@
                             <h2 style="color: red">SZÁMLA ZÁROLVA</h2>
                         </c:if>
 
-                        <p:panelGrid columns="2" class="col-md-offset-1" style="padding-top: 30px">
+                        <p:panelGrid columns="2" class="col-md-offset-1" style="margin-top: 40px">
                             <p:outputLabel value="Tulajdonos neve: " for="name" />
-                            <p:link id="name" href="/admin/user/account/listUserAccount.xhtml" value="#{accountController.account.user.name}" title="Név"/>
+                            <p:commandLink id="name" title="Név" action="#{userController.toUserAccount(accountController.account.user)}" style="color: #fff ; font-weight: bold">#{accountController.account.user.name}</p:commandLink>
                             <p:outputLabel value="Bankszámlaszám: " />
                             <p:outputLabel id="accountnumber" value="#{accountController.account.accountNumber}" title="Számlaszám"/>
                             <p:outputLabel value="Egyenleg " />
                             <p:outputLabel id="balance" value="#{accountController.account.balance}" title="Egyenleg"/>  
                         </p:panelGrid>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <h3>Számlához tartozó Bankkártyák</h3>
-                        <div class="col-md-offset-1">
                             <div class="resultTable" style="padding-top: 30px" >
                                 <p:dataTable id="card" var="card" value="#{creditCardController.getCreditCardListByAccountAdmin(accountController.account)}" 
                                              emptyMessage="Nincs találat"  class="dataTable"
                                              selectionMode="single" selection="#{creditCardController.selectedCard}" 
                                              rowKey="#{card.id}" rows="4"  paginator="true"
-                                             paginatorTemplate=" {PreviousPageLink} {PageLinks} {NextPageLink}"
+                                             paginatorTemplate="{PageLinks}"
                                              paginatorAlwaysVisible="false">
                                     <p:column headerText="Kártyaszám" filterBy="#{card.number}" filterMatchMode="contains">
                                         <h:outputText value="#{card.number}"/>
@@ -67,7 +66,6 @@
                                     </div>
                                 </c:if>  
                             </div> 
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-12" style="padding-top: 50px">
@@ -146,32 +144,52 @@
                 </div>
             </p:dialog>
 
-            <p:dialog header="Bankkártya Létrehozása" widgetVar="createDialog" modal="true" height="150" width="300" resizable="false" draggable="false">
-                <div>
-                    <h3 style="margin-top:0">Válasszon Típust</h3>
-                    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+            <p:dialog class="dialogPopup" widgetVar="createDialog" modal="true" height="170" width="450" resizable="false" draggable="false">
+                <div align="center">
+                    <p style="color:#fff; font-size: 18px">Bankkártya Létrehozása</p>
+                    <div class="col-md-12">
+                        <p style="color:#fff; font-size: 16px;text-align: left">Válasszon Típust</p>
+
                         <p:selectOneRadio id="console" value="#{creditCardController.type}">
-                            <f:selectItem itemLabel="Master Card" itemValue="MASTER_CARD" />
-                            <f:selectItem itemLabel="Maestro" itemValue="MAESTRO" />
-                            <f:selectItem itemLabel="Visa" itemValue="VISA" />
+                            <div class="row col-md-12" style="color: #fff">
+                                <div class="col-md-4" style="color: #fff" >
+                                    <f:selectItem class="selectitem" itemLabel="Master Card"  itemValue="MASTER_CARD" />
+                                </div>
+                                <div class="col-md-4" style="color: #fff">
+                                    <f:selectItem  class="selectitem"  itemLabel="Maestro" itemValue="MAESTRO" />
+                                </div>
+                                <div class="col-md-4" style="color: #fff">
+                                    <f:selectItem  class="selectitem" itemLabel="Visa" itemValue="VISA" />
+                                </div>
+
+                            </div>
                         </p:selectOneRadio>
-                    </h:panelGrid>
-                    <div class="col-md-6">
-                        <p:commandButton value="Létrehoz" action="#{creditCardController.addCreditCard(accountController.account)}" class="button btn btn-default"/>
                     </div>
-                    <div class="col-md-6">
-                        <p:commandButton value="Vissza" action="#{navigationController.toListTransaction()}" class="button btn btn-default"/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p:commandButton value="Létrehoz" action="#{creditCardController.addCreditCard(accountController.account)}" class="button btn btn-default"/>
+                        </div>
+                        <div class="col-md-6">
+                            <p:commandButton value="Vissza" action="#{navigationController.toListTransaction()}" class="button btn btn-default"/>
+                        </div>
                     </div>
+
+
                 </div>
             </p:dialog>
 
-            <p:dialog header="Biztosan Zárolja / Aktiválja a Bankkártyát?" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
-                <div>
-                    <div class="col-md-6">
-                        <p:commandButton value="Igen" action="#{creditCardController.deleteCard()}" class="button btn btn-default"/>
-                    </div>
-                    <div class="col-md-6">
-                        <p:commandButton value="Vissza" action="#{navigationController.toListTransaction()}" class="button btn btn-default"/>
+
+            <p:dialog class="dialogPopup" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+                <div align="center">
+                    <p style="color:#fff; font-size: 20px">Biztosan Zárolja a Bankkártyát?</p>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p:commandButton value="Igen" action="#{creditCardController.deleteCard()}"  class="button btn btn-default"/>
+                        </div>
+                        <div class="col-md-6">
+                            <p:commandButton value="Vissza" action="#{navigationController.toListTransaction()}" class="button btn btn-default"/>
+                        </div>
                     </div>
                 </div>
             </p:dialog>

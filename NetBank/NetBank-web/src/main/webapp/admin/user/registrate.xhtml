@@ -42,31 +42,36 @@
                     </div>
                 </div>
                 <div class="panel-heading" style="text-align: center; padding-top: 20px ;padding-bottom: 30px">
-                        <div class="row" >
-                            <div class="col-md-6 ">
-                                <p:commandButton value="Regisztráció elfogadása" action="#{userController.acceptRegister()}" class="button btn btn-default"/>
-                            </div>
-                            <div class="col-md-6 ">
-                                <p:commandButton value="Regisztráció visszautasítása" onclick="PF('refuseDialog').show();" class="button btn btn-default"/>
-                            </div>
+                    <div class="row" >
+                        <div class="col-md-6 ">
+                            <p:commandButton value="Regisztráció elfogadása" action="#{userController.acceptRegister()}" class="button btn btn-default"/>
+                        </div>
+                        <div class="col-md-6 ">
+                            <p:commandButton value="Regisztráció visszautasítása" onclick="PF('refuseDialog').show();" class="button btn btn-default"/>
                         </div>
                     </div>
+                </div>
 
 
             </div>
-            
-            <p:dialog header="Regisztráció visszautasítása" widgetVar="refuseDialog" modal="true" height="150" width="300" resizable="false" draggable="false">
-                <div>
-                    <h3 style="margin-top:0">Visszautasítás indoka:</h3>
-                    <p:inputTextarea value="#{userController.message}" />
-                    <div class="col-md-6">
-                        <p:commandButton value="Visszautasít" action="#{userController.refuseRegister()}"  class="button btn btn-default"/>
+
+            <p:dialog class="dialogPopup"  widgetVar="refuseDialog" modal="true" height="220" width="600" resizable="false" draggable="false">
+                <div align="center" class="col-md-12">
+                    <p style="color:#fff; font-size: 20px">Regisztráció visszautasítása</p>
+                    <div class="form-group col-md-12">
+                        <label for="message2" style="color: #fff" class="col-md-5">Visszautasítás indoka:</label>
+                        <div class="col-md-7">
+                            <p:inputTextarea id="message2" value="#{userController.message}" style="height: 100px; width: 300px" />
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <p:commandButton value="Mégse" action="#{navigationController.toRegistrate()}" class="button btn btn-default"/>
-                    </div>
+                    <div class="panel-heading">
+                       <p:commandButton value="Visszautasít" action="#{userController.refuseRegister()}"  class="button btn btn-default"/>
+                    </div>      
                 </div>
             </p:dialog>
+
+
+
         </h:form>
 
     </ui:define>

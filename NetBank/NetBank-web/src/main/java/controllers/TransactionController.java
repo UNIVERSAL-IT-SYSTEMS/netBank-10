@@ -138,7 +138,7 @@ public class TransactionController implements Serializable {
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Sikertelen kifizetés! Nincs elég egyenlege!",""));
             return "listAccountTransaction?faces-redirect=false";
-        }else if(transaction.getAmount()<1000){
+        }else if(transaction.getAmount() < 1000){
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Sikertelen kifizetés! Legalább 1000 forintot kell felvenni!",""));
@@ -218,9 +218,14 @@ public class TransactionController implements Serializable {
         if (transaction.getSender().getBalance() < transaction.getAmount()) {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                    "Nincs elég egyenlege!", "Nincs elég egyenlege!"));
-            return "/atm/index?faces-redirect=false";
-        } else {
+                                    "Sikertelen kifizetés! Nincs elég egyenlege!", ""));
+            return "/atm/makeWitdrawalFromAtm?faces-redirect=false";
+        }else if(transaction.getAmount() < 1000){
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                    "Sikertelen kifizetés! Legalább 1000 forintot kell felvenni!",""));
+            return "/atm/makeWitdrawalFromAtm?faces-redirect=false";
+        }else {
             Transaction withdrawal = new Transaction();
             withdrawal.setSender(transaction.getSender());
             withdrawal.setAmount(transaction.getAmount());
@@ -240,7 +245,7 @@ public class TransactionController implements Serializable {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Sikeres készpénzfelvétel!", "Sikeres készpénzfelvétel!"));
-            return "/atm/index?faces-redirect=false";
+            return "/atm/index?faces-redirect=true";
             
             /*
             return "/atm/index?faces-redirect=true";*/

@@ -24,17 +24,9 @@
 
 
             <nav class="navbar navbar-default col-md-12">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
 
 
-                <div class="collapse navbar-collapse" id="js-navbar-collapse">
+
                     <ul id="menu" class="nav nav-pills">
                         <li><p:link class="navbar-fnt" href="/user/account/listAccount.xhtml" value="Bankszámlák Kezelése"/></li>
                         <li><p:link class="navbar-fnt" href="/user/message/listTopic.xhtml" value="Helpdesk"/></li>
@@ -43,7 +35,7 @@
                             <p:commandLink class="navbar-name" id="dialogButt" value="#{loggedIn.user.name}" />
                         </li>  
                     </ul>
-                </div>
+
             </nav>
 
             <p:overlayPanel class="col-md-3 profile-popup-panel" id="profilePanel" for="dialogButt" hideEffect="fade" dynamic="true">

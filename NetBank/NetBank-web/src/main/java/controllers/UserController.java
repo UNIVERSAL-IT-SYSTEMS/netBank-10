@@ -301,4 +301,9 @@ public class UserController implements Serializable {
         }
         return "/user/index?faces-redirect=true";
     }
+    
+    public String toUserAccount(User user){
+        this.user=user;
+        return "/admin/user/account/listUserAccount?faces-redirect=true";
+    }
 }

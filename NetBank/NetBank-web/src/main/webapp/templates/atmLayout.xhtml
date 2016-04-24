@@ -19,16 +19,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/t/dt/dt-1.10.11/datatables.min.js"></script>
         <h:form>
             <nav class="navbar navbar-default col-md-12">
-                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
 
-                <div class="collapse navbar-collapse" id="js-navbar-collapse">
                     <ul id="menu" class="nav nav-pills">
                         <li class="navbar-left">
                             <h1 class="navbar-fnt" align="left">SZDT Bank Netbank Alkalmazás</h1>
@@ -38,10 +29,6 @@
                             <p:commandLink class="navbar-name" id="dialogButt" value="#{creditCardController.card.account.user.name}" />
                         </li>  
                     </ul>
-                </div>
-
-
-
             </nav>
 
             <p:overlayPanel id="profilePanel" class="col-md-3 profile-popup-panel" for="dialogButt" hideEffect="fade" dynamic="true">

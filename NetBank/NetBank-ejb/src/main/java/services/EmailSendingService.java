@@ -71,7 +71,7 @@ public class EmailSendingService {
         send(toMail, type.getSubject(), messageBody);
     }
     
-    public void sendRefuseMail(String toName, String toMail, EmailType type, String message){
+    public void sendMailWithMessage(String toName, String toMail, EmailType type, String message){
         StringBuilder sb = new StringBuilder();
         sb.append("Tisztelt ");
         sb.append(toName);

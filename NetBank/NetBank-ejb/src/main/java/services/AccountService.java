@@ -5,6 +5,8 @@ import entities.User;
 import facades.AccountFacadeLocal;
 import facades.UserFacadeLocal;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -31,16 +33,12 @@ public class AccountService {
         if (isAvailableAccountNumber(account.getAccountNumber())) { 
                 accountFacade.create(account); 
         } else {
-            // HibaÜzenet
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a számlaszám már foglalt");
         }
     }
     
     public void updateAccount(Account account){
         accountFacade.edit(account);
-    }
-    
-    public void removeAccount(Account account) {
-        accountFacade.remove(account);
     }
     
     public List<Account> getAccountList(){

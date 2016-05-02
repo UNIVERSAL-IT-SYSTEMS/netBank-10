@@ -2,7 +2,6 @@ package services;
 
 import entities.Account;
 import entities.Transaction;
-import entities.User;
 import facades.TransactionFacadeLocal;
 import java.util.List;
 import javax.ejb.LocalBean;

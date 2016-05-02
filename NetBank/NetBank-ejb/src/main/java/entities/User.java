@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
  * @author Daniel Szabo
  */
 @Entity(name = "USER_TABLE")
-@NamedQuery(name = "getUserByLoginName", 
+@NamedQuery(name = "getUserByLoginName",
         query = "SELECT u FROM USER_TABLE u WHERE u.loginName = :lName")
 public class User implements Serializable {
 

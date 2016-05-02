@@ -4,6 +4,8 @@ import entities.Account;
 import entities.CreditCard;
 import facades.CreditCardFacadeLocal;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -26,14 +28,14 @@ public class CreditCardService {
         if (isAvailableCardNumber(card.getNumber())) {
             creditCardFacade.create(card);
         } else {
-            // HibaÜzenet
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a kártyaszám már foglalt");
         }
     }
 
     public List<CreditCard> getCreditCardListByAccountAdmin(Account account) {
         return creditCardFacade.listByAccountAdmin(account.getId());
     }
-    
+
     public List<CreditCard> getCreditCardListByAccountUser(Account account) {
         return creditCardFacade.listByAccountUser(account.getId());
     }
@@ -50,10 +52,6 @@ public class CreditCardService {
 
     public void updateCreditCard(CreditCard card) {
         creditCardFacade.edit(card);
-    }
-
-    public void removeCreditCard(CreditCard card) {
-        creditCardFacade.remove(card);
     }
 
     public List<CreditCard> getCreditCardList() {

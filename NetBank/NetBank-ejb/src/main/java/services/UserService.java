@@ -104,7 +104,7 @@ public class UserService {
 
     public void refuseRegister(RegistratedUser regUser, String message) {
 
-        emailService.sendRefuseMail(regUser.getName(), regUser.getEmail(), EmailType.REFUSE, message);
+        emailService.sendMailWithMessage(regUser.getName(), regUser.getEmail(), EmailType.REFUSE, message);
         registrate.remove(regUser);
     }
 
@@ -165,7 +165,8 @@ public class UserService {
     }
 
     public User findByLoginName(String name) {
-        return userFacade.findByLoginName(name);
+        User user = userFacade.findByLoginName(name);
+        return user;
     }
 
     public void editUserPassword(User user) {

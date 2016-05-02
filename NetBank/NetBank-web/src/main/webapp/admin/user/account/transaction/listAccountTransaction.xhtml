@@ -125,7 +125,7 @@
                         </div>
                     </c:if>
                     <div class="panel-heading" style="text-align: center">
-                        <p:button value="Vissza a Felhasználó adataihoz" href="/admin/user/account/listUserAccount.xhtml" class="button btn btn-default"/>
+                        <p:commandButton value="Vissza a Felhasználó adataihoz" action="#{userController.toUserAccount(accountController.account.user)}" class="button btn btn-default"/>
                     </div>
                 </div>
             </div>    
@@ -179,7 +179,7 @@
             </p:dialog>
 
 
-            <p:dialog class="dialogPopup" widgetVar="deleteDialog" modal="true" height="100" width="400" resizable="false" draggable="false">
+            <p:dialog class="dialogPopup" widgetVar="deleteDialog" modal="true" height="140" width="400" resizable="false" draggable="false">
                 <div align="center">
                     <p style="color:#fff; font-size: 20px">Biztosan Zárolja a Bankkártyát?</p>
 
@@ -190,6 +190,9 @@
                         <div class="col-md-6">
                             <p:commandButton value="Vissza" action="#{navigationController.toListTransaction()}" class="button btn btn-default"/>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p:messages id="messages" style="height: 15px; font-size: 12px" closable="true" showDetail="false" autoUpdate="true"></p:messages>
                     </div>
                 </div>
             </p:dialog>

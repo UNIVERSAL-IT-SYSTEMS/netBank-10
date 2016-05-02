@@ -24,24 +24,23 @@ public class AccountService {
 
     @Inject
     UserFacadeLocal userFacade;
-    
+
     @Inject
     AccountFacadeLocal accountFacade;
-    
 
     public void addAccount(Account account) {
-        if (isAvailableAccountNumber(account.getAccountNumber())) { 
-                accountFacade.create(account); 
+        if (isAvailableAccountNumber(account.getAccountNumber())) {
+            accountFacade.create(account);
         } else {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, "Ez a számlaszám már foglalt");
         }
     }
-    
-    public void updateAccount(Account account){
+
+    public void updateAccount(Account account) {
         accountFacade.edit(account);
     }
-    
-    public List<Account> getAccountList(){
+
+    public List<Account> getAccountList() {
         return accountFacade.findAll();
     }
 
@@ -54,20 +53,20 @@ public class AccountService {
         }
         return true;
     }
-   
-    public List<Account> getAllByUser(User user){
+
+    public List<Account> getAllByUser(User user) {
         return accountFacade.getAllByUser(user.getId());
     }
-    
-    public List<Account> getNotDestroyByUser(User user){
+
+    public List<Account> getNotDestroyByUser(User user) {
         return accountFacade.getNotDestroyByUser(user.getId());
     }
-    
-    public List<Account> getAllNotDestroy(){
+
+    public List<Account> getAllNotDestroy() {
         return accountFacade.getAllNotDestroy();
     }
-   
-    public Account findByAccountNumber(int number){
+
+    public Account findByAccountNumber(int number) {
         List<Account> accountList = accountFacade.findAll();
         for (Account account : accountList) {
             if (account.getAccountNumber() == number) {

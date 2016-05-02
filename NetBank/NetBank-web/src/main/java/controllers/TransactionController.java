@@ -137,12 +137,12 @@ public class TransactionController implements Serializable {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Sikertelen kifizetés! Nincs elég egyenlege!",""));
-            return "listAccountTransaction?faces-redirect=false";
+            return "makeWithdrawalInBank?faces-redirect=false";
         }else if(transaction.getAmount() < 1000){
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                                     "Sikertelen kifizetés! Legalább 1000 forintot kell felvenni!",""));
-            return "listAccountTransaction?faces-redirect=false";
+            return "makeWithdrawalInBank?faces-redirect=false";
         }
         else {
             Transaction withdrawal = new Transaction();

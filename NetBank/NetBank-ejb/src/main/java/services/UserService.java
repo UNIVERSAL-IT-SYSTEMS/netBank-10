@@ -86,24 +86,35 @@ public class UserService {
         }
     }
 
-    public void acceptRegister(RegistratedUser regUser) {
-        User user = new User();
-        user.setAddress(regUser.getAddress());
-        user.setDateOfBirth(regUser.getDateOfBirth());
-        user.setEmail(regUser.getEmail());
-        user.setLoginName(regUser.getLoginName());
-        user.setPassword(regUser.getPassword());
-        user.setPhoneNumber(regUser.getPhoneNumber());
-        user.setName(regUser.getName());
-        user.setPosition(Role.USER);
-        addUser(user);
-        registrate.remove(regUser);
+    public boolean acceptRegister(RegistratedUser regUser) {
+        if (isAvailableLoginName(regUser.getLoginName())) {
+            if (isAvailableEmail(regUser.getEmail())) {
+                User user = new User();
+                user.setAddress(regUser.getAddress());
+                user.setDateOfBirth(regUser.getDateOfBirth());
+                user.setEmail(regUser.getEmail());
+                user.setLoginName(regUser.getLoginName());
+                user.setPassword(regUser.getPassword());
+                user.setPhoneNumber(regUser.getPhoneNumber());
+                user.setName(regUser.getName());
+                user.setPosition(Role.USER);
+                addUser(user);
+                registrate.remove(regUser);
 
-        emailService.sendEmail(user.getName(), user.getEmail(), EmailType.ACTIVATION);
+                emailService.sendEmail(user.getName(), user.getEmail(), EmailType.ACTIVATION);
+                return true;
+            } else {
+                //refuseRegister(regUser, "Az email cím foglalt.");
+                return false;
+            }
+        } else {
+            //refuseRegister(regUser, "A megadott felhasználónév foglalt.");
+            return false;
+        }
+
     }
 
     public void refuseRegister(RegistratedUser regUser, String message) {
-
         emailService.sendMailWithMessage(regUser.getName(), regUser.getEmail(), EmailType.REFUSE, message);
         registrate.remove(regUser);
     }

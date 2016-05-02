@@ -18,23 +18,23 @@ import logging.LoggingInterceptor;
 @LocalBean
 @Interceptors(LoggingInterceptor.class)
 public class TransactionService {
-    
+
     @Inject
     TransactionFacadeLocal transactionFacade;
-    
+
     public void addTransaction(Transaction transaction) {
         transactionFacade.create(transaction);
     }
-    
+
     public void removeAccount(Transaction transaction) {
         transactionFacade.remove(transaction);
     }
-    
-    public List<Transaction> getTransactionList(){
+
+    public List<Transaction> getTransactionList() {
         return transactionFacade.findAll();
     }
-    
-    public List<Transaction> listByAccount(Account account){
+
+    public List<Transaction> listByAccount(Account account) {
         return transactionFacade.specifyTransaction(account.getId());
     }
 }

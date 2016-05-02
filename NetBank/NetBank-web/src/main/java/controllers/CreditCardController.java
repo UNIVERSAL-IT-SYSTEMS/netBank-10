@@ -178,7 +178,7 @@ public class CreditCardController implements Serializable {
         }
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                "Hiba!", "Kérem válassza ki a zárolni / aktiválni kívánt bankkártyát"));
-        return "listAccountTransaction?faces-redirect=true";
+                                "Kérem válassza ki a zárolni / aktiválni kívánt bankkártyát!", ""));
+        return "listAccountTransaction?faces-redirect=false";
     }
 }

@@ -19,32 +19,31 @@ import services.UserService;
  *
  * @author Daniel Szabo
  */
-@ManagedBean(name="currentPasswordValidator")
+@ManagedBean(name = "currentPasswordValidator")
 @RequestScoped
 public class CurrentPasswordValidator implements Validator {
 
-    @ManagedProperty(value="#{userController}")
+    @ManagedProperty(value = "#{userController}")
     private UserController userController;
-    
+
     @Inject
     private UserService userService;
-    
+
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
-    
+
         try {
             String input = value.toString();
             input = userService.encode(input);
             String current = userController.getUser().getPassword();
-            
-            if(!input.equals(current)){
-                throw new ValidatorException(new
-                        FacesMessage("Hibás jelszó!"));
+
+            if (!input.equals(current)) {
+                throw new ValidatorException(new FacesMessage("Hibás jelszó!"));
             }
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(CurrentPasswordValidator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     public UserController getUserController() {
@@ -54,5 +53,5 @@ public class CurrentPasswordValidator implements Validator {
     public void setUserController(UserController userController) {
         this.userController = userController;
     }
-    
+
 }

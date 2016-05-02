@@ -84,7 +84,7 @@ public class AccountController implements Serializable {
         }
         FacesContext.getCurrentInstance().
                 addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "Account has not selected", "You did not select any account!"));
+                        "Bankszámla nincs kiválasztva", ""));
         return "listUserAccount?faces-redirect=false";
     }
 
@@ -118,7 +118,7 @@ public class AccountController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Bankszámla nincs kiválasztva", "Bankszámla nincs kiválasztva"));
+                            "Bankszámla nincs kiválasztva", ""));
 
             return "listUserAccount?faces-redirect=false";
         }
@@ -132,7 +132,7 @@ public class AccountController implements Serializable {
         } else {
             FacesContext.getCurrentInstance().
                     addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Bankszámla nincs kiválasztva", "Bankszámla nincs kiválasztva"));
+                            "Bankszámla nincs kiválasztva", ""));
 
             return "listAccount?faces-redirect=false";
         }

@@ -22,11 +22,9 @@ import logging.LoggingInterceptor;
 @LocalBean
 @Interceptors(LoggingInterceptor.class)
 public class EmailSendingService {
-    
 
-    private static final String FOOTER ="\n\n" + "Üdvözlettel, SZDT Bank!";
-    
-    
+    private static final String FOOTER = "\n\n" + "Üdvözlettel, SZDT Bank!";
+
     private void send(String to, String subject, String content) {
         final String username = "szdtbank@gmail.com";
         final String password = "abcde01248";
@@ -56,9 +54,9 @@ public class EmailSendingService {
             mex.printStackTrace();
         }
     }
-    
-    public void sendEmail(String toName, String toMail, EmailType type){
-        
+
+    public void sendEmail(String toName, String toMail, EmailType type) {
+
         StringBuilder sb = new StringBuilder();
         sb.append("Tisztelt ");
         sb.append(toName);
@@ -67,11 +65,11 @@ public class EmailSendingService {
         sb.append(type.getMessage());
         sb.append(FOOTER);
         String messageBody = sb.toString();
-        
+
         send(toMail, type.getSubject(), messageBody);
     }
-    
-    public void sendMailWithMessage(String toName, String toMail, EmailType type, String message){
+
+    public void sendMailWithMessage(String toName, String toMail, EmailType type, String message) {
         StringBuilder sb = new StringBuilder();
         sb.append("Tisztelt ");
         sb.append(toName);
@@ -81,10 +79,8 @@ public class EmailSendingService {
         sb.append(message);
         sb.append(FOOTER);
         String messageBody = sb.toString();
-        
+
         send(toMail, type.getSubject(), messageBody);
     }
-    
-    
-    
+
 }

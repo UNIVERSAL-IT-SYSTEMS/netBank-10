@@ -282,9 +282,21 @@ public class UserController implements Serializable {
     }
 
     public String acceptRegister() {
-        userService.acceptRegister(selectedRegUser);
+        boolean isAccept = userService.acceptRegister(selectedRegUser);
         this.selectedRegUser = new RegistratedUser();
-        return "registrate?faces-redirect=true";
+        
+        if(isAccept){
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felhasználó regisztrálása sikeres volt!",""));
+            return "registrate?faces-redirect=true";
+        }else{
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felhasználó regisztrálása helytelen adatok miatt sikertelen volt!",""));
+            return "registrate?faces-redirect=true";
+        }
+        
     }
     
     public String refuseRegister(){

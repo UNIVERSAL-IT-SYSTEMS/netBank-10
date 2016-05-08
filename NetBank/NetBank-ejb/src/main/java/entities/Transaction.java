@@ -1,6 +1,6 @@
 package entities;
 
-import enums.Type;
+import enums.TransactionType;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -39,7 +39,7 @@ public class Transaction implements Serializable {
 
     private String description;
 
-    private Type transactionType;
+    private TransactionType transactionType;
 
     public Transaction() {
     }
@@ -88,11 +88,11 @@ public class Transaction implements Serializable {
         this.description = description;
     }
 
-    public Type getTransactionType() {
+    public TransactionType getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(Type transactionType) {
+    public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
     }
     

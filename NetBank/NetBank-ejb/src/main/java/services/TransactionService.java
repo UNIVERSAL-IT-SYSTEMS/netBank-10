@@ -26,7 +26,7 @@ public class TransactionService {
         transactionFacade.create(transaction);
     }
 
-    public void removeAccount(Transaction transaction) {
+    public void removeTransaction(Transaction transaction) {
         transactionFacade.remove(transaction);
     }
 

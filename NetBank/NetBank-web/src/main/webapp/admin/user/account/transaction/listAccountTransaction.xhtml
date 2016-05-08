@@ -40,8 +40,8 @@
                                     <h:outputText value="#{card.number}"/>
                                 </p:column>
 
-                                <p:column headerText="Típus" filterBy="#{card.type}" filterMatchMode="contains">
-                                    <h:outputText value="#{card.type}"/>
+                                <p:column headerText="Típus" filterBy="#{card.type.type}" filterMatchMode="contains">
+                                    <h:outputText value="#{card.type.type}"/>
                                 </p:column>
 
                                 <p:column headerText="PIN kód">
@@ -91,8 +91,8 @@
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Típus" filterBy="#{transaction.transactionType}" filterMatchMode="contains">
-                                <h:outputText value="#{transaction.transactionType}"/>
+                            <p:column headerText="Típus" filterBy="#{transaction.transactionType.type}" filterMatchMode="contains">
+                                <h:outputText value="#{transaction.transactionType.type}"/>
                             </p:column>
 
                             <p:column headerText="Összeg" filterBy="#{transaction.amount}" sortBy="#{transaction.amount}" filterMatchMode="contains">

@@ -1,9 +1,8 @@
 package controllers;
 
 import entities.Account;
-import entities.CreditCard;
 import entities.Transaction;
-import enums.Type;
+import enums.TransactionType;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -91,7 +90,7 @@ public class TransactionController implements Serializable {
                 transfer.setAmount(transaction.getAmount());
                 transfer.setDateOfTransaction(new Date());
                 transfer.setDescription(transaction.getDescription());
-                transfer.setTransactionType(Type.TRANSFER);
+                transfer.setTransactionType(TransactionType.TRANSFER);
 
                 transactionService.addTransaction(transfer);
 
@@ -149,7 +148,7 @@ public class TransactionController implements Serializable {
             withdrawal.setSender(transaction.getSender());
             withdrawal.setAmount(transaction.getAmount());
             withdrawal.setDateOfTransaction(new Date());
-            withdrawal.setTransactionType(Type.WITHDRAWAL_IN_BANK);
+            withdrawal.setTransactionType(TransactionType.WITHDRAWAL_IN_BANK);
 
             transactionService.addTransaction(withdrawal);
 
@@ -190,7 +189,7 @@ public class TransactionController implements Serializable {
         inpayment.setReciever(transaction.getReciever());
         inpayment.setAmount(transaction.getAmount());
         inpayment.setDateOfTransaction(new Date());
-        inpayment.setTransactionType(Type.INPAYMENT);
+        inpayment.setTransactionType(TransactionType.INPAYMENT);
 
         transactionService.addTransaction(inpayment);
 
@@ -230,7 +229,7 @@ public class TransactionController implements Serializable {
             withdrawal.setSender(transaction.getSender());
             withdrawal.setAmount(transaction.getAmount());
             withdrawal.setDateOfTransaction(new Date());
-            withdrawal.setTransactionType(Type.WITHDRAWAL_FROM_ATM);
+            withdrawal.setTransactionType(TransactionType.WITHDRAWAL_FROM_ATM);
 
             transactionService.addTransaction(withdrawal);
 

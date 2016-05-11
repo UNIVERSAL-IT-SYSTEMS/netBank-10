@@ -76,7 +76,7 @@
                                      value="#{transactionController.getListByAccount(accountController.account)}" emptyMessage="Nincs találat"  
                                      class="dataTable col-md-12" widgetVar="transactionTable"
                                      rows="10"  paginator="true"
-                                     paginatorTemplate=" {PreviousPageLink} {PageLinks} {NextPageLink}"
+                                     paginatorTemplate=" {PageLinks}"
                                      paginatorAlwaysVisible="false">
 
                             <f:facet name="header">
@@ -87,7 +87,7 @@
 
                             <p:column headerText="Dátum" filterBy="#{transaction.dateOfTransaction}" sortBy="#{transaction.dateOfTransaction}" filterMatchMode="contains">
                                 <h:outputText value="#{transaction.dateOfTransaction}">
-                                    <f:convertDateTime pattern="YYYY-MM-dd" />
+                                    <f:convertDateTime pattern="YYYY-MM-dd"/>
                                 </h:outputText>
                             </p:column>
 

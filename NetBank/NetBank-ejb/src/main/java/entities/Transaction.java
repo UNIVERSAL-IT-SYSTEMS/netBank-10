@@ -4,6 +4,8 @@ import enums.TransactionType;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,7 +40,8 @@ public class Transaction implements Serializable {
     private Date dateOfTransaction;
 
     private String description;
-
+    
+    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
     public Transaction() {

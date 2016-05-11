@@ -4,6 +4,8 @@ import enums.CardType;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,8 +21,6 @@ import javax.validation.constraints.NotNull;
  * @author Daniel Szabo
  */
 @Entity
-
-
 @NamedQueries({
     @NamedQuery(name = "getListByAccountAdmin", query = "SELECT c FROM CreditCard c WHERE c.account.id = :rId"),
     @NamedQuery(name = "getListByAccountUser", query = "SELECT c FROM CreditCard c WHERE c.account.id = :rId AND c.destroy = false"),
@@ -36,6 +36,7 @@ public class CreditCard implements Serializable {
     @NotNull
     private Integer number;
 
+    @Enumerated(EnumType.STRING)
     private CardType type;
 
     @ManyToOne
@@ -44,6 +45,7 @@ public class CreditCard implements Serializable {
 
     @Min(1000)
     @Max(9999)
+    @NotNull
     private Integer pinCode;
 
     private boolean destroy = false;

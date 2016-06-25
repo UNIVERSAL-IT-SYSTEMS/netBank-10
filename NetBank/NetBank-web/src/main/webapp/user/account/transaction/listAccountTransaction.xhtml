@@ -89,6 +89,14 @@
                                 <h:outputText value="#{transaction.sender.accountNumber}" />
                             </p:column>
                             
+                            <p:column headerText="Fogadó Neve" filterBy="#{transaction.reciever.user.name}" filterMatchMode="contains">
+                                <h:outputText value="#{transaction.reciever.user.name}" />
+                            </p:column>
+
+                            <p:column headerText="Fogadó Számlaszáma" filterBy="#{transaction.reciever.accountNumber}" filterMatchMode="contains">
+                                <h:outputText value="#{transaction.reciever.accountNumber}" />
+                            </p:column>
+                            
                             <p:column headerText="Közlemény" filterBy="#{transaction.description}" filterMatchMode="contains">
                                 <h:outputText value="#{transaction.description}" />
                             </p:column>
